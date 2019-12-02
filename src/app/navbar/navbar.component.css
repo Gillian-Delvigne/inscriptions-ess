@@ -1,0 +1,17 @@
+.navbar {
+background-color: #ff2400;
+display: flex;
+justify-content: space-between;
+}
+
+.main-title {
+padding-left: 15px;
+font-size: 1.5rem;
+color: white;
+}
+
+.btn-primary {
+  color: #ff2400!important;
+  background-color: white !important;
+  border-color: white !important;
+}
