@@ -9,7 +9,10 @@ export class NavbarComponent implements OnInit {
 
   constructor() { }
 
+  public isCollapsed = true;
+
   ngOnInit() {
   }
+
 
 }
