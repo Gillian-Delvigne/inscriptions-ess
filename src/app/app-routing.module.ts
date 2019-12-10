@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CatalogueComponent } from './catalogue/catalogue.component';
-import { AgendaComponent } from './agenda/agenda.component';
-import { InscriptionsComponent } from './inscriptions/inscriptions.component';
+import { CatalogueComponent } from './front-end/catalogue/catalogue.component';
+import { AgendaComponent } from './front-end/agenda/agenda.component';
+import { InscriptionsComponent } from './front-end/inscriptions/inscriptions.component';
 
 const routes: Routes = [
   { path: '', component: CatalogueComponent },
