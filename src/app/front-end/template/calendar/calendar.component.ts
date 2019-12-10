@@ -11,7 +11,7 @@ import {
 
 const colors: any = {
   red: {
-    primary: '#ad2121',
+    primary: '#ff2400',
     secondary: '#FAE3E3'
   },
   blue: {
@@ -69,7 +69,7 @@ export class CalendarComponent implements OnInit {
     {
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
-      title: 'A 3 day event',
+      title: 'Un événement de trois jours',
       color: colors.red,
       actions: this.actions,
       allDay: true,
@@ -81,21 +81,21 @@ export class CalendarComponent implements OnInit {
     },
     {
       start: startOfDay(new Date()),
-      title: 'An event with no end date',
+      title: 'Un événement sans date de fin',
       color: colors.yellow,
       actions: this.actions
     },
     {
       start: subDays(endOfMonth(new Date()), 3),
       end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
+      title: 'Un événement de deux mois',
       color: colors.blue,
       allDay: true
     },
     {
       start: addHours(startOfDay(new Date()), 2),
       end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
+      title: 'Un événement drag and drop',
       color: colors.yellow,
       actions: this.actions,
       resizable: {

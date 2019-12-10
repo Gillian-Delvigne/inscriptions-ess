@@ -1,0 +1,12 @@
+.btn-primary {
+  color: white!important;
+  background-color: #ff2400 !important;
+  border-color: #ff2400!important;
+  margin: 2px;
+}
+
+.btn-outline-secondary {
+  color: white;
+  background-color:#c61017;
+  border-color: #c61017!important;
+}
