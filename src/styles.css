@@ -1,6 +1,15 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 
+
+html, body {
+  min-width: 100vw !important;
+  height: 100% !important;
+
+}
+
+/* front-end calendar */
+
 h3 {
   margin: 0 0 10px;
 }
@@ -8,4 +17,13 @@ h3 {
 pre {
   background-color: #f5f5f5;
   padding: 15px;
+}
+
+.footer {
+position: fixed;
+bottom:0;
+height: 10vh;
+border-top: solid 5px #ff2400;
+background-color: white;
+text-align: center;
 }

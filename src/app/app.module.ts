@@ -6,10 +6,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { NavbarComponent } from './front-end/template/navbar/navbar.component';
-import { CatalogueComponent } from './front-end/catalogue/catalogue.component';
-import { AgendaComponent } from './front-end/agenda/agenda.component';
-import { InscriptionsComponent } from './front-end/inscriptions/inscriptions.component';
+import { NavbarComponent } from './front-end/header/navbar/navbar.component';
+import { CatalogueComponent } from './front-end/body/catalogue/catalogue.component';
+import { AgendaComponent } from './front-end/body/agenda/agenda.component';
+import { InscriptionsComponent } from './front-end/body/inscriptions/inscriptions.component';
 import { CardComponent } from './front-end/template/card/card.component';
 import { CalendarComponent } from './front-end/template/calendar/calendar.component';
 import { CommonModule } from '@angular/common';
@@ -19,6 +19,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { FooterComponent } from './front-end/footer/footer.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -31,6 +32,7 @@ registerLocaleData(localeFr, 'fr');
     InscriptionsComponent,
     CardComponent,
     CalendarComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
