@@ -1,37 +1,41 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
-
 app-root {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+    height: 100vh;
 }
 
 .main-content {
-  margin-bottom: 10vh;
+    margin-bottom: 10vh;
+    position: relative;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+app-catalogue {
+    width: 100%;
 }
 
 .footer {
-  position: fixed;
-  bottom:0;
-  height: 10vh;
-  width: 100%;
-  border-top: solid 5px #ff2400;
-  background-color: white;
-  text-align: center;
-  font-size: 0.8rem;
-  font-weight: 600;
+    position: fixed;
+    bottom: 0;
+    height: 10vh;
+    width: 100%;
+    border-top: solid 5px #ff2400;
+    background-color: white;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
 }
+
 
 /* front-end calendar */
 
 h3 {
-  margin: 0 0 10px;
+    margin: 0 0 10px;
 }
 
 pre {
-  background-color: #f5f5f5;
-  padding: 15px;
+    background-color: #f5f5f5;
+    padding: 15px;
 }
-
-

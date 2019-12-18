@@ -1,0 +1,17 @@
+.catalogue-content {
+    width: 100%;
+    margin: auto;
+    padding-top: 5%;
+    margin-bottom: 10vh;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+}
+
+app-sidebar {
+    position: fixed;
+    padding-left: 5%;
+    padding-top: 5%;
+}

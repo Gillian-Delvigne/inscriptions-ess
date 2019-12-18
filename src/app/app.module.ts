@@ -20,6 +20,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { FooterComponent } from './front-end/footer/footer.component';
+import { SidebarComponent } from './front-end/template/sidebar/sidebar.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -33,6 +34,7 @@ registerLocaleData(localeFr, 'fr');
     CardComponent,
     CalendarComponent,
     FooterComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
