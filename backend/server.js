@@ -14,17 +14,6 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
-const port = process.env.PORT || 8080;
-
-const app = express()
-    .use(cors())
-    .use(bodyParser.json())
-    .use(data(connection));
-
-app.listen(port, () => {
-    console.log(`Express server listening on port ${port}`);
-});
-
-app.listen(8080, () => {
+app.listen(8000, () => {
     console.log('Server started!')
 })
