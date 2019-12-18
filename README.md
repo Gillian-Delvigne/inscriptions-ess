@@ -25,3 +25,44 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+## Description détaillée du projet 
+
+Cette application vise à faciliter le processus d'inscription des volontaires engagés à la Croix-Rouge aux formations dont ils ont besoin pour mener à bien leurs activités.
+Actuellement, pour s'inscrire, un volontaire doit se rendre sur l'intranet, consulter un pdf et envoyer un email avec les informations utiles à l'administrateur des formations. Celui-ci doit pour sa part compiler les informations qui lui parviennent par email et inscrire les participants aux formations choisies et générer des documents relatifs aux formations.
+
+Avec cette application, l'expérience utilisateur des volontaires et des administrateurs entend être améliorée.
+
+FRONT-END
+
+côté utilisateur (volontaire), l'application se divise en 3 parties :
+
+- Une partie catalogue qui présente chaque formation (titre, description, modalités, places disponibles, pictos).
+- Une partie agenda qui renseigne les cours prévus (formation X à tel endroit, à tel heure).
+- Une formulaire d'inscription (et de désincription) qui permet au volontaire de s'inscrire à une formation prévue.
+
+côté utilisateur (administrateur / back-office), un dashboard est mis en place :
+L'administrateur peut : 
+- Gérer le catalogue et le calendrier via un CMS/Dashboard :
+o Création, suppression, modification d’un type de formation du catalogue (titre, description, nombre d’apprenants…).
+o Ajout, suppression, modification de séances (actions de formation) dans le calendrier (type de formation, date donnée, lieu donné, formateur).
+- Accéder à la liste des inscrits (données personnelles).
+- Modification de la liste des inscrits : ajouter, supprimer des participants, éditer leur statut (présent, absent, excusé).
+- Télécharger la liste des participants au format excel.
+
+BACK-END
+
+- La liste des éléments (formations, formateurs, lieux, volontaires inscrits) se trouve dans une base de données mysql sur un serveur OVH. (Tables à vérifier sur le plan de la justesse).
+- L'application communique avec la base de données via node.js (express ?).
+
+
+
+## Roadmap
+
+Pour la semaine du 02/01/2020, une version a minima devrait être créée :
+- Partie front-end fonctionnelle (affichage de l'agenda, des formations dans le catalogue, formulaire d'inscription fonctionnel).
+- Possibilité pour l'admin de voir les données de la BD et de les exporter au format excel.
+
+Plus tard :
+Version complète dynamique du back-office : modifications de l'admin qui se répercutent côté utilisateur.
