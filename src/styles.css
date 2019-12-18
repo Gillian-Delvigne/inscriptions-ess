@@ -12,7 +12,8 @@ app-root {
     padding: 0;
 }
 
-app-catalogue {
+app-catalogue,
+app-agenda {
     width: 100%;
 }
 
