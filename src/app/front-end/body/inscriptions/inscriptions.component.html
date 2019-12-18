@@ -1,1 +1,137 @@
-<p>inscriptions works!</p>
+<div class="container form-container m-auto w-100">
+    <form name="" id="" action="" method="post" class="m-auto">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="nom">Nom <span class="asterisque">*</span></label>
+                <input type="text" class="form-control" required id="nom" name="nom" placeholder="Dupont">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="prenom">Prénom <span class="asterisque">*</span></label>
+                <input type="text" class="form-control" required id="nom" name="nom" placeholder="Jean">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Adresse email <span class="asterisque">*</span></label>
+            <input type="email" class="form-control" required id="email" name="Email" placeholder="nom@exemple.com">
+        </div>
+    </form>
+</div>
+
+
+<!--
+
+<form name="" id="" action="" method="post">
+
+    <section id="identification" style="background:#fff;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Identification</h1>
+                    <hr>
+
+                    <h4>identification personnelle</h4>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12">
+                            <label class="col-xs-6 col-sm-3" for="LastName">Nom <span class="asterisque">*</span></label>
+                            <input class="form-group col-xs-6 col-sm-5" required id="LastName" name="Nom" type="text" value="">
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12">
+                            <label class="col-xs-6 col-sm-3" for="FirstName">Prénom <span class="asterisque">*</span></label>
+                            <input class="form-group col-xs-6 col-sm-5" required id="FirstName" name="Prénom" type="text" value="">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12">
+                            <label class="col-xs-6 col-sm-3" for="Birthday">Date de naissance <span
+                                        class="asterisque">*</span></label>
+                            <input class="form-group col-xs-6 col-sm-5" required id="birthday" name="Date de naissance" type="text" value="" placeholder="JJ/MM/AAAA">
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12">
+                            <label class="form-group col-xs-12 col-sm-3">Genre <span class="asterisque">*</span></label>
+                            <div class="radio-inline col-md-2"><input checked="checked" id="Masculin" name="Genre" type="radio" value="Masculin" required><label class="form-group col-xs-12 col-sm-3" for="Masculin">Masculin</label>
+                            </div>
+                            <div class="radio-inline col-md-2"><input id="Feminin" name="Genre" type="radio" value="Féminin">
+                                <label class="form-group col-xs-12 col-sm-3" for="Feminin">Féminin</label>
+                            </div>
+                            <div class="radio-inline col-md-2"><input id="Autre" name="Genre" type="radio" value="Autre">
+                                <label class="form-group col-xs-12 col-sm-3" for="Autre">Autre</label>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12">
+                            <label class="col-xs-6 col-sm-3" for="PhoneNum">Tel ou Gsm <span class="asterisque">*</span></label>
+                            <input class="form-group col-xs-6 col-sm-5" required id="PhoneNum" name="Tel" type="text" value="">
+                        </div>
+                        <div class="col-xs-12 col-sm-12">
+                            <label class="col-xs-6 col-sm-3" for="email">Email <span class="asterisque">*</span></label>
+                            <input class="form-group col-xs-6 col-sm-5" required id="email" name="Email" type="text" value="">
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <h4>données croix-rouge</h4>
+                    <br>
+                    <div class="row">
+                        <label class="form-group col-sm-12" for="ContractType">Je suis</label>
+                    </div>
+                    <div class="row">
+                        <div class="radio-inline col-md-3">
+                            <input checked="checked" id="volontaire" name="Statut" required type="radio" value="Volontaire" onclick="HideMatricule()">
+                            <label for="volontaire">Volontaire</label>
+                        </div>
+                        <div class="radio-inline col-md-9" id="matricule">
+                            Mon n° de matricule : <input type="text" size="20" name="Matricule" placeholder="&nbsp;&nbsp;20180103F067053">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="radio-inline col-md-6">
+                            <input id="salarie" name="Statut" type="radio" value="Salarié(e)" onclick="HideMatricule()">
+                            <label for="salarie">Salarié(e)</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="radio-inline col-md-6">
+                            <input id="animateur" name="Statut" type="radio" value="Animateur Relais BEPS" onclick="HideMatricule()">
+                            <label for="animateur">Animateur Relais BEPS</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <label class="form-group col-xs-12 col-sm-5 col-md-3 col-lg-3 label-entity" for="TypeEntityId">Votre entité générale&nbsp;:</label>
+                <select class="form-group col-xs-6 col-sm-5" onchange="DisplayEntiteL(event)" id="TypeEntityId" name="Entité Générale" required>
+                    <option class="option-arrow" value="" disabled selected>Sélectionnez votre entité générale</option>
+                    <option value="1">Départements &amp; Services centraux</option>
+                    <option value="2">Secours (Wallonie)</option>
+                    <option value="3">Secours (Bruxelles)</option>
+                    <option value="4">Comité Provincial</option>
+                    <option value="5">Relais</option>
+                    <option value="6">SISU</option>
+                    <option value="7">Centre ADA</option>
+                    <option value="8">Réseau : Maison Croix-Rouge / Section Locale &amp; LokalSection</option>
+                </select>
+            </div>
+            <br>
+            <div class="row">
+                <label class="form-group form-group col-xs-12 col-sm-5 col-md-3 col-lg-3 label-entity" for="EntityId">Votre entité locale&nbsp;:</label>
+                <select class="form-group col-xs-6 col-sm-5" id="EntityId" name="Entité Locale" required>
+                    <option value="" disabled selected>Sélectionnez votre entité locale</option>
+                </select>
+
+            </div>
+        </div>
+    </section>
+    <br>
+    <br>
+
+</form>
+
+-->

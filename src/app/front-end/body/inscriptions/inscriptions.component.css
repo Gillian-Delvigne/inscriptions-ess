@@ -1,0 +1,10 @@
+.form-container {
+    padding-top: 5%;
+}
+
+.asterisque {
+    color: #ff2400;
+    font-variant-position: super;
+    font-size: 0.8rem;
+    line-height: 0.8;
+}

@@ -13,7 +13,8 @@ app-root {
 }
 
 app-catalogue,
-app-agenda {
+app-agenda,
+app-inscriptions {
     width: 100%;
 }
 
