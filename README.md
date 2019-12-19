@@ -26,8 +26,37 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
+## Project description (English)
 
-## Description détaillée du projet 
+This application aims to facilitate the process of registering Red Cross volunteers for the training they need to carry out their activities.
+Currently, in order to register, a volunteer has to go to the intranet, consult a pdf and send an email with the relevant information to the training administrator. The training administrator will then compile the information received by email and register the participants for the selected trainings and generate training related documents.
+
+With this application, the user experience of the volunteers and administrators will be improved.
+
+FRONT-END
+
+On the user side (volunteer), the application is divided into 3 parts :
+
+- A catalogue part which presents each training course (title, description, modalities, available places, pictograms).
+- A diary section that provides information about the planned courses (training X at such a place, at such a time).
+- A registration (and “cancel resgistration”) form that allows the volunteer to register for a scheduled training.
+
+On the user side (administrator / back-office), a dashboard is set up :
+The administrator can : 
+- Manage the catalogue and the calendar via a CMS/Dashboard :
+o Create, delete, modify a type of training from the catalogue (title, description, number of learners...).
+o Add, delete, modify sessions (training actions) in the calendar (training type, given date, given place, trainer).
+- Access the list of registered participants (personal data).
+- Modify the list of participants: add, delete participants, edit their status (present, absent, excused).
+- Download the list of participants in excel format.
+
+BACK-END
+
+- The list of elements (trainings, trainers, locations, registered volunteers) is in a mysql database on an OVH server. (Tables to be checked for accuracy and completed).
+- The application communicates with the database via node.js (express).
+
+
+## Description détaillée du projet (français)
 
 Cette application vise à faciliter le processus d'inscription des volontaires engagés à la Croix-Rouge aux formations dont ils ont besoin pour mener à bien leurs activités.
 Actuellement, pour s'inscrire, un volontaire doit se rendre sur l'intranet, consulter un pdf et envoyer un email avec les informations utiles à l'administrateur des formations. Celui-ci doit pour sa part compiler les informations qui lui parviennent par email et inscrire les participants aux formations choisies et générer des documents relatifs aux formations.
