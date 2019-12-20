@@ -16,3 +16,6 @@ export class InscriptionsComponent implements OnInit {
   }
 
 }
+
+
+

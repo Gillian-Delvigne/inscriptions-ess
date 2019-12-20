@@ -1,4 +1,4 @@
-<div class="container form-container m-auto w-100">
+<div class="container form-container m-auto w-50">
     <form name="" id="" action="" method="post" class="m-auto">
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -7,7 +7,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="prenom">Prénom <span class="asterisque">*</span></label>
-                <input type="text" class="form-control" required id="nom" name="nom" placeholder="Jean">
+                <input type="text" class="form-control" required id="prenom" name="prenom" placeholder="Jean">
             </div>
         </div>
         <div class="form-row">
@@ -24,9 +24,9 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-3">
-                <label for="prenom">Date de naissance <span class="asterisque">*</span></label>
+                <label for="date_de_naissance">Date de naissance <span class="asterisque">*</span></label>
                 <div class="input-group">
-                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                    <input id="date_de_naissance" class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
                     </div>
@@ -39,6 +39,23 @@
                 <input type="email" class="form-control" required id="email" name="Email" placeholder="nom@exemple.com">
             </div>
         </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="phone">GSM <span class="asterisque">*</span></label>
+            <input type="tel" class="form-control" id="phone" #phone name="phone" pattern="[0-9]{4}/[0-9]{2}.[0-9]{2}.[0-9]{2}" placeholder="0000/00.00.00" required>
+          </div>
+      </div>
+
+
+        <div class="form-row">
+          <div class="form-group col-md-3">
+          <label for="matricule">N° de matricule</label>
+          <input id="matricule" type="text" class="form-control" size="20" name="Matricule" placeholder="20180103F067053">
+          </div>
+        </div>
+
+
     </form>
 </div>
 
