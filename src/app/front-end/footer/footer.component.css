@@ -1,16 +1,15 @@
 .footer-row {
- height: 100%;
- align-items: center;
- justify-content: center;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 .footer-logo {
-  height: 3vh;
+    height: 3vh;
 }
 
 @media screen and (max-width: 1024px) {
-  .footer-logo {
-    height: 2vh;
-  }
-
+    .footer-logo {
+        height: 2vh;
+    }
 }

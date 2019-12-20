@@ -1,5 +1,6 @@
 .form-container {
     padding-top: 5%;
+    margin-bottom: 20vh;
 }
 
 .asterisque {
@@ -16,4 +17,13 @@ button.calendar:active {
     background-repeat: no-repeat;
     background-size: 23px;
     background-position: center;
+}
+
+.btn-primary {
+    background-color: #ff2400 !important;
+    border-color: #ff2400 !important;
+}
+
+.form {
+    max-width: 50%;
 }
