@@ -21,6 +21,7 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { FooterComponent } from './front-end/footer/footer.component';
 import { SidebarComponent } from './front-end/template/sidebar/sidebar.component';
+import { ModalComponent } from './front-end/template/modal/modal.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -35,6 +36,7 @@ registerLocaleData(localeFr, 'fr');
     CalendarComponent,
     FooterComponent,
     SidebarComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,30 +1,48 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  styleUrls: ['./card.component.css'],
+  providers: [NgbModalConfig, NgbModal]
 })
 export class CardComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(config: NgbModalConfig, private modalService: NgbModal) { 
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
+
+  open(content) {
+    this.modalService.open(content);
+  }
 
   ngOnInit() {
   }
+
+
+
 
   trainings = [
     {
         name: "Au coeur de la Croix-Rouge",
         description: "Ce module participatif et convivial te permet de situer ton action au sein du Mouvement international de la Croix-Rouge et du Croissant-Rouge, et à travers des cas pratiques, de mesurer la portée concrète des Principes fondamentaux et des valeurs humanitaires dans ton engagement volontaire."
         + "\n" + "Le module vise également à mieux comprendre l’organisation et le fonctionnement de la Croix-Rouge de Belgique, ses activités, l’organisation du volontariat, etc. notamment à travers les échanges avec d’autres volontaires issu·es d’activités et d’entités variées.",
+        category: "tous",
         picto_url:"././././assets/img/pictos/pour-tous-3.png",
         image_url:"././././assets/img/illustrations/formation-au-coeur-crb.png",
+
       },
 
     {
-        name: 'Clean Code'
+        name: 'Second training type name'
     }
 ];
+
+
+
 
 
 

@@ -9,8 +9,43 @@
             <div class="card-body">
                 <h5 class="card-title">{{training.name}}</h5>
                 <p class="card-text">{{training.description}}</p>
+                <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Voir les sessions</button>
 
             </div>
         </div>
     </div>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Sessions</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Lieu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let country of countries; index as i">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>
+                        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px"> {{ country.name }}
+                    </td>
+                    <td>{{ country.area | number }}</td>
+                    <td>{{ country.population | number }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+    </div>
+</ng-template>
