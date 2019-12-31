@@ -7,6 +7,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./inscriptions.component.css']
 })
 export class InscriptionsComponent implements OnInit {
+  
+
+  constructor() { }
 
   model;
 
@@ -235,7 +238,7 @@ export class InscriptionsComponent implements OnInit {
 
 
 
-  constructor() { }
+
 
   ngOnInit() {
   }

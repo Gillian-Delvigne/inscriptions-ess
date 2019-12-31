@@ -13,7 +13,7 @@ import { InscriptionsComponent } from './front-end/body/inscriptions/inscription
 import { CardComponent } from './front-end/template/card/card.component';
 import { CalendarComponent } from './front-end/template/calendar/calendar.component';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -46,6 +46,7 @@ registerLocaleData(localeFr, 'fr');
     AngularFontAwesomeModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
