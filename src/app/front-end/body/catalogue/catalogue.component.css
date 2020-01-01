@@ -13,5 +13,11 @@
 app-sidebar {
     position: fixed;
     padding-left: 5%;
-    padding-top: 5%;
+}
+
+@media screen and (max-width: 1024px) {
+    app-sidebar {
+        position: relative;
+        margin: 3%;
+    }
 }

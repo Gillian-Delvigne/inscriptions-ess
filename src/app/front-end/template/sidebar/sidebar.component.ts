@@ -9,6 +9,9 @@ export class SidebarComponent implements OnInit {
 
   constructor() { }
 
+  public isCollapsed = true;
+
+
   ngOnInit() {
   }
 

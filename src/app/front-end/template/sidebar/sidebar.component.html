@@ -1,5 +1,14 @@
-<div class="row sidebar">
-    <div class="list-group" id="list-tab" role="tablist">
+<div class="row">
+    <button class="sidebar-toggler d-lg-none" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="list-tab" aria-label="Toggle navigation">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line" style="margin-bottom: 0;"></span>
+        <span>Catégories</span>
+    </button>
+</div>
+
+<div class="row sidebar m-auto">
+    <div class="list-group collapse sidebar-collapse" [ngbCollapse]="!isCollapsed" id="list-tab" role="tablist">
         <li class="list-group-item list-title">Catégories</li>
         <button class="list-group-item list-group-item-action" role="tab" data-filter="tous">Pour tous</button>
         <button class="list-group-item list-group-item-action" role="tab" data-filter="ada">Aide aux demandeurs d’asile</button>
