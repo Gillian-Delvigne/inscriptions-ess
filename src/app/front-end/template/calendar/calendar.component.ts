@@ -67,6 +67,19 @@ export class CalendarComponent implements OnInit {
 
   events: CalendarEvent[] = [
     {
+      start: startOfDay(new Date('january 17, 2020 09:00:00')),
+      end: endOfDay(new Date('january 17, 2020 16:00:00')),
+      title: 'Au coeur de la Croix-Rouge',
+      color: colors.red,
+      actions: this.actions,
+      allDay: true,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true
+      },
+      draggable: true
+    },
+    {
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
       title: 'Un événement de trois jours',
