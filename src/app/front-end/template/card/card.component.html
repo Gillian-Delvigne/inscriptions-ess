@@ -1,16 +1,56 @@
 <div class="card mb-3" *ngFor="let training of trainings">
     <div class="row no-gutters">
-        <div class="col-md-4">
-            <img src="{{training.image_url}}" class="card-img" alt="">
-            <hr>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        <div class="col-md-4 text-center">
+            <img src="{{training.image_url}}" class="card-img mt-3 mb-5" alt="">
+            <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Voir les sessions</button>
         </div>
         <div class="col-md-8">
             <div class="card-body">
-                <h5 class="card-title">{{training.name}}</h5>
-                <p class="card-text">{{training.description}}</p>
-                <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Voir les sessions</button>
+                <h4 class="card-title">{{training.name}}</h4>
+                <p class="card-text text-justify">{{training.description}}</p>
+                <hr>
+                <div class="text-justify">
+                    <h5 class="card-title">Détails</h5>
+                    <div class="row mb-2">
+                        <div class="col-md-6">
+                            <p class="card-text"><small class="text-muted va_center" placement="top" ngbTooltip="Durée"><img src="../../../../assets/img/pictos/picto-duree.png" class="picto">{{training.duration_info}}</small></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="card-text"><small class="text-muted va_center" placement="top" ngbTooltip="Prix"><img src="../../../../assets/img/pictos/picto-prix.png" class="picto">{{training.price}}</small></p>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <p class="card-text"><small class="text-muted va_center" placement="top" ngbTooltip="Nombres de participants"><img src="../../../../assets/img/pictos/picto-participant.png" class="picto">De {{training.participants_min}} à {{training.participants_max}} participants</small></p>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <p class="card-text"><small class="text-muted va_center" placement="top" ngbTooltip="Conditions d'accès"><img src="../../../../assets/img/pictos/picto-accessibilite.png" class="picto">{{training.conditions}}</small></p>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <p class="card-text"><small class="text-muted va_center contact_title"><img src="../../../../assets/img/pictos/picto-telephone.png" class="picto">{{training.contact_id[0]}}</small></p>
+                        </div>
+                    </div>
+                    <div class="mb-2 mt-3 contact_area" placement="top" ngbTooltip="Contact">
+                        <div class="col-md-12">
+                            <span class="contact_method"><strong>Téléphone</strong></span>
+                            <p class="card-text"><small class="text-muted text-left contact_method_content">{{training.contact_id[1]}}</small></p>
+                        </div>
+                        <div class="col-md-12">
+                            <span class="contact_method"><strong>Email</strong></span>
+                            <p class="card-text"><small class="text-muted text-left contact_method_content">{{training.contact_id[2]}}</small></p>
+                        </div>
+                        <div class="col-md-12">
+                            <span class="contact_method"><strong>Site web</strong></span>
+                            <p class="card-text"><small class="text-muted text-left contact_method_content">{{training.contact_id[3]}}</small></p>
+                        </div>
 
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
@@ -31,21 +71,18 @@
                     <th scope="col">Type</th>
                     <th scope="col">Date</th>
                     <th scope="col">Lieu</th>
+                    <th scope="col">Choisir</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let country of countries; index as i">
+                <tr *ngFor="let session of sessions; index as i">
                     <th scope="row">{{ i + 1 }}</th>
-                    <td>
-                        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px"> {{ country.name }}
-                    </td>
-                    <td>{{ country.area | number }}</td>
-                    <td>{{ country.population | number }}</td>
+                    <td>{{session.details.training_id}}</td>
+                    <td>{{ session.details.day1 }} <br> {{ session.details.start_time1 }} - {{ session.details.end_time1 }} </td>
+                    <td>{{session.details.location_id[0]}} <br>{{session.details.location_id[1]}}</td>
+                    <td><button class="btn btn-primary">Choisir</button></td>
                 </tr>
             </tbody>
         </table>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
     </div>
 </ng-template>

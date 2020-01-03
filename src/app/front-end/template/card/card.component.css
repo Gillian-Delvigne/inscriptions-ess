@@ -1,0 +1,50 @@
+.card-text,
+.card-title {
+    color: #1D2F56;
+}
+
+.btn-primary {
+    background-color: #ff2400 !important;
+    border-color: #ff2400;
+}
+
+.btn-outline-primary {
+    color: #ff2400;
+    border-color: #ff2400;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:active {
+    color: white !important;
+    border-color: #ff2400 !important;
+    background-color: #ff2400 !important;
+}
+
+.va_center {
+    vertical-align: middle;
+}
+
+.picto {
+    padding-right: 10px;
+    width: 30px;
+}
+
+.contact_area {
+    background-color: #ffcb78;
+    border-radius: 5px;
+    padding: 2%;
+    margin: 5%;
+}
+
+.contact_title {
+    color: #ff2400 !important;
+}
+
+.contact_method {
+    color: #1D2F56;
+    font-size: 0.6rem;
+}
+
+.contact_method_content {
+    font-size: 0.6rem;
+}
