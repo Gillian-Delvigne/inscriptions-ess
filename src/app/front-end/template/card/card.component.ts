@@ -19,8 +19,8 @@ export class CardComponent implements OnInit {
     this.modalService.open(
       content, 
       {
-          size: 'lg', 
-          windowClass: 'custom-class'
+          size: 'xl', 
+          windowClass: ''
       }
   )
   }
@@ -72,6 +72,8 @@ sessions = [
                 day2: "/",
                 trainer1_id: "Mayi Mukuna",
                 location_id: ["Comité provincial du Luxembourg – Formation", "Rue du Dispensaire, 1 - 6700 Arlon"],
+                participants_number : 10,
+                participants_max: 14
                 },
           },
           { type: "training1_sessions",
@@ -82,7 +84,9 @@ sessions = [
               day2: "/",
               trainer1_id: "Mayi Mukuna",
               location_id: ["Maison Croix-Rouge Pays de Bastogne", "Rue des Jardins 20, 6600 Bastogne"],
-              },
+              participants_number: 5,
+              participants_max: 14 
+            },
           },
           { type: "training1_sessions",
             details: { training_id: this.trainings[0].name,
@@ -92,6 +96,8 @@ sessions = [
               day2: "/",
               trainer1_id: "Mayi Mukuna",
               location_id: ["Maison Croix-Rouge Charlemagne", "Boulevard de l'Enseignement 1, 5600 Philipeville "],
+              participants_number: 3,
+              participants_max: 14
               },
           },
           { type: "training2_sessions",
@@ -102,6 +108,8 @@ sessions = [
               day2: "/",
               trainer1_id: "Eddy Vanhorenbeek",
               location_id: ["Maison Croix-Rouge Ottignies | Louvain-la-Neuve | Court-St-Etienne", "Rue de Franquenies 10, 1341 Céroux (Ottignies)"],
+              participants_number : 12,
+              participants_max: 14
               },
           },
           { type: "training2_sessions",
@@ -112,6 +120,8 @@ sessions = [
               day2: "/",
               trainer1_id: "Xavier Hennebert",
               location_id: ["Maison Croix-Rouge Braine-l'Alleud", "Rue du Ménil 47, 1420 Braine-l'Alleud"],
+              participants_number : 14,
+              participants_max: 14
 
               },
           },

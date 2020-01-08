@@ -68,18 +68,18 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Type</th>
                     <th scope="col">Date</th>
                     <th scope="col">Lieu</th>
+                    <th scope="col">Participants (#)</th>
                     <th scope="col">Choisir</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let session of sessions; index as i">
                     <th scope="row">{{ i + 1 }}</th>
-                    <td>{{session.details.training_id}}</td>
                     <td>{{ session.details.day1 }} <br> {{ session.details.start_time1 }} - {{ session.details.end_time1 }} </td>
                     <td>{{session.details.location_id[0]}} <br>{{session.details.location_id[1]}}</td>
+                    <td>{{session.details.participants_number}}/{{ session.details.participants_max }}</td>
                     <td><button class="btn btn-primary">Choisir</button></td>
                 </tr>
             </tbody>
