@@ -22,7 +22,7 @@ import localeFr from '@angular/common/locales/fr';
 import { FooterComponent } from './front-end/footer/footer.component';
 import { SidebarComponent } from './front-end/template/sidebar/sidebar.component';
 import { AccueilComponent } from './front-end/body/accueil/accueil.component';
-
+import 'flatpickr/dist/flatpickr.css';
 
 registerLocaleData(localeFr, 'fr');
 
