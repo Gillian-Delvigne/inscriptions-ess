@@ -1,0 +1,80 @@
+.accueil-content {
+  width: 100%;
+  margin: auto;
+  padding-top: 5%;
+  margin-bottom: 20vh;
+}
+
+.jumbotron {
+  background-color: #9FD5D8;
+  color: white;
+  font-family: 'Lato', sans-serif;
+  width: 85%;
+  margin: auto;
+  padding-bottom: 120px;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 3rem !important;
+}
+
+h3 {
+  color: #FF2400;
+  font-size: 2rem;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+p {
+  color: #1D2F56;
+  font-size: 1.3rem;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  text-align: justify;
+}
+
+.lead {
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.red-line {
+  width: 100px;
+  max-width: 100px;
+  border: 3px solid #FF2400;
+}
+
+
+@media (min-width: 576px) {
+  .intro-title {
+    width: 100%;
+    max-width: 100%;
+  }
+ }
+
+@media (min-width: 768px) {
+  .intro-title {
+    width: 75%;
+    max-width: 75%;
+  }
+ }
+
+@media (min-width: 992px) {
+  .intro-title {
+    width: 50%;
+    max-width: 50%;
+  }
+ }
+
+@media (min-width: 1200px) {
+  .intro-title {
+    width: 50%;
+    max-width:50%;
+  }
+}
+
+#signature {
+  font-weight: 900;
+}
