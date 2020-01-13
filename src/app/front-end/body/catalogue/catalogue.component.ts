@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import {SystemService} from '../../shared/system.service';
 
 @Component({
   selector: 'app-catalogue',
@@ -8,9 +9,10 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 })
 export class CatalogueComponent implements OnInit {
 
-  constructor() { }
+  constructor(public systemService: SystemService) { }
 
   ngOnInit() {
+
   }
 
 
