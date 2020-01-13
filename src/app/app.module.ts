@@ -23,7 +23,6 @@ import { FooterComponent } from './front-end/footer/footer.component';
 import { SidebarComponent } from './front-end/template/sidebar/sidebar.component';
 import { AccueilComponent } from './front-end/body/accueil/accueil.component';
 import '../../node_modules/flatpickr/dist/flatpickr.min.css';
-import {HttpClientModule} from '@angular/common/http';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -53,8 +52,7 @@ registerLocaleData(localeFr, 'fr');
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
-      useFactory: adapterFactory}),
-    HttpClientModule
+      useFactory: adapterFactory})
   ],
   exports: [CalendarComponent],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],

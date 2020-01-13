@@ -158,7 +158,6 @@ export class CalendarComponent implements OnInit {
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
-    console.log(this.modalData);
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {SystemService} from '../../shared/system.service';
 
 @Component({
   selector: 'app-card',
@@ -9,85 +8,30 @@ import {SystemService} from '../../shared/system.service';
   providers: [NgbModalConfig, NgbModal]
 })
 export class CardComponent implements OnInit {
-  trainings: any;
-  public sessions: any;
-  public selectedTraining: any;
 
-  constructor(config: NgbModalConfig,
-              private modalService: NgbModal,
-              public systemService: SystemService) {
+
+  constructor(config: NgbModalConfig, private modalService: NgbModal) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
 
-  open(content, training) {
-    this.getSessions(content, training);
-    /*this.modalService.open(
-      content,
+  open(content) {
+    this.modalService.open(
+      content, 
       {
-          size: 'xl',
+          size: 'xl', 
           windowClass: ''
       }
-    );*/
+  )
   }
 
   ngOnInit() {
-    this.systemService.getTrainings().subscribe(
-      r => {
-        console.log('test', r);
-        this.systemService.trainings = r;
-      },
-      err => {
-        console.log('Error', err)
-      }
-    );
-    // this.getSessions();
   }
 
 
-  getSessions(content, training){
-    this.systemService.getSessions(training.training_id).subscribe(
-      r => {
-        this.sessions = r;
-        console.log(this.sessions);
-        this.selectedTraining = training;
 
-        this.sessions.map((k, v) => {
-          console.log(k, v);
-          const count = this.getParticipants(k.training_session_id);
-          console.log('count', count);
-          k.participants = count;
-        });
-        console.log(this.sessions);
-        this.modalService.open(
-          content,
-          {
-            size: 'xl',
-            windowClass: ''
-          }
-        );
-      },
-      err => {
 
-      }
-    )
-  }
-
-  getParticipants(sessionId){
-    let count = 0;
-    this.systemService.getParticipants(sessionId).subscribe(
-      r => {
-        console.log(r);
-        count = r;
-      },
-      err => {
-        console.log(err)
-      }
-    )
-    console.log(count)
-    return count;
-  }
- /* trainings = [
+  trainings = [
     {
         name: "À la rencontre de la personne bénéficiaire d’aide alimentaire",
         description: "Lors de cette formation, tu aborderas le cadre de référence de tes activités ainsi que les savoirs et pratiques utiles à ton volontariat. Nous y discuterons le contexte de l’aide alimentaire, y compris nos principaux partenaires sociaux, ainsi que la raison d’être de nos critères de fonctionnement (conditions d’accès, sources d’approvisionnement, etc.). Nous mènerons également une réflexion sur le profil et les réalités du public bénéficiaire de l’aide alimentaire afin de définir le rôle du volontaire et les clés pour la relation volontaire-bénéficiaire.",
@@ -116,10 +60,10 @@ export class CardComponent implements OnInit {
       category_id: "tous",
       image_url:"././././assets/img/illustrations/formation-au-coeur-crb.png",
     }
-];*/
+];
 
 
-/*sessions = [
+sessions = [
             { type: "training1_sessions",
               details: { training_id: this.trainings[0].name,
                 day1: "jeudi 22 octobre 2020",
@@ -181,7 +125,7 @@ export class CardComponent implements OnInit {
 
               },
           },
-]*/
+]
 
 
 
