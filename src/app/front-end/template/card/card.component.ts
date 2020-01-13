@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {SystemService} from '../../shared/system.service';
 
 @Component({
   selector: 'app-card',
@@ -8,30 +9,71 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   providers: [NgbModalConfig, NgbModal]
 })
 export class CardComponent implements OnInit {
+  trainings: any;
+  public sessions: any;
+  public selectedTraining: any;
 
-
-  constructor(config: NgbModalConfig, private modalService: NgbModal) {
+  constructor(config: NgbModalConfig,
+              private modalService: NgbModal,
+              public systemService: SystemService) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
 
-  open(content) {
-    this.modalService.open(
+  open(content, training) {
+    this.getSessions(content, training);
+    /*this.modalService.open(
       content, 
       {
           size: 'xl', 
           windowClass: ''
       }
-  )
+    )*/
   }
 
   ngOnInit() {
+    this.systemService.getTrainings().subscribe(
+      r => {
+        console.log('test', r);
+        this.systemService.trainings = r;
+      },
+      err => {
+        console.log('Error', err)
+      }
+    );
+  }
+
+  getSessions(content, training){
+    this.systemService.getSessions(training.training_id).subscribe(
+      r => {
+        this.sessions = r;
+        console.log(this.sessions);
+        this.selectedTraining = training;
+
+        /*this.sessions.map((k, v) => {
+          console.log(k, v);
+          const count = this.getParticipants(k.training_session_id);
+          console.log('count', count);
+          k.participants = count;
+        });*/
+        console.log(this.sessions);
+        this.modalService.open(
+          content,
+          {
+            size: 'xl',
+            windowClass: ''
+          }
+        );
+      },
+      err => {
+
+      }
+    )
   }
 
 
 
-
-  trainings = [
+/*  trainings = [
     {
         name: "À la rencontre de la personne bénéficiaire d’aide alimentaire",
         description: "Lors de cette formation, tu aborderas le cadre de référence de tes activités ainsi que les savoirs et pratiques utiles à ton volontariat. Nous y discuterons le contexte de l’aide alimentaire, y compris nos principaux partenaires sociaux, ainsi que la raison d’être de nos critères de fonctionnement (conditions d’accès, sources d’approvisionnement, etc.). Nous mènerons également une réflexion sur le profil et les réalités du public bénéficiaire de l’aide alimentaire afin de définir le rôle du volontaire et les clés pour la relation volontaire-bénéficiaire.",
@@ -125,7 +167,7 @@ sessions = [
 
               },
           },
-]
+]*/
 
 
 

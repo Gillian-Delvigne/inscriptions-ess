@@ -1,7 +1,10 @@
 <div class="row sidebar m-auto">
     <div class="list-group" id="list-tab" role="tablist">
         <li class="list-group-item list-title">Catégories</li>
-        <button class="list-group-item list-group-item-action" role="tab" data-filter="tous">Pour tous</button>
+          <button *ngFor="let category of categories" class="list-group-item list-group-item-action" (click)="getCat(category.category_id)" role="tab" data-filter="tous">
+            {{category.name}}
+          </button>
+        <!--<button class="list-group-item list-group-item-action" role="tab" data-filter="tous">Pour tous</button>
         <button class="list-group-item list-group-item-action" role="tab" data-filter="ada">Aide aux demandeurs d’asile</button>
         <button class="list-group-item list-group-item-action" role="tab" data-filter="mandataires">Mandataires</button>
         <button class="list-group-item list-group-item-action" role="tab" data-filter="as">Action sociale</button>
@@ -9,6 +12,6 @@
         <button class="list-group-item list-group-item-action" role="tab" data-filter="formafor">Formation de formateurs</button>
         <button class="list-group-item list-group-item-action" role="tab" data-filter="actires">Activités ressources</button>
         <button class="list-group-item list-group-item-action" role="tab" data-filter="inter">International</button>
-        <button class="list-group-item list-group-item-action" role="tab" data-filter="marcom">Communication et marketing</button>
+        <button class="list-group-item list-group-item-action" role="tab" data-filter="marcom">Communication et marketing</button>-->
     </div>
 </div>
