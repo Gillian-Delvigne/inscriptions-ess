@@ -18,7 +18,9 @@ app-root {
 app-catalogue,
 app-agenda,
 app-inscriptions,
-app-accueil {
+app-accueil,
+app-signup,
+app-login{
     width: 100%;
 }
 

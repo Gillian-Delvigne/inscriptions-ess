@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {SystemService} from '../../shared/system.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-card',
@@ -15,7 +16,8 @@ export class CardComponent implements OnInit {
 
   constructor(config: NgbModalConfig,
               private modalService: NgbModal,
-              public systemService: SystemService) {
+              public systemService: SystemService,
+              public router: Router) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
@@ -32,15 +34,7 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.systemService.getTrainings().subscribe(
-      r => {
-        console.log('test', r);
-        this.systemService.trainings = r;
-      },
-      err => {
-        console.log('Error', err)
-      }
-    );
+    this.systemService.displayTrainings();
   }
 
   getSessions(content, training){
@@ -170,7 +164,8 @@ sessions = [
 ]*/
 
 
-
-
-
+  chooseSession(trainingSession: any) {
+    this.systemService.selectedSession = trainingSession;
+    this.router.navigateByUrl('/inscriptions');
+  }
 }

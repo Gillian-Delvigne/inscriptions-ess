@@ -19,8 +19,14 @@
             <li class="nav-item">
                 <a class="nav-link" routerLink="/agenda">Agenda</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/inscriptions">Inscriptions</a>
+            <li class="nav-item" *ngIf="!authService.isLoggedin">
+                <a class="nav-link" routerLink="/signup">Signup</a>
+            </li>
+            <li class="nav-item" *ngIf="!authService.isLoggedin">
+                <a class="nav-link" routerLink="/login">Login</a>
+            </li>
+            <li class="nav-item" *ngIf="authService.isLoggedin">
+                <a class="nav-link" routerLink="/" (click)="authService.logout()">Logout</a>
             </li>
         </ul>
     </div>

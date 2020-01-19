@@ -11,15 +11,27 @@ export class SidebarComponent implements OnInit {
   constructor(public systemService: SystemService) { }
 
   ngOnInit() {
+    this.getCats();
+
+    /*this.systemService.saveParticipants().subscribe(
+      r => {
+        console.log(r);
+      }
+    );*/
+  }
+
+  getCats(){
     this.systemService.getCategories().subscribe(
       r => {
         console.log(r);
         this.categories = r;
+        this.systemService.selectedCat = '';
+        this.systemService.displayTrainings();
       },
       err => {
         console.log(err);
       }
-    )
+    );
   }
 
   getCat(catId: any) {
@@ -28,4 +40,7 @@ export class SidebarComponent implements OnInit {
     this.systemService.displayTrainingByCatId();
   }
 
+  resetCats() {
+    this.getCats();
+  }
 }

@@ -1,7 +1,7 @@
 <div class="row sidebar m-auto">
     <div class="list-group" id="list-tab" role="tablist">
-        <li class="list-group-item list-title">Catégories</li>
-          <button *ngFor="let category of categories" class="list-group-item list-group-item-action" (click)="getCat(category.category_id)" role="tab" data-filter="tous">
+        <p class="list-group-item list-title">Catégories <span (click)="resetCats()">Reset</span></p>
+          <button *ngFor="let category of categories" class="list-group-item list-group-item-action" (click)="getCat(category.category_id)" role="tab" data-filter="tous" [ngClass]="{'active': systemService.selectedCat === category.category_id}">
             {{category.name}}
           </button>
         <!--<button class="list-group-item list-group-item-action" role="tab" data-filter="tous">Pour tous</button>

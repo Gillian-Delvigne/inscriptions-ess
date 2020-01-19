@@ -1,98 +1,44 @@
 <div class="container form-container">
-    <form novalidate name="" id="" action="/form-validation" method="post" class="m-auto form" #form="ngForm" [ngClass]="{'was-validated': form.submitted}">
-        <div class="personal_data">
-            <h3>Données personnelles</h3>
-            <hr>
-            <div class="form-row">
-                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-                    <label for="nom" class="control-label">Nom <span class="asterisque">*</span></label>
-                    <input type="text" class="form-control" required id="nom" name="nom" placeholder="Dupont">
-                    <div class="invalid-feedback">Veuillez remplir ce champ</div>
-                  </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-                    <label for="prenom" class="control-label">Prénom <span class="asterisque">*</span></label>
-                    <input type="text" class="form-control" required id="prenom" name="prenom" placeholder="Jean">
-                    <div class="invalid-feedback">Veuillez remplir ce champ</div>
-                  </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="genre" id="masculin" value="option1" required>
-                        <label class="form-check-label control-label" for="masculin">Monsieur</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="genre" id="féminin" value="option2" required>
-                        <label class="form-check-label control-label" for="féminin">Madame</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="genre" id="autre" value="option3" required>
-                        <label class="form-check-label control-label" for="autre">Autre</label>
-                        <div class="invalid-feedback" style="margin-left: 1em;">Veuillez choisir un genre</div>
-                      </div>
+    <div class="col-md-6 session-confirmation">
 
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-                    <label for="date_de_naissance" class="control-label">Date de naissance <span class="asterisque">*</span></label>
-                    <div class="input-group">
-                        <input id="date_de_naissance" class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" required>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-                        </div>
-                        <div class="invalid-feedback">Veuillez renseigner votre date de naissance</div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-                    <label for="email" class="control-label">Adresse email <span class="asterisque">*</span></label>
-                    <input type="email" class="form-control" required id="email" name="Email" placeholder="nom@exemple.com">
-                    <div class="invalid-feedback">Veuillez encoder une adresse email valide</div>
-                  </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-                    <label for="phone" class="control-label">Numéro de téléphone <span class="asterisque">*</span></label>
-                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="0000/00.00.00" required>
-                    <div class="invalid-feedback">Veuillez reiseigner un numéro de téléphone</div>
-                  </div>
-            </div>
+      <div class="row">
+        <div class="col-md-12" *ngIf="successJoined">
+          <h3>
+            Thank you for joining session.
+            <a class="nav-link" routerLink="/catalogue">Catalogue</a>
+          </h3>
         </div>
-        <div class="redcross_data mt-5 mb-3">
-            <h3>Données Croix-Rouge</h3>
-            <hr>
-            <div class="form-row">
-                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-                    <label for="matricule" class="control-label">N° de matricule</label>
-                    <input id="matricule" type="text" class="form-control" size="20" name="Matricule" placeholder="20180103F067053">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-                    <label for="TypeEntityId" class="control-label">Entité générale&nbsp;:</label>
-                    <select class="col-lg-12 form-control" id="TypeEntityId" name="Entité Générale" required (change)="onChange($event.target.value)">
-                        <option value="" disabled selected>Sélectionnez votre entité générale</option>
-                        <option *ngFor="let entity of entities">{{entity.name}}</option>
-                </select>
-                <div class="invalid-feedback">Veuillez renseigner votre entité générale</div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-                    <label for="EntityId" class="control-label">Entité locale&nbsp;:</label>
-                    <select class="col-lg-12 form-control" id="EntityId" name="Entité Locale" required>
-                    <option value="" disabled selected>Sélectionnez votre entité locale</option>
-                </select>
-                <div class="invalid-feedback">Veuillez renseigner votre entité locale</div>
-                </div>
-            </div>
+        <div class="col-md-12" *ngIf="!successJoined">
+          <h4>
+            Confirm Session Joining
+          </h4>
+          <ul>
+            <li>
+              <h4>Contact Information</h4>
+              <p><b>Location Name: </b>{{systemService.selectedSession.name}}</p>
+              <p><b>Location Name: </b>{{systemService.selectedSession.address}}</p>
+              <p><b>Location Name: </b>{{systemService.selectedSession.phone_number}}</p>
+              <p><b>Location Name: </b>{{systemService.selectedSession.email}}</p>
+            </li>
+            <li *ngIf="systemService.selectedSession.day1">
+              <p><b>Day 1: </b>{{systemService.selectedSession.day1}}</p>
+              <p><b>Start Time: </b>{{systemService.selectedSession.start_time1}}</p>
+              <p><b>End Time: </b>{{systemService.selectedSession.end_time1}}</p>
+              <!--<p>{{systemService.selectedSession.trainer1_id}}</p>-->
+            </li>
+            <li *ngIf="systemService.selectedSession.day2 !=null">
+              <p><b>Day 2: </b>{{systemService.selectedSession.day2}}</p>
+              <p><b>Start Time: </b>{{systemService.selectedSession.start_time2}}</p>
+              <p><b>End Time: </b>{{systemService.selectedSession.end_time2}}</p>
+              <!--<p>{{systemService.selectedSession.trainer1_id}}</p>-->
+            </li>
+            <!--<li>{{systemService.selectedSession.day1}}</li>
+            <li>{{systemService.selectedSession.day1}}</li>-->
+          </ul>
+          <div class="form-row text-center">
+            <button type="submit" class="btn btn-primary" (click)="submit()">Join Session</button>
+          </div>
         </div>
-        <div class="form-row float-right">
-            <button type="submit" class="btn btn-primary" (click)="submit(form)">Envoyer</button>
-        </div>
-    </form>
+      </div>
+    </div>
 </div>

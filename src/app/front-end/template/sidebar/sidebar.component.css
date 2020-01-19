@@ -27,3 +27,13 @@
 .list-group {
     width: 100%;
 }
+p.list-group-item.list-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+p.list-group-item.list-title span {
+  font-size: 15px;
+  font-weight: 700;
+  color: red;
+}
