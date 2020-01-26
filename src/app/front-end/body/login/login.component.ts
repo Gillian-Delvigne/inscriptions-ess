@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import {AuthService} from '../../shared/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +13,12 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
   submitted = false;
+  emailExists: string;
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              public authService: AuthService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -36,15 +39,28 @@ export class LoginComponent implements OnInit {
     }
     console.log(this.loginForm);
     // this.loading = true;
-    /*this.authenticationService.login(this.f.username.value, this.f.password.value)
+    const formData = {
+      email : this.f.username.value,
+      password : this.f.password.value,
+    };
+    console.log('formData', formData);
+    this.authService.login(formData )
       .pipe(first())
       .subscribe(
-        data => {
-          this.router.navigate([this.returnUrl]);
+        r => {
+          console.log(r);
+          if (r.status){
+            this.emailExists = '';
+            this.authService.saveUser(r.data[0]);
+            this.router.navigateByUrl('/');
+          } else {
+            this.emailExists = 'No User found with this Email/Password. Please try again.';
+          }
+          // this.router.navigate([this.returnUrl]);
         },
   error => {
         this.loading = false;
-    });*/
+    });
   }
 
 }

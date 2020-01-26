@@ -56,6 +56,16 @@
       </div>
       <div class="form-row">
         <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
+          <label for="country" class="control-label">Nationalité (pays d'origine) <span class="asterisque">*</span></label>
+          <select class="col-lg-12 form-control" id="country" [ngModel]="country" name="country" required>
+            <option value="" disabled selected>Sélectionnez votre pays d'origine</option>
+            <option *ngFor="let country of countries">{{country.name}}</option>
+          </select>
+          <div class="invalid-feedback">Veuillez renseigner votre nationalité</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
           <label for="phone" class="control-label">Numéro de téléphone <span class="asterisque">*</span></label>
           <input type="tel" class="form-control" id="phone" name="phone" [ngModel]="phone" placeholder="0000/00.00.00" required>
           <div class="invalid-feedback">Veuillez reiseigner un numéro de téléphone</div>
@@ -89,6 +99,27 @@
             <option *ngFor="let single of localEntities">{{single.name}}</option>
           </select>
           <div class="invalid-feedback">Veuillez renseigner votre entité locale</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
+          <label for="TypeActivity" class="control-label">Type d'activité&nbsp;:</label>
+          <select class="col-lg-12 form-control" id="TypeActivity" name="typeActivity" [ngModel]="typeActivity" (change)="onChangeActivity($event.target.value)"  required>
+            <option value="" disabled selected>Sélectionnez votre type d'activité</option>
+            <option *ngFor="let activity of activities">{{activity.type}}</option>
+          </select>
+          <div class="invalid-feedback">Veuillez renseigner un type d'activité principale</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
+          <label for="Activity" class="control-label">Activité&nbsp;:</label>
+          <select class="col-lg-12 form-control" id="activity" name="activity" [ngModel]="activity" required>
+            <option value="" disabled selected>Sélectionnez votre activité principale</option>
+            <option *ngFor="let activity of activityList">{{activity.name}}</option>
+
+          </select>
+          <div class="invalid-feedback">Veuillez renseigner une activité principale</div>
         </div>
       </div>
       <div class="form-row">

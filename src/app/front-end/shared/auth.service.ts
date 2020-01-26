@@ -28,6 +28,13 @@ export class AuthService {
     return this.http.post<any>(this.ROOT_URL + 'users/signUp', data, {headers});
   }
 
+  login(data): Observable<any> {
+    console.log(data)
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.http.post<any>(this.ROOT_URL + 'users/login', data, {headers});
+  }
+
   // Keep user in session
   saveUser(user){
     console.log(user);
@@ -42,5 +49,8 @@ export class AuthService {
   logout(){
     sessionStorage.setItem('loggedUser', '');
     sessionStorage.setItem('userId', '');
+    this.isLoggedin = false;
+    this.loggedInUser = '';
+    this.loggedInUserId = '';
   }
 }

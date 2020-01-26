@@ -34,3 +34,6 @@ ul {
   list-style: none;
   padding: 0;
 }
+h3.login-status {
+  color: red;
+}
