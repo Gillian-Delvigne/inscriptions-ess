@@ -25,6 +25,8 @@ import { AccueilComponent } from './front-end/body/accueil/accueil.component';
 import '../../node_modules/flatpickr/dist/flatpickr.min.css';
 import {HttpClientModule} from '@angular/common/http';
 import {SystemService} from './front-end/shared/system.service';
+import { LoginComponent } from './front-end/body/login/login.component';
+import { SignupComponent } from './front-end/body/signup/signup.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -40,6 +42,8 @@ registerLocaleData(localeFr, 'fr');
     FooterComponent,
     SidebarComponent,
     AccueilComponent,
+    LoginComponent,
+    SignupComponent,
 
   ],
   imports: [

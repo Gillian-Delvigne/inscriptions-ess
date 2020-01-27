@@ -1,5 +1,51 @@
 <div class="container form-container">
-    <form novalidate name="" id="" action="/form-validation" method="post" class="m-auto form" #form="ngForm" [ngClass]="{'was-validated': form.submitted}">
+
+    <div class="col-md-6 session-confirmation">
+
+      <div class="row">
+        <div class="col-md-12" *ngIf="successJoined">
+          <h3>
+            Thank you for joining session.
+            <a class="nav-link" routerLink="/catalogue">Catalogue</a>
+          </h3>
+        </div>
+        <div class="col-md-12" *ngIf="!successJoined">
+          <h4>
+            Confirm Session Joining
+          </h4>
+          <ul>
+            <li>
+              <!--<h5>Contact Information</h5>-->
+              <p><b>Location Name: </b>{{systemService.selectedSession.name}}</p>
+              <p><b>Location Name: </b>{{systemService.selectedSession.address}}</p>
+              <p><b>Location Name: </b>{{systemService.selectedSession.phone_number}}</p>
+              <p><b>Location Name: </b>{{systemService.selectedSession.email}}</p>
+            </li>
+            <li *ngIf="systemService.selectedSession.day1">
+              <p><b>Day 1: </b>{{systemService.selectedSession.day1}}</p>
+              <p><b>Start Time: </b>{{systemService.selectedSession.start_time1}}</p>
+              <p><b>End Time: </b>{{systemService.selectedSession.end_time1}}</p>
+              <!--<p>{{systemService.selectedSession.trainer1_id}}</p>-->
+            </li>
+            <li *ngIf="systemService.selectedSession.day2 !=null">
+              <p><b>Day 2: </b>{{systemService.selectedSession.day2}}</p>
+              <p><b>Start Time: </b>{{systemService.selectedSession.start_time2}}</p>
+              <p><b>End Time: </b>{{systemService.selectedSession.end_time2}}</p>
+              <!--<p>{{systemService.selectedSession.trainer1_id}}</p>-->
+            </li>
+            <!--<li>{{systemService.selectedSession.day1}}</li>
+            <li>{{systemService.selectedSession.day1}}</li>-->
+          </ul>
+          <div class="form-row text-center" *ngIf="authService.isLoggedin">
+            <button type="submit" class="btn btn-primary" (click)="submit()">Join Session</button>
+          </div>
+          <h3 class="login-status text-center" *ngIf="!authService.isLoggedin">
+            Please <a routerLink="/login">Login</a> to join this session.
+          </h3>
+        </div>
+      </div>
+    </div>
+    <!--<form novalidate name="" id="" action="/form-validation" method="post" class="m-auto form" #form="ngForm" [ngClass]="{'was-validated': form.submitted}">
         <div class="personal_data">
             <h3>Données personnelles</h3>
             <hr>
@@ -124,5 +170,5 @@
         <div class="form-row float-right">
             <button type="submit" class="btn btn-primary">Envoyer</button>
         </div>
-    </form>
+    </form>-->
 </div>

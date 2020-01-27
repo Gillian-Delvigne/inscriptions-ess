@@ -12,6 +12,7 @@ export class SystemService {
   ROOT_URL = environment.apiUrl;
   selectedCat = '';
   public trainings: any;
+  selectedSession: any;
   constructor(private http: HttpClient, private router: Router) { }
 
   // Get Trainings With Contacts
@@ -26,6 +27,18 @@ export class SystemService {
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
     return this.http.get<any>(this.ROOT_URL + 'trainings/getTrainingsByCat/' + this.selectedCat, {headers});
+  }
+
+  displayTrainings(){
+    this.getTrainings().subscribe(
+      r => {
+        console.log('test', r);
+        this.trainings = r;
+      },
+      err => {
+        console.log('Error', err)
+      }
+    )
   }
 
   displayTrainingByCatId(){
@@ -57,4 +70,15 @@ export class SystemService {
 
     return this.http.get<any>(this.ROOT_URL + 'sessions/getTrainingSessionParticipants/' + sessionId, {headers});
   }
+
+  saveParticipants(trainingSessionId): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const data = {
+      userId: sessionStorage.getItem('userId'),
+      sessionId: trainingSessionId
+    };
+
+    return this.http.post<any>(this.ROOT_URL + 'sessions/addParticipant', data, {headers});
+  }
+
 }

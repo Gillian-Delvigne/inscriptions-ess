@@ -1,0 +1,9 @@
+.login {
+  margin: auto;
+  margin-top: 40px;
+}
+.email-error{
+  font-size: 13px;
+  color: red;
+  margin: 20px 0;
+}
