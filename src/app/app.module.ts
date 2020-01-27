@@ -27,6 +27,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {SystemService} from './front-end/shared/system.service';
 import { LoginComponent } from './front-end/body/login/login.component';
 import { SignupComponent } from './front-end/body/signup/signup.component';
+import { ToastrModule } from 'ngx-toastr';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -59,7 +60,8 @@ registerLocaleData(localeFr, 'fr');
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory}),
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot()
   ],
   exports: [CalendarComponent],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' },

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../../shared/auth.service';
 import {Router} from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -31,7 +32,7 @@ export class SignupComponent implements OnInit {
   typeActivity: any;
   activityList: any;
   activity: any;
-  constructor(public router: Router, public authService: AuthService) { }
+  constructor(public router: Router, public authService: AuthService, public toastr: ToastrService) { }
 
   ngOnInit() {
     if (this.authService.isLoggedin) {
@@ -473,15 +474,24 @@ export class SignupComponent implements OnInit {
           this.apiError = '';
         }
         if (r.status) {
+          this.showSuccess();
           this.emailExists = '';
           this.authService.saveUser(r.data[0]);
           this.router.navigateByUrl('/');
         }
       },
       err => {
+        this.showFailure();
         this.apiError = 'Technical Issue. Please try again';
         console.log(err);
       }
     );
+  }
+
+  showSuccess() {
+    this.toastr.success('Registered Successfully!', 'Success!!!');
+  }
+  showFailure() {
+    this.toastr.success('Error Found!', 'Failed!!!');
   }
 }

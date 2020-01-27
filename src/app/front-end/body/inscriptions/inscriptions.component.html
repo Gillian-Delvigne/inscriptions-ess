@@ -22,7 +22,7 @@
               <p><b>Location Name: </b>{{systemService.selectedSession.email}}</p>
             </li>
             <li *ngIf="systemService.selectedSession.day1">
-              <p><b>Day 1: </b>{{systemService.selectedSession.day1}}</p>
+              <p><b>Day 1: </b>{{systemService.selectedSession.day1 | date: 'yyyy-MM-dd'}}</p>
               <p><b>Start Time: </b>{{systemService.selectedSession.start_time1}}</p>
               <p><b>End Time: </b>{{systemService.selectedSession.end_time1}}</p>
               <!--<p>{{systemService.selectedSession.trainer1_id}}</p>-->
