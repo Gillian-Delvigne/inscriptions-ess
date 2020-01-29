@@ -4,6 +4,6 @@
         <button *ngFor="let category of categories" class="list-group-item list-group-item-action" (click)="getCat(category.category_id)" role="tab" data-filter="tous" [ngClass]="{'active': systemService.selectedCat === category.category_id}">
             {{category.name}}
           </button>
-        <button class="btn btn-warning mt-2" (click)="resetCats()"><fa-icon [icon]="faRedoAlt" class="mr-1"></fa-icon>Toutes les formations</button>
+        <button class="btn btn-danger mt-2" (click)="resetCats()"><fa-icon [icon]="faRedoAlt" class="mr-1"></fa-icon>Toutes les formations</button>
     </div>
 </div>
