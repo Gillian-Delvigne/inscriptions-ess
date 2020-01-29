@@ -19,16 +19,5 @@ export class CatalogueComponent implements OnInit {
 }
 
 
-const formations = [ 
-  {
-    id : 1,
-    type : "ada",
-    title : "Formation d’animateur à l’atelier citoyenneté",
-    description : "Jour 1 : méthodologie de base d’animation de groupe",
-    durée : "3h30",
-    accessibilité : "Salarié/volontaire qui donne les ateliers citoyenneté dans les centres d’accueil des DPI",
-    Prix : "Gratuit",
-    contact : "Suley Velaj – suley.velaj@croix-rouge.be"
-},
-]
+
 

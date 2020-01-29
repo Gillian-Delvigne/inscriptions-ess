@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SystemService} from '../../shared/system.service';
+import { faRedoAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,6 +10,8 @@ import {SystemService} from '../../shared/system.service';
 export class SidebarComponent implements OnInit {
   categories: any;
   constructor(public systemService: SystemService) { }
+
+  faRedoAlt = faRedoAlt;
 
   ngOnInit() {
     this.getCats();

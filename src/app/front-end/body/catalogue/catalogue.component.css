@@ -12,7 +12,6 @@
 
 app-sidebar {
     position: fixed;
-    padding-left: 5%;
 }
 
 @media screen and (max-width: 1024px) {
