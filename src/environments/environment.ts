@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://admin.ess.crb-pedagogiedigitale.ovh/api/'
+  // apiUrl: 'https://admin.ess.crb-pedagogiedigitale.ovh/api/'
+  apiUrl: 'http://localhost:3000/api/'
 };
 
 /*

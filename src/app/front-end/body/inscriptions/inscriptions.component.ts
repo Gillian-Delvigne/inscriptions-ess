@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {SystemService} from '../../shared/system.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../shared/auth.service';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-inscriptions',
@@ -14,7 +14,9 @@ export class InscriptionsComponent implements OnInit {
 
   constructor(public systemService: SystemService,
               public router: Router,
-              public authService: AuthService) { }
+              public authService: AuthService,
+              public toastr: ToastrService) {
+  }
 
  /* model;
 
@@ -607,8 +609,13 @@ countries = [
         console.log(r);
         if (r.status) {
           this.successJoined = true;
+          this.showSuccess();
         }
       }
     );
+  }
+
+  showSuccess() {
+    this.toastr.success('Session Joined Successfully!', 'Congrats!!!');
   }
 }

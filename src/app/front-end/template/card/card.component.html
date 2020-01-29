@@ -83,7 +83,7 @@
         <tbody>
         <tr *ngFor="let session of sessions; index as i">
           <th scope="row">{{ i + 1 }}</th>
-          <td>{{ session.day1 }} <br> {{ session.start_time1 }} - {{ session.end_time1 }} </td>
+          <td>{{ session.day1 | date: 'yyyy-MM-dd' }} <br> {{ session.start_time1 }} - {{ session.end_time1 }} </td>
           <td>{{session.name}} <br>{{session.email}}</td>
           <td>{{session.participants}}/{{ selectedTraining.participants_max }}</td>
           <td><button class="btn btn-primary" (click)="d('Cross click')" (click)="chooseSession(session)">Choisir</button></td>

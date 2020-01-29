@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import {AuthService} from '../../shared/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
-              public authService: AuthService) { }
+              public authService: AuthService,
+              public toastr: ToastrService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -50,10 +52,12 @@ export class LoginComponent implements OnInit {
         r => {
           console.log(r);
           if (r.status){
+            this.showSuccess();
             this.emailExists = '';
             this.authService.saveUser(r.data[0]);
             this.router.navigateByUrl('/');
           } else {
+            this.showFailure();
             this.emailExists = 'No User found with this Email/Password. Please try again.';
           }
           // this.router.navigate([this.returnUrl]);
@@ -63,4 +67,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  showSuccess() {
+    this.toastr.success('Loggedin Successfully!', 'Success!!!');
+  }
+  showFailure() {
+    this.toastr.success('Login Issue Found!', 'Failed!!!');
+  }
 }
