@@ -482,16 +482,16 @@ export class SignupComponent implements OnInit {
       },
       err => {
         this.showFailure();
-        this.apiError = 'Technical Issue. Please try again';
+        this.apiError = 'Un problème technique est survenu : merci de réessayer plus tard.';
         console.log(err);
       }
     );
   }
 
   showSuccess() {
-    this.toastr.success('Registered Successfully!', 'Success!!!');
+    this.toastr.success('Votre compte a bien été créé', 'Réussite');
   }
   showFailure() {
-    this.toastr.success('Error Found!', 'Failed!!!');
+    this.toastr.error('Une erreur s\'est produite lors de la création de votre compte', 'Erreur');
   }
 }

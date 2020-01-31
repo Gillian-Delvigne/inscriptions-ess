@@ -1,39 +1,63 @@
 .list-title {
-    background-color: #9FD5D8;
-    color: white;
-    font-size: 1.4rem;
+  background-color: #9FD5D8;
+  color: white;
+  font-size: 1.4rem;
 }
 
 .sidebar-toggler-icon {
-    color: #fff !important;
-    font-size: 13px;
+  color: #fff !important;
+  font-size: 13px;
 }
 
 .sidebar-toggler {
-    width: 47px;
-    height: 34px;
-    border: 1px solid white;
-    margin-bottom: 3%;
+  width: 47px;
+  height: 34px;
+  border: 1px solid white;
+  margin-bottom: 3%;
 }
 
 .sidebar-toggler .line {
-    width: 100%;
-    float: left;
-    height: 2px;
-    background-color: #fff;
-    margin-bottom: 5px;
+  width: 100%;
+  float: left;
+  height: 2px;
+  background-color: #fff;
+  margin-bottom: 5px;
 }
 
 .list-group {
-    width: 100%;
+  width: 100%;
 }
-p.list-group-item.list-title {
+
+list-group-item.list-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-p.list-group-item.list-title span {
+
+list-group-item.list-title span {
   font-size: 15px;
   font-weight: 700;
   color: red;
+}
+
+.list-group-item:active,
+.list-group-item:hover,
+.list-group-item:visited {
+  background-color: #ff2400 !important;
+  border-color: #ff2400 !important;
+  color: white;
+}
+
+.active {
+  background-color: #ff2400 !important;
+  border-color: #ff2400 !important;
+  color: white;
+  outline: none;
+}
+
+.btn-warning {
+  background-color: #FFCB7B;
+  font-size: 0.6rem;
+  font-weight: 700;
+  outline: none;
 }

@@ -1,17 +1,9 @@
 <div class="row sidebar m-auto">
-    <div class="list-group" id="list-tab" role="tablist">
-        <p class="list-group-item list-title">Catégories <span (click)="resetCats()">Reset</span></p>
-          <button *ngFor="let category of categories" class="list-group-item list-group-item-action" (click)="getCat(category.category_id)" role="tab" data-filter="tous" [ngClass]="{'active': systemService.selectedCat === category.category_id}">
-            {{category.name}}
-          </button>
-        <!--<button class="list-group-item list-group-item-action" role="tab" data-filter="tous">Pour tous</button>
-        <button class="list-group-item list-group-item-action" role="tab" data-filter="ada">Aide aux demandeurs d’asile</button>
-        <button class="list-group-item list-group-item-action" role="tab" data-filter="mandataires">Mandataires</button>
-        <button class="list-group-item list-group-item-action" role="tab" data-filter="as">Action sociale</button>
-        <button class="list-group-item list-group-item-action" role="tab" data-filter="secours">Secours</button>
-        <button class="list-group-item list-group-item-action" role="tab" data-filter="formafor">Formation de formateurs</button>
-        <button class="list-group-item list-group-item-action" role="tab" data-filter="actires">Activités ressources</button>
-        <button class="list-group-item list-group-item-action" role="tab" data-filter="inter">International</button>
-        <button class="list-group-item list-group-item-action" role="tab" data-filter="marcom">Communication et marketing</button>-->
-    </div>
+  <div class="list-group" id="list-tab" role="tablist">
+    <span class="list-group-item list-title">Catégories</span>
+    <button *ngFor="let category of categories" class="list-group-item list-group-item-action" (click)="getCat(category.category_id)" role="tab" data-filter="tous" [ngClass]="{'active': systemService.selectedCat === category.category_id}">
+      {{category.name}}
+    </button>
+    <button class="btn btn-warning mt-2" (click)="resetCats()"><fa-icon [icon]="faRedoAlt" class="mr-1"></fa-icon>Toutes les formations</button>
+  </div>
 </div>

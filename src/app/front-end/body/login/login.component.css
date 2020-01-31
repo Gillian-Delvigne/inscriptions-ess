@@ -2,8 +2,18 @@
   margin: auto;
   margin-top: 40px;
 }
-.email-error{
+
+.email-error {
   font-size: 13px;
   color: red;
   margin: 20px 0;
+}
+
+.btn-primary {
+  background-color: #ff2400 !important;
+  border-color: #ff2400 !important;
+}
+
+.btn-link {
+  color: #c61017;
 }

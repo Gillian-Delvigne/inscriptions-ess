@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
             this.router.navigateByUrl('/');
           } else {
             this.showFailure();
-            this.emailExists = 'No User found with this Email/Password. Please try again.';
+            this.emailExists = 'Adresse email ou mot de passe incorrect. Merci de réessayer.';
           }
           // this.router.navigate([this.returnUrl]);
         },
@@ -68,9 +68,9 @@ export class LoginComponent implements OnInit {
   }
 
   showSuccess() {
-    this.toastr.success('Loggedin Successfully!', 'Success!!!');
+    this.toastr.success('La connexion à votre compte a réussi', 'Réussite');
   }
   showFailure() {
-    this.toastr.success('Login Issue Found!', 'Failed!!!');
+    this.toastr.error('Un problème est survenu lors de la création de votre compte', 'Erreur');
   }
 }
