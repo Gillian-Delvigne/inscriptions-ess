@@ -8,6 +8,7 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
+import {SystemService} from '../../shared/system.service';
 
 const colors: any = {
   red: {
@@ -122,7 +123,8 @@ export class CalendarComponent implements OnInit {
   activeDayIsOpen: boolean = true;
 
 
-  constructor(private modal: NgbModal) { }
+  constructor(private modal: NgbModal,
+              public systemService: SystemService) { }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -192,6 +194,14 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getParticipants();
   }
 
+  getParticipants(){
+    this.systemService.getParticipants().subscribe(
+      res => {
+        console.log(res);
+      }
+    )
+  }
 }
