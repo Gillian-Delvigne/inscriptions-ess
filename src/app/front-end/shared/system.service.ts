@@ -65,6 +65,12 @@ export class SystemService {
     return this.http.get<any>(this.ROOT_URL + 'sessions/getTrainingSessionByTId/' + trainingId, {headers});
   }
 
+  getSessionById(trainingId): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
+    return this.http.get<any>(this.ROOT_URL + 'sessions/getTrainingSessionByTSId/' + trainingId, {headers});
+  }
+
   getParticipants(): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
