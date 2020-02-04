@@ -1,33 +1,35 @@
 <nav class="navbar navbar-expand-sm navbar-light">
-    <a class="navbar-brand" href="#">
-        <img src="../../assets/img/logos/logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
-        <span class="main-title">Inscriptions Membres Croix-Rouge</span>
-    </a>
-    <button class="navbar-toggler d-lg-none" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbar-menu" aria-label="Toggle navigation">
-        <span class="line"></span>
-        <span class="line"></span>
-        <span class="line" style="margin-bottom: 0;"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbar-menu" [ngbCollapse]="isCollapsed">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" routerLink="">Accueil<span class="sr-only">(current)</span></a>
-        </li>
-            <li class="nav-item active">
-                <a class="nav-link" routerLink="/catalogue">Catalogue</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/agenda">Agenda</a>
-            </li>
-            <li class="nav-item" *ngIf="!authService.isLoggedin">
-                <a class="nav-link" routerLink="/signup">Signup</a>
-            </li>
-            <li class="nav-item" *ngIf="!authService.isLoggedin">
-                <a class="nav-link" routerLink="/login">Login</a>
-            </li>
-            <li class="nav-item" *ngIf="authService.isLoggedin">
-                <a class="nav-link" routerLink="/" (click)="authService.logout()">Logout</a>
-            </li>
-        </ul>
-    </div>
+  <a class="navbar-brand" href="#">
+    <img src="../../assets/img/logos/logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
+    <span class="main-title">Inscriptions Membres Croix-Rouge</span>
+  </a>
+  <button class="navbar-toggler d-lg-none" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbar-menu" aria-label="Toggle navigation">
+    <span class="line"></span>
+    <span class="line"></span>
+    <span class="line" style="margin-bottom: 0;"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbar-menu" [ngbCollapse]="isCollapsed">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+                    true}">Accueil</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/catalogue" routerLinkActive="active-link">Catalogue</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/agenda" routerLinkActive="active-link">Agenda</a>
+      </li>
+      <li class="nav-item" *ngIf="!authService.isLoggedin">
+        <a class="nav-link" routerLink="/signup" routerLinkActive="active-link">Créer un compte</a>
+      </li>
+      <li class="nav-item" *ngIf="!authService.isLoggedin">
+        <a class="nav-link" routerLink="/login" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+                    true}">Connexion</a>
+      </li>
+      <li class="nav-item" *ngIf="authService.isLoggedin">
+        <a class="nav-link" routerLink="/" (click)="authService.logout()">Déconnexion</a>
+      </li>
+    </ul>
+  </div>
 </nav>

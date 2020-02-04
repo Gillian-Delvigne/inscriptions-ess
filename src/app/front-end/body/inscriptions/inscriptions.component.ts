@@ -610,6 +610,8 @@ countries = [
         if (r.status) {
           this.successJoined = true;
           this.showSuccess();
+        } else {
+          this.showError();
         }
       }
     );
@@ -617,5 +619,9 @@ countries = [
 
   showSuccess() {
     this.toastr.success('Session Joined Successfully!', 'Congrats!!!');
+  }
+
+  showError() {
+    this.toastr.error('Already joined this session', 'Alert!!!');
   }
 }

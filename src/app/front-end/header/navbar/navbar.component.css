@@ -1,50 +1,60 @@
-        .navbar {
-            background-color: #ff2400;
-            display: flex;
-            justify-content: space-between;
-        }
+.navbar {
+  background-color: #ff2400;
+  display: flex;
+  justify-content: space-between;
+}
 
-        .main-title {
-            padding-left: 15px;
-            font-size: 1.5rem;
-            color: white;
-        }
+.main-title {
+  padding-left: 15px;
+  font-size: 1.5rem;
+  color: white;
+}
 
-        @media screen and (max-width:380px)  {
-          .main-title {
-            font-size: 0.8rem;
-            }
-        }
+@media screen and (max-width:380px) {
+  .main-title {
+    font-size: 0.8rem;
+  }
+}
 
-        .btn-primary {
-            color: #ff2400!important;
-            background-color: white !important;
-            border-color: white !important;
-        }
+.btn-primary {
+  color: #ff2400!important;
+  background-color: white !important;
+  border-color: white !important;
+}
 
-        .navbar-toggler-icon {
-            color: #fff !important;
-            font-size: 13px;
-        }
+.navbar-toggler-icon {
+  color: #fff !important;
+  font-size: 13px;
+}
 
-        .navbar-toggler {
-            width: 47px;
-            height: 34px;
-            border: 1px solid white;
-        }
+.navbar-toggler {
+  width: 47px;
+  height: 34px;
+  border: 1px solid white;
+}
 
-        .navbar-toggler .line {
-            width: 100%;
-            float: left;
-            height: 2px;
-            background-color: #fff;
-            margin-bottom: 5px;
-        }
+.navbar-toggler .line {
+  width: 100%;
+  float: left;
+  height: 2px;
+  background-color: #fff;
+  margin-bottom: 5px;
+}
 
-        .navbar-collapse {
-            flex-grow: 0;
-        }
+.navbar-collapse {
+  flex-grow: 0;
+}
 
-        .nav-link {
-            color: white !important;
-        }
+.nav-link {
+  color: white !important;
+}
+
+.active-link {
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
