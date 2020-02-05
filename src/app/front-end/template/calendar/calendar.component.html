@@ -88,3 +88,39 @@
   </mwl-calendar-day-view>
 </div>
 
+<ng-template #modalContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Session Details</h4>
+    <!--<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>-->
+  </div>
+  <div class="modal-body">
+    <table class="table table-striped" *ngIf="session">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Lieu</th>
+        <th scope="col">Participants (#)</th>
+        <th scope="col">Choisir</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">{{ 1 }}</th>
+        <td>{{ session.day1 | date: 'yyyy-MM-dd' }} <br> {{ session.start_time1 }} - {{ session.end_time1 }} </td>
+        <td>{{session.name}} <br>{{session.email}}</td>
+        <td>{{session.count.count}}/{{ session.participants_max }}</td>
+        <td >
+          <button class="btn btn-primary" *ngIf="session.count.count != session.participants_max"  (click)="chooseSession(session)" (click)="modal.close('Save click')">Choisir</button>
+          <button class="btn btn-primary" *ngIf="session.count.count == session.participants_max" disabled="true"  (click)="chooseSession(session)" (click)="modal.close('Save click')">Choisir</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>-->
+</ng-template>

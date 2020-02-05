@@ -131,6 +131,12 @@
             <p *ngIf="emailExists !=''">{{emailExists}} </p>
             <p *ngIf="apiError !=''">{{apiError}} </p>
             <button type="submit" class="btn btn-primary" (click)="submit(form)">Envoyer</button>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
+          <label for="password" class="control-label">Mot de passe <span class="asterisque">*</span></label>
+          <input type="password" class="form-control" required id="password" name="password" [ngModel]="password" placeholder="Choisir un mot de passe">
+          <div class="invalid-feedback">Merci d'encoder un mot de passe</div>
         </div>
     </form>
 </div>

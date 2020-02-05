@@ -33,6 +33,8 @@ export class InscriptionsComponent implements OnInit {
         if (r.status) {
           this.successJoined = true;
           this.showSuccess();
+        } else {
+          this.showError();
         }
       }
     );
@@ -40,5 +42,9 @@ export class InscriptionsComponent implements OnInit {
 
   showSuccess() {
     this.toastr.success('Votre inscription à la formation a bien été prise en compte : nous reviendrons rapidement vers vous avec de plus amples informations.', 'Réussite');
+  }
+
+  showError() {
+    this.toastr.error('Already joined this session', 'Alert!!!');
   }
 }

@@ -13,11 +13,4 @@ export class CatalogueComponent implements OnInit {
 
   ngOnInit() {
   }
-
-
-  
 }
-
-
-
-

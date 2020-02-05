@@ -6,27 +6,27 @@
 }
 
 .sidebar-toggler-icon {
-    color: #fff !important;
-    font-size: 13px;
+  color: #fff !important;
+  font-size: 13px;
 }
 
 .sidebar-toggler {
-    width: 47px;
-    height: 34px;
-    border: 1px solid white;
-    margin-bottom: 3%;
+  width: 47px;
+  height: 34px;
+  border: 1px solid white;
+  margin-bottom: 3%;
 }
 
 .sidebar-toggler .line {
-    width: 100%;
-    float: left;
-    height: 2px;
-    background-color: #fff;
-    margin-bottom: 5px;
+  width: 100%;
+  float: left;
+  height: 2px;
+  background-color: #fff;
+  margin-bottom: 5px;
 }
 
 .list-group {
-    width: 100%;
+  width: 100%;
 }
 
 list-group-item.list-title {
@@ -58,3 +58,4 @@ list-group-item.list-title {
     outline: none;
     color: white;
 }
+

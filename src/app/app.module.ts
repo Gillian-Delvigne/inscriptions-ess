@@ -30,6 +30,7 @@ import { SignupComponent } from './front-end/body/signup/signup.component';
 import { ToastrModule } from 'ngx-toastr';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+
 registerLocaleData(localeFr, 'fr');
 
 @NgModule({

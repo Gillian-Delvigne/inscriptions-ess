@@ -8,6 +8,8 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
+import {SystemService} from '../../shared/system.service';
+import {Router} from '@angular/router';
 
 const colors: any = {
   red: {
@@ -33,7 +35,7 @@ const colors: any = {
 export class CalendarComponent implements OnInit {
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
-
+  closeResult: string;
   view: CalendarView = CalendarView.Month;
 
   CalendarView = CalendarView;
@@ -64,12 +66,12 @@ export class CalendarComponent implements OnInit {
   ];
 
   refresh: Subject<any> = new Subject();
-
-  events: CalendarEvent[] = [
+  events: CalendarEvent[];
+/*  events: CalendarEvent[] = [
     {
-      start: startOfDay(new Date('january 17, 2020 09:00:00')),
-      end: endOfDay(new Date('january 17, 2020 16:00:00')),
-      title: 'Au coeur de la Croix-Rouge',
+      start: startOfDay(new Date('2020-02-01T18:30:00.000Z')),
+      end: endOfDay(new Date('2020-02-01T19:30:00.000Z')),
+      title: 'Au coeur de la Croix-Rouge as',
       color: colors.red,
       actions: this.actions,
       allDay: true,
@@ -117,12 +119,15 @@ export class CalendarComponent implements OnInit {
       },
       draggable: true
     }
-  ];
+  ];*/
 
   activeDayIsOpen: boolean = true;
+  public session: any;
 
 
-  constructor(private modal: NgbModal) { }
+  constructor(private modal: NgbModal,
+              public systemService: SystemService,
+              public router: Router) { }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -158,7 +163,13 @@ export class CalendarComponent implements OnInit {
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
-    console.log(this.modalData);
+    console.log(this.modalData, this.modalData.event.meta.id);
+    this.systemService.getSessionById(this.modalData.event.meta.id).subscribe(
+      res => {
+        console.log(res);
+        this.session = res[0];
+      }
+    )
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
@@ -192,6 +203,49 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getParticipants();
   }
 
+  getParticipants(){
+    this.systemService.getParticipants().subscribe(
+      res => {
+        console.log(res);
+        const data = res.data;
+        const eve = [];
+        data.map(
+          (val, key) => {
+            const startDate = new Date(val.day1);
+            const endDate = new Date(val.day1)
+            console.log(val, key, startDate, endDate);
+            eve.push(
+              {
+                start: startOfDay(startDate),
+                end: endOfDay(endDate),
+                title: val.name,
+                color: colors.red,
+                actions: this.actions,
+                allDay: true,
+                resizable: {
+                  beforeStart: true,
+                  afterEnd: true
+                },
+                meta: {
+                  id: val.training_session_id
+                },
+                draggable: true
+              }
+            )
+        }
+        )
+        this.events = eve;
+        console.log(this.events);
+        this.refresh.next();
+        /**/
+      }
+    );
+  }
+  chooseSession(trainingSession: any) {
+    this.systemService.selectedSession = trainingSession;
+    this.router.navigateByUrl('/inscriptions');
+  }
 }
