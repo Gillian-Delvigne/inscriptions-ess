@@ -123,6 +123,7 @@ export class CalendarComponent implements OnInit {
 
   activeDayIsOpen: boolean = true;
   public session: any;
+  private emptySession = false;
 
 
   constructor(private modal: NgbModal,
@@ -165,10 +166,17 @@ export class CalendarComponent implements OnInit {
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     console.log(this.modalData, this.modalData.event.meta.id);
-    this.systemService.getSessionById(this.modalData.event.meta.id).subscribe(
+    this.systemService.getSessions(this.modalData.event.meta.id).subscribe(
       res => {
         console.log(res);
-        this.session = res[0];
+        if (res.status == false){
+          this.emptySession = true;
+          this.session = [];
+        } else {
+          this.emptySession = false;
+          this.session = res[0];
+        }
+
       }
     )
     this.modal.open(this.modalContent, { size: 'lg' });
@@ -182,7 +190,7 @@ export class CalendarComponent implements OnInit {
         start: startOfDay(new Date()),
         end: endOfDay(new Date()),
         color: colors.red,
-        draggable: true,
+        draggable: false,
         resizable: {
           beforeStart: true,
           afterEnd: true
@@ -220,24 +228,26 @@ export class CalendarComponent implements OnInit {
             const startDate = new Date(val.day1);
             const endDate = new Date(val.day1)
             // console.log(val, key, startDate, endDate);
-            eve.push(
-              {
-                start: startOfDay(startDate),
-                end: endOfDay(endDate),
-                title: val.name,
-                color: colors.red,
-                actions: this.actions,
-                allDay: true,
-                resizable: {
-                  beforeStart: true,
-                  afterEnd: true
-                },
-                meta: {
-                  id: val.training_id
-                },
-                draggable: true
-              }
-            )
+            if(val.training_id != null && val.training_id !='') {
+              eve.push(
+                {
+                  start: startOfDay(startDate),
+                  end: endOfDay(endDate),
+                  title: val.name,
+                  color: colors.red,
+                  actions: this.actions,
+                  allDay: true,
+                  resizable: {
+                    beforeStart: true,
+                    afterEnd: true
+                  },
+                  meta: {
+                    id: val.training_id
+                  },
+                  draggable: false
+                }
+              );
+            }
           }
         )
         this.events = eve;
