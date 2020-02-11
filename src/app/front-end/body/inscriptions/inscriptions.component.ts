@@ -47,4 +47,11 @@ export class InscriptionsComponent implements OnInit {
   showError() {
     this.toastr.error('Already joined this session', 'Alert!!!');
   }
+  public sliceTime(str) {
+    if (str.length === 8){
+      return str.substring(0, str.length - 3);
+    } else {
+      return str;
+    }
+  }
 }

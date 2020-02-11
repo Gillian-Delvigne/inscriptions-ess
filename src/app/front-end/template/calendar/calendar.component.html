@@ -109,8 +109,8 @@
       <tbody>
       <tr>
         <th scope="row">{{ 1 }}</th>
-        <td>{{ session.day1 | date: 'yyyy-MM-dd' }} <br> {{ session.start_time1 }} - {{ session.end_time1 }} </td>
-        <td>{{session.name}} <br>{{session.email}}</td>
+        <td>{{ session.day1 | date: 'dd-MM-yyyy' }} <br> {{ sliceTime(session.start_time1) }} - {{ sliceTime(session.end_time1) }} </td>
+        <td>{{session.name}} <br>{{session.address}}</td>
         <td>{{session.count.count}}/{{ session.participants_max }}</td>
         <td >
           <button class="btn btn-primary" *ngIf="session.count.count != session.participants_max"  (click)="chooseSession(session)" (click)="modal.close('Save click')">Choisir</button>
