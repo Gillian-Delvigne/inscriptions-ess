@@ -28,7 +28,8 @@ import {SystemService} from './front-end/shared/system.service';
 import { LoginComponent } from './front-end/body/login/login.component';
 import { SignupComponent } from './front-end/body/signup/signup.component';
 import { ToastrModule } from 'ngx-toastr';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 registerLocaleData(localeFr, 'fr');
 

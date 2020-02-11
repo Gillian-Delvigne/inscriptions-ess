@@ -1,71 +1,73 @@
 <div class="container form-container">
-  <form novalidate name="" id="" class="m-auto form" #form="ngForm" [ngClass]="{'was-validated': form.submitted}">
-    <div class="personal_data">
-      <h3>Données personnelles</h3>
-      <hr>
-      <div class="form-row">
-        <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-          <label for="nom" class="control-label">Nom <span class="asterisque">*</span></label>
-          <input type="text" class="form-control" required id="nom" name="nom" [ngModel]="nom" placeholder="Dupont">
-          <div class="invalid-feedback">Veuillez remplir ce champ</div>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-          <label for="prenom" class="control-label">Prénom <span class="asterisque">*</span></label>
-          <input type="text" class="form-control" required id="prenom" name="prenom" [ngModel]="prenom" placeholder="Jean">
-          <div class="invalid-feedback">Veuillez remplir ce champ</div>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="genre" [ngModel]="genre" id="masculin" value="Monsieur" required>
-            <label class="form-check-label control-label" for="masculin">Monsieur</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="genre" [ngModel]="genre" id="féminin" value="Madame" required>
-            <label class="form-check-label control-label" for="féminin">Madame</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="genre" [ngModel]="genre" id="autre" value="Autre" required>
-            <label class="form-check-label control-label" for="autre">Autre</label>
-            <div class="invalid-feedback" style="margin-left: 1em;">Veuillez choisir un genre</div>
-          </div>
+    <form novalidate name="" id="" class="m-auto form" #form="ngForm" [ngClass]="{'was-validated': form.submitted}">
+        <div class="personal_data">
+            <h3>Données personnelles</h3>
+            <hr>
+            <div class="form-row">
+                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
+                    <label for="nom" class="control-label">Nom <span class="asterisque">*</span></label>
+                    <input type="text" class="form-control" required id="nom" name="nom" [ngModel]="nom" placeholder="Dupont">
+                    <div class="invalid-feedback">Veuillez remplir ce champ</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
+                    <label for="prenom" class="control-label">Prénom <span class="asterisque">*</span></label>
+                    <input type="text" class="form-control" required id="prenom" name="prenom" [ngModel]="prenom" placeholder="Jean">
+                    <div class="invalid-feedback">Veuillez remplir ce champ</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="genre" [ngModel]="genre" id="masculin" value="Monsieur" required>
+                        <label class="form-check-label control-label" for="masculin">Monsieur</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="genre" [ngModel]="genre" id="féminin" value="Madame" required>
+                        <label class="form-check-label control-label" for="féminin">Madame</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="genre" [ngModel]="genre" id="autre" value="Autre" required>
+                        <label class="form-check-label control-label" for="autre">Autre</label>
+                        <div class="invalid-feedback" style="margin-left: 1em;">Veuillez choisir un genre</div>
+                    </div>
 
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-          <label for="date_de_naissance" class="control-label">Date de naissance <span class="asterisque">*</span></label>
-          <div class="input-group">
-            <input id="date_de_naissance" class="form-control" placeholder="yyyy-mm-dd" name="dob" [ngModel]="dob" type="date" required>
-            <div class="invalid-feedback">Veuillez renseigner votre date de naissance</div>
-          </div>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-          <label for="email" class="control-label">Adresse email <span class="asterisque">*</span></label>
-          <input type="email" class="form-control" required id="email" name="email" [ngModel]="email" placeholder="nom@exemple.com">
-          <div class="invalid-feedback">Veuillez encoder une adresse email valide</div>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-          <label for="country" class="control-label">Nationalité (pays d'origine) <span class="asterisque">*</span></label>
-          <select class="col-lg-12 form-control" id="country" [ngModel]="country" name="country" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
+                    <label for="date_de_naissance" class="control-label">Date de naissance <span class="asterisque">*</span></label>
+                    <div class="input-group">
+                        <input id="date_de_naissance" class="form-control" placeholder="yyyy-mm-dd" name="dob" [ngModel]="dob" type="date" required>
+                        <div class="invalid-feedback">Veuillez renseigner votre date de naissance</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
+                    <label for="email" class="control-label">Adresse email <span class="asterisque">*</span></label>
+                    <input type="email" class="form-control" required id="email" name="email" [ngModel]="email" placeholder="nom@exemple.com">
+                    <div class="invalid-feedback">Veuillez encoder une adresse email valide</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
+                    <label for="country" class="control-label">Nationalité (pays d'origine) <span class="asterisque">*</span></label>
+                    <select class="col-lg-12 form-control" id="country" [ngModel]="country" name="country" required>
             <option value="" disabled selected>Sélectionnez votre pays d'origine</option>
             <option *ngFor="let country of countries">{{country.name}}</option>
           </select>
-          <div class="invalid-feedback">Veuillez renseigner votre nationalité</div>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-          <label for="phone" class="control-label">Numéro de téléphone <span class="asterisque">*</span></label>
-          <input type="tel" class="form-control" id="phone" name="phone" [ngModel]="phone" placeholder="0000/00.00.00" required>
-          <div class="invalid-feedback">Veuillez reiseigner un numéro de téléphone</div>
+                    <div class="invalid-feedback">Veuillez renseigner votre nationalité</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
+                    <label for="phone" class="control-label">Numéro de téléphone <span class="asterisque">*</span></label>
+                    <input type="tel" class="form-control" id="phone" name="phone" [ngModel]="phone" placeholder="0000/00.00.00" required>
+                    <div class="invalid-feedback">Veuillez reiseigner un numéro de téléphone</div>
+                </div>
+            </div>
         </div>
       </div>
     </div>
@@ -85,52 +87,51 @@
             <option value="" disabled selected>Sélectionnez votre entité générale</option>
             <option *ngFor="let entity of entities">{{entity.name}}</option>
           </select>
-          <div class="invalid-feedback">Veuillez renseigner votre entité générale</div>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-          <label for="EntityId" class="control-label">Entité locale&nbsp;:</label>
-          <select class="col-lg-12 form-control" id="EntityId" name="entity" [ngModel]="entity" required>
+                    <div class="invalid-feedback">Veuillez renseigner votre entité générale</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
+                    <label for="EntityId" class="control-label">Entité locale&nbsp;:</label>
+                    <select class="col-lg-12 form-control" id="EntityId" name="entity" [ngModel]="entity" required>
             <option value="" selected>Sélectionnez votre entité locale</option>
             <option *ngFor="let single of localEntities">{{single.name}}</option>
           </select>
-          <div class="invalid-feedback">Veuillez renseigner votre entité locale</div>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-          <label for="TypeActivity" class="control-label">Type d'activité&nbsp;:</label>
-          <select class="col-lg-12 form-control" id="TypeActivity" name="typeActivity" [ngModel]="typeActivity" (change)="onChangeActivity($event.target.value)" required>
+                    <div class="invalid-feedback">Veuillez renseigner votre entité locale</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
+                    <label for="TypeActivity" class="control-label">Type d'activité&nbsp;:</label>
+                    <select class="col-lg-12 form-control" id="TypeActivity" name="typeActivity" [ngModel]="typeActivity" (change)="onChangeActivity($event.target.value)" required>
             <option value="" disabled selected>Sélectionnez votre type d'activité</option>
             <option *ngFor="let activity of activities">{{activity.type}}</option>
           </select>
-          <div class="invalid-feedback">Veuillez renseigner un type d'activité principale</div>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-          <label for="Activity" class="control-label">Activité&nbsp;:</label>
-          <select class="col-lg-12 form-control" id="activity" name="activity" [ngModel]="activity" required>
+                    <div class="invalid-feedback">Veuillez renseigner un type d'activité principale</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
+                    <label for="Activity" class="control-label">Activité&nbsp;:</label>
+                    <select class="col-lg-12 form-control" id="activity" name="activity" [ngModel]="activity" required>
             <option value="" disabled selected>Sélectionnez votre activité principale</option>
             <option *ngFor="let activity of activityList">{{activity.name}}</option>
-
           </select>
-          <div class="invalid-feedback">Veuillez renseigner une activité principale</div>
+                    <div class="invalid-feedback">Veuillez renseigner une activité principale</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
+                    <label for="password" class="control-label">Mot de passe <span class="asterisque">*</span></label>
+                    <input type="password" class="form-control" required id="password" name="password" [ngModel]="password" placeholder="Choisir un mot de passe">
+                    <div class="invalid-feedback">Merci d'encoder un mot de passe</div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-lg-12 has-warning has-error has-success has-feedback">
-          <label for="password" class="control-label">Mot de passe <span class="asterisque">*</span></label>
-          <input type="password" class="form-control" required id="password" name="password" [ngModel]="password" placeholder="Choisir un mot de passe">
-          <div class="invalid-feedback">Merci d'encoder un mot de passe</div>
+        <div class="form-row submit-roe">
+            <p *ngIf="emailExists !=''">{{emailExists}} </p>
+            <p *ngIf="apiError !=''">{{apiError}} </p>
+            <button type="submit" class="btn btn-primary" (click)="submit(form)">Envoyer</button>
         </div>
-      </div>
-    </div>
-    <div class="form-row submit-roe">
-      <p *ngIf="emailExists !=''">{{emailExists}} </p>
-      <p *ngIf="apiError !=''">{{apiError}} </p>
-      <button type="submit" class="btn btn-primary" (click)="submit(form)">Envoyer</button>
-    </div>
-  </form>
+    </form>
 </div>

@@ -29,18 +29,18 @@ button.calendar:active {
 }
 
 .session-confirmation {
-  margin: auto;
+    margin: auto;
 }
 
 ul {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 h3.login-status {
-  color: red;
+    color: red;
 }
 
 a {
-  color: #ff2400;
+    color: #ff2400;
 }
