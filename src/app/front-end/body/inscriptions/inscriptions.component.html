@@ -15,22 +15,22 @@
         <ul>
           <li>
             <!--<h5>Contact Information</h5>-->
-            <p><b>Formation : </b>{{systemService.selectedSession.name}}</p>
-            <p><b>Lieu : </b>{{systemService.selectedSession.name}}</p>
+            <p><b>Formation : </b>{{systemService.selectedSession.training_name}}</p>
+            <p><b>Lieu : </b>{{systemService.selectedSession.loc_name}}</p>
             <p><b>Adresse : </b>{{systemService.selectedSession.address}}</p>
             <p><b>Téléphone : </b>{{systemService.selectedSession.phone_number}}</p>
             <p><b>Email : </b>{{systemService.selectedSession.email}}</p>
           </li>
           <li *ngIf="systemService.selectedSession.day1">
-            <p><b>Date (jour 1) : </b>{{systemService.selectedSession.day1 | date: 'yyyy-MM-dd'}}</p>
-            <p><b>Heure de début : </b>{{systemService.selectedSession.start_time1}}</p>
-            <p><b>Heure de fin : </b>{{systemService.selectedSession.end_time1}}</p>
+            <p><b>Date (jour 1) : </b>{{systemService.selectedSession.day1 | date: 'dd-MM-yyyy'}}</p>
+            <p><b>Heure de début : </b>{{sliceTime(systemService.selectedSession.start_time1)}}</p>
+            <p><b>Heure de fin : </b>{{sliceTime(systemService.selectedSession.end_time1)}}</p>
             <!--<p>{{systemService.selectedSession.trainer1_id}}</p>-->
           </li>
           <li *ngIf="systemService.selectedSession.day2 !=null">
             <p><b>Date (jour 2) : </b>{{systemService.selectedSession.day2}}</p>
-            <p><b>Heure de début : </b>{{systemService.selectedSession.start_time2}}</p>
-            <p><b>Heure de fin : </b>{{systemService.selectedSession.end_time2}}</p>
+            <p><b>Heure de début : </b>{{sliceTime(systemService.selectedSession.start_time2)}}</p>
+            <p><b>Heure de fin : </b>{{sliceTime(systemService.selectedSession.end_time2)}}</p>
             <!--<p>{{systemService.selectedSession.trainer1_id}}</p>-->
           </li>
           <!--<li>{{systemService.selectedSession.day1}}</li>

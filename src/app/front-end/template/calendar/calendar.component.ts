@@ -158,6 +158,7 @@ export class CalendarComponent implements OnInit {
       }
       return iEvent;
     });
+    console.log('herr')
     this.handleEvent('Dropped or resized', event);
   }
 
@@ -188,6 +189,7 @@ export class CalendarComponent implements OnInit {
         }
       }
     ];
+    console.log(this.events)
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {
@@ -195,6 +197,7 @@ export class CalendarComponent implements OnInit {
   }
 
   setView(view: CalendarView) {
+    console.log(view)
     this.view = view;
   }
 
@@ -207,7 +210,42 @@ export class CalendarComponent implements OnInit {
   }
 
   getParticipants(){
-    this.systemService.getParticipants().subscribe(
+    this.systemService.getAllSessions().subscribe(
+      res => {
+        console.log(res);
+        const data = res;
+        const eve = [];
+        data.map(
+          (val, key) => {
+            const startDate = new Date(val.day1);
+            const endDate = new Date(val.day1)
+            // console.log(val, key, startDate, endDate);
+            eve.push(
+              {
+                start: startOfDay(startDate),
+                end: endOfDay(endDate),
+                title: val.name,
+                color: colors.red,
+                actions: this.actions,
+                allDay: true,
+                resizable: {
+                  beforeStart: true,
+                  afterEnd: true
+                },
+                meta: {
+                  id: val.training_id
+                },
+                draggable: true
+              }
+            )
+          }
+        )
+        this.events = eve;
+        console.log(this.events);
+        this.refresh.next();
+      }
+    )
+    /*this.systemService.getParticipants().subscribe(
       res => {
         console.log(res);
         const data = res.data;
@@ -216,7 +254,7 @@ export class CalendarComponent implements OnInit {
           (val, key) => {
             const startDate = new Date(val.day1);
             const endDate = new Date(val.day1)
-            console.log(val, key, startDate, endDate);
+            // console.log(val, key, startDate, endDate);
             eve.push(
               {
                 start: startOfDay(startDate),
@@ -240,12 +278,21 @@ export class CalendarComponent implements OnInit {
         this.events = eve;
         console.log(this.events);
         this.refresh.next();
-        /**/
+        /!**!/
       }
-    );
+    );*/
   }
   chooseSession(trainingSession: any) {
+    console.log(trainingSession)
     this.systemService.selectedSession = trainingSession;
     this.router.navigateByUrl('/inscriptions');
+  }
+
+  public sliceTime(str) {
+    if (str.length === 8){
+      return str.substring(0, str.length - 3);
+    } else {
+      return str;
+    }
   }
 }

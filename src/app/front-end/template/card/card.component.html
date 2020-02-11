@@ -83,8 +83,8 @@
         <tbody>
         <tr *ngFor="let session of sessions; index as i">
           <th scope="row">{{ i + 1 }}</th>
-          <td>{{ session.day1 | date: 'yyyy-MM-dd' }} <br> {{ session.start_time1 }} - {{ session.end_time1 }} </td>
-          <td>{{session.name}} <br>{{session.email}}</td>
+          <td>{{ session.day1 | date: 'dd-MM-yyyy' }} <br> {{ sliceTime(session.start_time1) }} - {{ sliceTime(session.end_time1) }} </td>
+          <td>{{session.name}} <br>{{session.address}}</td>
           <td>{{session.count.count}}/{{ selectedTraining.participants_max }}</td>
           <td>
             <button class="btn btn-primary" *ngIf="session.count.count != selectedTraining.participants_max" (click)="d('Cross click')" (click)="chooseSession(session)">Choisir</button>
@@ -94,7 +94,11 @@
         </tbody>
       </table>
     </ng-template>
-    <ng-template #other_content>No Training Session Found !!!</ng-template>
+    <ng-template #other_content>
+      <h3>
+        Aucune session n’est prevue pour actuellement pour cette formation
+      </h3>
+    </ng-template>
 
   </div>
 </ng-template>
