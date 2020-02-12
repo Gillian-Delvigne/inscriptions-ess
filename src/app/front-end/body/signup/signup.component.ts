@@ -3,6 +3,7 @@ import {NgForm} from '@angular/forms';
 import {AuthService} from '../../shared/auth.service';
 import {Router} from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import {SystemService} from '../../shared/system.service';
 
 @Component({
   selector: 'app-signup',
@@ -32,7 +33,8 @@ export class SignupComponent implements OnInit {
   typeActivity: any;
   activityList: any;
   activity: any;
-  constructor(public router: Router, public authService: AuthService, public toastr: ToastrService) { }
+  constructor(public router: Router, public authService: AuthService, public toastr: ToastrService,
+              public systemService: SystemService) { }
 
   ngOnInit() {
     if (this.authService.isLoggedin) {
@@ -486,7 +488,13 @@ export class SignupComponent implements OnInit {
           this.showSuccess();
           this.emailExists = '';
           this.authService.saveUser(r.data[0]);
-          this.router.navigateByUrl('/');
+          if (sessionStorage.getItem('selectedSession') != '' && sessionStorage.getItem('selectedSession') != null){
+            this.systemService.selectedSession = JSON.parse(sessionStorage.getItem('selectedSession'));
+            this.router.navigateByUrl('/inscriptions');
+          } else {
+            this.router.navigateByUrl('/');
+          }
+          // this.router.navigateByUrl('/');
         }
       },
       err => {
