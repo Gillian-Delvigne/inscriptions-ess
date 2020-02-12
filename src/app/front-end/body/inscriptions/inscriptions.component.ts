@@ -45,7 +45,7 @@ export class InscriptionsComponent implements OnInit {
   }
 
   showError() {
-    this.toastr.error('Already joined this session', 'Alert!!!');
+    this.toastr.error('Vous êtes déjà inscrit à cette formation.', 'Erreur');
   }
   public sliceTime(str) {
     if (str.length === 8){
