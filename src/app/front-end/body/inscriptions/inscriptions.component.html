@@ -12,7 +12,7 @@
         <h4 class="mb-5">
           Détails de la session sélectionnée
         </h4>
-        <ul>
+        <ul *ngIf="systemService.selectedSession">
           <li>
             <!--<h5>Contact Information</h5>-->
             <p><b>Formation : </b>{{systemService.selectedSession.training_name}}</p>

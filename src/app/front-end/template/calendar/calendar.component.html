@@ -96,7 +96,7 @@
     </button>-->
   </div>
   <div class="modal-body">
-    <table class="table table-striped" *ngIf="session">
+    <table class="table table-striped" *ngIf="session && !emptySession">
       <thead>
       <tr>
         <th scope="col">#</th>
@@ -110,7 +110,7 @@
       <tr>
         <th scope="row">{{ 1 }}</th>
         <td>{{ session.day1 | date: 'dd-MM-yyyy' }} <br> {{ sliceTime(session.start_time1) }} - {{ sliceTime(session.end_time1) }} </td>
-        <td>{{session.name}} <br>{{session.address}}</td>
+        <td>{{session.loc_name}} <br>{{session.address}}</td>
         <td>{{session.count.count}}/{{ session.participants_max }}</td>
         <td >
           <button class="btn btn-primary" *ngIf="session.count.count != session.participants_max"  (click)="chooseSession(session)" (click)="modal.close('Save click')">Choisir</button>
@@ -119,6 +119,9 @@
       </tr>
       </tbody>
     </table>
+    <h3 *ngIf="emptySession">
+      Aucune session n’est prevue pour actuellement pour cette formation
+    </h3>
   </div>
   <!--<div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
