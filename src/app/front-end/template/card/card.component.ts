@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {SystemService} from '../../shared/system.service';
 import {Router} from '@angular/router';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-card',
@@ -17,7 +18,8 @@ export class CardComponent implements OnInit {
   constructor(config: NgbModalConfig,
               private modalService: NgbModal,
               public systemService: SystemService,
-              public router: Router) {
+              public router: Router,
+              public SpinnerService: NgxSpinnerService) {
     config.backdrop = 'static';
     config.keyboard = false;
   }

@@ -597,7 +597,10 @@ countries = [
 
 
   ngOnInit() {
-    console.log(this.systemService.selectedSession);
+    console.log(this.systemService.selectedSession, sessionStorage.getItem('selectedSession'));
+    /*if (sessionStorage.getItem('selectedSession') != ''){
+      this.systemService.selectedSession = JSON.parse(sessionStorage.getItem('selectedSession'));
+    }*/
     if (!this.systemService.selectedSession) {
       this.router.navigateByUrl('/catalogue');
     }
@@ -630,5 +633,10 @@ countries = [
     } else {
       return str;
     }
+  }
+
+  saveLogin() {
+    sessionStorage.setItem('selectedSession', JSON.stringify(this.systemService.selectedSession))
+    this.router.navigateByUrl('/login');
   }
 }

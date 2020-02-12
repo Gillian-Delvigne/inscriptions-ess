@@ -174,7 +174,12 @@ export class CalendarComponent implements OnInit {
           this.session = [];
         } else {
           this.emptySession = false;
-          this.session = res[0];
+          res.map((val, key) => {
+            console.log(val, key);
+            if (val.training_session_id === this.modalData.event.meta.session_id){
+              this.session = val;
+            }
+          });
         }
 
       }
@@ -242,7 +247,8 @@ export class CalendarComponent implements OnInit {
                     afterEnd: true
                   },
                   meta: {
-                    id: val.training_id
+                    id: val.training_id,
+                    session_id: val.training_session_id
                   },
                   draggable: false
                 }

@@ -42,7 +42,7 @@
         </div>
 
         <div class="alert alert-danger" *ngIf="!authService.isLoggedin">
-          Veuillez vous <a routerLink="/login">connecter</a> afin de vous inscrire à cette session.<br /> Si vous n'avez pas encore de compte, merci d'en créer un <a routerLink="/signup">ici</a>.
+          Veuillez vous <a routerLink="/login" (click)="saveLogin()">connecter</a> afin de vous inscrire à cette session.<br /> Si vous n'avez pas encore de compte, merci d'en créer un <a routerLink="/signup">ici</a>.
 
         </div>
       </div>
