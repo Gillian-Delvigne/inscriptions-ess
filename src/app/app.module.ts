@@ -28,8 +28,8 @@ import {SystemService} from './front-end/shared/system.service';
 import { LoginComponent } from './front-end/body/login/login.component';
 import { SignupComponent } from './front-end/body/signup/signup.component';
 import { ToastrModule } from 'ngx-toastr';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -64,7 +64,8 @@ registerLocaleData(localeFr, 'fr');
       provide: DateAdapter,
       useFactory: adapterFactory}),
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxSpinnerModule
   ],
   exports: [CalendarComponent],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' },

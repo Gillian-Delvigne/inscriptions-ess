@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import {AuthService} from '../../shared/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import {SystemService} from '../../shared/system.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,9 @@ export class LoginComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               public authService: AuthService,
-              public toastr: ToastrService) { }
+              public toastr: ToastrService,
+              public systemService: SystemService,
+              public SpinnerService: NgxSpinnerService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -40,6 +44,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     console.log(this.loginForm);
+    this.SpinnerService.show();
     // this.loading = true;
     const formData = {
       email : this.f.username.value,
@@ -51,11 +56,18 @@ export class LoginComponent implements OnInit {
       .subscribe(
         r => {
           console.log(r);
+          this.SpinnerService.hide();
           if (r.status){
             this.showSuccess();
             this.emailExists = '';
             this.authService.saveUser(r.data[0]);
-            this.router.navigateByUrl('/');
+
+            if (sessionStorage.getItem('selectedSession') != '' && sessionStorage.getItem('selectedSession') != null){
+              this.systemService.selectedSession = JSON.parse(sessionStorage.getItem('selectedSession'));
+              this.router.navigateByUrl('/inscriptions');
+            } else {
+              this.router.navigateByUrl('/');
+            }
           } else {
             this.showFailure();
             this.emailExists = 'Adresse email ou mot de passe incorrect. Merci de réessayer.';

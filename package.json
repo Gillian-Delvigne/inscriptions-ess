@@ -34,6 +34,7 @@
     "flatpickr": "^4.6.3",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
+    "ngx-spinner": "^8.1.0",
     "ngx-toastr": "^11.3.2",
     "popper": "^1.0.1",
     "rxjs": "~6.5.3",

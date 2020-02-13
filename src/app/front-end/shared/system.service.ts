@@ -3,6 +3,7 @@ import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,9 @@ export class SystemService {
   selectedCat = '';
   public trainings: any;
   selectedSession: any;
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient,
+              private router: Router,
+              public SpinnerService: NgxSpinnerService) { }
 
   // Get Trainings With Contacts
   getTrainings(): Observable<any> {
@@ -30,24 +33,30 @@ export class SystemService {
   }
 
   displayTrainings(){
+    this.SpinnerService.show();
     this.getTrainings().subscribe(
       r => {
+        this.SpinnerService.hide();
         console.log('test', r);
         this.trainings = r;
       },
       err => {
+        this.SpinnerService.hide();
         console.log('Error', err)
       }
     )
   }
 
   displayTrainingByCatId(){
+    this.SpinnerService.show();
     this.getTrainingsByCat().subscribe(
       r => {
+        this.SpinnerService.hide();
         console.log('test', r);
         this.trainings = r;
       },
       err => {
+        this.SpinnerService.hide();
         console.log('Error', err)
       }
     )
