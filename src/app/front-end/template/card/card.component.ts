@@ -14,6 +14,7 @@ export class CardComponent implements OnInit {
   trainings: any;
   public sessions: any;
   public selectedTraining: any;
+  public sessionStatus = false;
 
   constructor(config: NgbModalConfig,
               private modalService: NgbModal,
@@ -42,17 +43,16 @@ export class CardComponent implements OnInit {
   getSessions(content, training){
     this.systemService.getSessions(training.training_id).subscribe(
       r => {
-        this.sessions = r;
-        console.log(this.sessions);
-        this.selectedTraining = training;
+        console.log(r);
+        if(r.status){
+          this.sessions = r.data;
 
-        /*this.sessions.map((k, v) => {
-          console.log(k, v);
-          const count = this.getParticipants(k.training_session_id);
-          console.log('count', count);
-          k.participants = count;
-        });*/
-        console.log(this.sessions);
+          this.selectedTraining = training;
+          console.log(this.sessions);
+          this.sessionStatus = true;
+        } else{
+          this.sessionStatus = false;
+        }
         this.modalService.open(
           content,
           {

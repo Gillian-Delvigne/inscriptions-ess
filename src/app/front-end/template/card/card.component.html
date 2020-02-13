@@ -70,7 +70,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <div *ngIf="sessions;then content else other_content">here is ignored</div>
+    <div *ngIf="sessions && sessionStatus;then content else other_content">here is ignored</div>
     <ng-template #content>
       <table class="table table-striped">
         <thead>

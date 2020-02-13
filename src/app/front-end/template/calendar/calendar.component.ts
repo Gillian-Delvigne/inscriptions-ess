@@ -166,7 +166,7 @@ export class CalendarComponent implements OnInit {
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     console.log(this.modalData, this.modalData.event.meta.id);
-    this.systemService.getSessions(this.modalData.event.meta.id).subscribe(
+    this.systemService.getSessionById(this.modalData.event.meta.session_id).subscribe(
       res => {
         console.log(res);
         if (res.status == false){
