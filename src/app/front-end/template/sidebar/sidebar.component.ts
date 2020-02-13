@@ -10,7 +10,9 @@ import { faRedoAlt } from '@fortawesome/free-solid-svg-icons';
 export class SidebarComponent implements OnInit {
   categories: any;
   constructor(public systemService: SystemService) { }
+
   faRedoAlt = faRedoAlt;
+
   ngOnInit() {
     this.getCats();
 

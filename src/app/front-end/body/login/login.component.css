@@ -1,19 +1,23 @@
 .login {
-  margin: auto;
-  margin-top: 40px;
+    margin: auto;
+    margin-top: 40px;
 }
 
 .email-error {
-  font-size: 13px;
-  color: red;
-  margin: 20px 0;
+    font-size: 13px;
+    color: red;
+    margin: 20px 0;
 }
 
 .btn-primary {
-  background-color: #ff2400 !important;
-  border-color: #ff2400 !important;
+    background-color: #ff2400 !important;
+    border-color: #ff2400 !important;
 }
 
 .btn-link {
-  color: #c61017;
+    color: #c61017;
+}
+
+.custom-text {
+    font-size: 0.7rem;
 }
