@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-lg-12">
+    <!--begin::Body-->
+    <div class="kt-login__body">
+      <!--begin::Signin-->
+      <div class="kt-login__form">
+        <div class="kt-login__title">
+          <h3>Sign In</h3>
+        </div>
+
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="loginForm" autocomplete="off">
+          <p *ngIf="emailExists != '' ">{{emailExists}}</p>
+          <div class="form-group">
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input matInput type="email" placeholder="Email" formControlName="email" autocomplete="off"/>
+              <mat-error *ngIf="isControlHasError('email','required')">
+                <strong>Email is required</strong>
+              </mat-error>
+              <mat-error *ngIf="isControlHasError('email','email')">
+                <strong>Email is not valid</strong>
+              </mat-error>
+              <mat-error *ngIf="isControlHasError('email','minlength')">
+                <strong>Email min length is 3</strong>
+              </mat-error>
+              <mat-error *ngIf="isControlHasError('email','maxlength')">
+                <strong>Email min length is 320</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field>
+              <mat-label>Password</mat-label>
+              <input matInput type="password" placeholder="Password" formControlName="password" autocomplete="off"/>
+              <mat-error *ngIf="isControlHasError('password','required')">
+                <strong>Password is required</strong>
+              </mat-error>
+              <mat-error *ngIf="isControlHasError('password','minlength')">
+                <strong>Password min length should be 3</strong>
+              </mat-error>
+              <mat-error *ngIf="isControlHasError('password','maxlength')">
+                <strong>Password max length should be 100</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!--begin::Action-->
+          <div class="kt-login__actions">
+            <button (click)="submit()"  id="kt_login_signin_submit" class="btn btn-primary btn-elevate kt-login__btn-primary">Login</button>
+          </div>
+          <!--end::Action-->
+        </form>
+        <!--end::Form-->
+
+      </div>
+      <!--end::Signin-->
+    </div>
+    <!--end::Body-->
+  </div>
+</div>

@@ -1,0 +1,11 @@
+.navbar.navbar-expand-sm.navbar-light {
+  background-color: #fff;
+  border-bottom: 1px solid #eff0f6;
+  width: 100%;
+}
+.navbar-light .navbar-nav a.nav-link {
+  color: #6c7293;
+  font-weight: 500;
+  font-size: 1rem;
+  text-transform: initial;
+}
