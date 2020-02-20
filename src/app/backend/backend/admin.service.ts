@@ -25,7 +25,7 @@ export class AdminService {
     console.log(data)
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    return this.http.post<any>(this.ROOT_URL + 'users/login', data, {headers});
+    return this.http.post<any>(this.ROOT_URL + 'users/loginAdmin', data, {headers});
   }
 
   // Keep user in session

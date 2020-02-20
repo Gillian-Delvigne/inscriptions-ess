@@ -74,7 +74,7 @@ export class LoginAdminComponent implements OnInit {
           if (r.status) {
             this.adminService.saveUser(r.data[0]);
             this.emailExists = '';
-            // this.router.navigateByUrl('/admin');
+            this.router.navigateByUrl('/admin/dashboard');
           } else {
             this.emailExists = 'Adresse email ou mot de passe incorrect. Merci de réessayer.';
           }

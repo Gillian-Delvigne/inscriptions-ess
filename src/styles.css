@@ -22,7 +22,8 @@ app-inscriptions,
 app-accueil,
 app-signup,
 app-login,
-app-backend{
+app-backend,
+app-users {
     width: 100%;
 }
 

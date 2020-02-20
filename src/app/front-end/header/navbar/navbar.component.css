@@ -1,9 +1,12 @@
 .navbar {
+  display: none;
   background-color: #ff2400;
-  display: flex;
   justify-content: space-between;
+  transition: 1s all;
 }
-
+.show.navbar {
+  display: flex;
+}
 .main-title {
   padding-left: 15px;
   font-size: 1.5rem;

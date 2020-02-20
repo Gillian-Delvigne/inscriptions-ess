@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-light">
+<nav class="navbar navbar-expand-sm navbar-light" [ngClass]="{'show':appService.frontNav, 'hide':!appService.frontNav}">
   <a class="navbar-brand" href="#">
     <img src="../../assets/img/logos/logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
     <span class="main-title">Inscriptions Membres Croix-Rouge</span>

@@ -1,4 +1,4 @@
-<app-navbar class="nav-bar" *ngIf="appService.frontNav"></app-navbar>
+<app-navbar class="nav-bar"  [ngClass]="{'show':appService.frontNav, 'hide':!appService.frontNav}"></app-navbar>
 <div class="container-fluid main-content">
     <router-outlet></router-outlet>
 </div>
