@@ -46,6 +46,6 @@ kt-menu__nav>.kt-menu__item.kt-menu__item--active {
   padding: 0;
   white-space: nowrap;
 }
-.kt-menu__nav>.kt-menu__item.kt-menu__item--active>.kt-menu__link .kt-menu__link-text {
+a.kt-menu__link.kt-menu__item--active .kt-menu__link-text {
   color: #fff;
 }

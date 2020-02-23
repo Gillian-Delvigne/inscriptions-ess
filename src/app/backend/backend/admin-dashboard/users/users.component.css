@@ -83,3 +83,17 @@ p {
   margin-bottom: 0;
   font-size: 14px;
 }
+i.material-icons {
+  cursor: pointer;
+}
+::ng-deep mat-toolbar.head-user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+p.user-add {
+  font-size: 14px;
+  padding: 0px 10px;
+  background: green;
+  color: #fff;
+}

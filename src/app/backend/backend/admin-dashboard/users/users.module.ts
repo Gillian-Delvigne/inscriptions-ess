@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { UsersComponent } from './users.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MaterialModule} from '../../../../material/material.module';
+import {FormsModule} from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -17,7 +18,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ]
 })
 export class UsersModule { }
