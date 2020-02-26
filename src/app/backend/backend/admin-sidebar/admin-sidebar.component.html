@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-12 col-lg-12 col-sm-12">
+    <a class="navbar-brand" href="#">
+      <img src="../../../../assets/img/logos/logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
+      <span class="main-title">Inscriptions Admin</span>
+    </a>
+    <br>
+    <ul class="navs kt-menu__nav" *ngIf="adminService.adminLoggedin">
+      <li data-placement="right" class="kt-menu__item kt-menu__item--here" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+        <a class="kt-menu__link kt-menu__toggle" routerLink="/admin/dashboard" routerLinkActive="kt-menu__item--active">
+          <i class="kt-menu__link-icon flaticon2-architecture-and-city"></i>
+          <span class="kt-menu__link-text">Dashboard</span>
+        </a>
+      </li>
+      <li data-placement="right" class="kt-menu__item kt-menu__item--here" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+        <a class="kt-menu__link kt-menu__toggle" routerLink="/admin/dashboard/users"  routerLinkActive="kt-menu__item--active">
+          <i class="kt-menu__link-icon flaticon2-architecture-and-city"></i>
+          <span class="kt-menu__link-text">Users</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

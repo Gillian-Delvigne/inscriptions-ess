@@ -21,7 +21,9 @@ app-agenda,
 app-inscriptions,
 app-accueil,
 app-signup,
-app-login{
+app-login,
+app-backend,
+app-users {
     width: 100%;
 }
 
@@ -70,3 +72,6 @@ pre {
   font-weight: 700;
 }
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

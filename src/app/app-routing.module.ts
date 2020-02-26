@@ -13,7 +13,11 @@ const routes: Routes = [
   { path: 'agenda', component: AgendaComponent },
   { path: 'inscriptions', component: InscriptionsComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent }
+  { path: 'signup', component: SignupComponent },
+  {
+    path: 'admin',
+    loadChildren : () => import('./backend/backend/backend.module').then(mod => mod.BackendModule)
+  }
 ];
 
 @NgModule({
