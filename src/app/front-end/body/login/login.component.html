@@ -1,29 +1,33 @@
 <div class="col-sm-5 align-content-center login">
-  <h2 class="mb-5">Connexion</h2>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="username">Adresse email</label>
-      <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-        <div *ngIf="f.username.errors.required">Veuillez introduire l'adresse email liée à votre compte</div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="password">Mot de passe</label>
-      <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-        <div *ngIf="f.password.errors.required">Le mot de passe est requis</div>
-      </div>
-    </div>
-    <div class="form-group">
-      <h5 *ngIf="emailExists != ''" class="email-error">{{emailExists}}</h5>
-      <button [disabled]="loading" class="btn btn-primary">
-        <button *ngIf="loading" class="spinner-border spinner-border-sm mr-1 btn btn-primary"></button> Connexion
-      </button>
-      <a routerLink="/signup" class="btn btn-link">Créer un compte</a>
-    </div>
-  </form>
+    <h2 class="mb-5">Connexion</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="username">Adresse email</label>
+            <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">Veuillez introduire l'adresse email liée à votre compte</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Le mot de passe est requis</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <h5 *ngIf="emailExists != ''" class="email-error">{{emailExists}}</h5>
+            <button [disabled]="loading" class="btn btn-primary">
+      <button *ngIf="loading" class="spinner-border spinner-border-sm mr-1 btn btn-primary"></button> Connexion
+            </button>
+            <a routerLink="/signup" class="btn btn-link">Créer un compte</a>
+        </div>
+        <div class="form-group">
+            <a routerLink="" class="text-muted custom-text">Mot de passe oublié ?</a>
+        </div>
+    </form>
 </div>
 <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
   <p style="color: white">Please Wait. </p>
 </ngx-spinner>
+

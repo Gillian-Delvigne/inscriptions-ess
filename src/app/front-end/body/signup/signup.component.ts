@@ -506,9 +506,9 @@ export class SignupComponent implements OnInit {
   }
 
   showSuccess() {
-    this.toastr.success('Votre compte a bien été créé', 'Réussite');
+    this.toastr.success("Votre compte a bien été créé", 'Réussite');
   }
   showFailure() {
-    this.toastr.error('Une erreur s\'est produite lors de la création de votre compte', 'Erreur');
+    this.toastr.error("Une erreur s'est produite lors de la création de votre compte", 'Erreur');
   }
 }
