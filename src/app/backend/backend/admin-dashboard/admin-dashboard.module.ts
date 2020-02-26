@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminDashboardComponent } from './admin-dashboard.component';
 import {RouterModule, Routes} from '@angular/router';
+import {RolesModule} from './roles/roles.module';
 
 const routes: Routes = [
   {
@@ -11,6 +12,14 @@ const routes: Routes = [
       {
         path: 'users',
         loadChildren: () => import('./users/users.module').then( mod => mod.UsersModule)
+      },
+      {
+        path: 'roles',
+        loadChildren: () => import('./roles/roles.module').then(mod => RolesModule)
+      },
+      {
+        path: 'trainings',
+        loadChildren: () => import('./trainings/trainings.module').then(mod => mod.TrainingsModule)
       }
     ]
   }
