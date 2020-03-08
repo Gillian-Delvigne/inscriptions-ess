@@ -607,17 +607,26 @@ countries = [
   }
 
   submit() {
-    this.systemService.saveParticipants(this.systemService.selectedSession.training_session_id).subscribe(
-      r => {
-        console.log(r);
-        if (r.status) {
-          this.successJoined = true;
-          this.showSuccess();
-        } else {
-          this.showError();
+    console.log(this.systemService.selectedSession);
+    const startDate = new Date(this.systemService.selectedSession.day1);
+    const today = new Date();
+    if (startDate.getTime() > today.getTime()) {
+      this.systemService.saveParticipants(this.systemService.selectedSession.training_session_id).subscribe(
+        r => {
+          console.log(r);
+          if (r.status) {
+            this.successJoined = true;
+            this.showSuccess();
+          } else {
+            this.showError();
+          }
         }
-      }
-    );
+      );
+    } else {
+      this.toastr.error('Date Passed', 'Alert!!!');
+    }
+    // return;
+
   }
 
   showSuccess() {

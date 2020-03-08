@@ -1,1 +1,261 @@
-<p>trainings works!</p>
+<div class="col-sm-12 col-md-12 col-lg-12">
+  <mat-toolbar class="head-user">
+    <span>Trainings</span>
+    <p class="user-add" (click)="openAddTraining()">Add Training</p>
+  </mat-toolbar>
+  <mat-form-field>
+    <mat-label>Search</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+  </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element; let i = index;"> {{i + 1}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="actions-container">
+            <span>{{element.name | titlecase}}</span>
+            <p class="actions">
+              <i class="material-icons" (click)="view(element)">
+                menu_book
+              </i>
+              <i class="material-icons" (click)="edit(element)">
+                edit
+              </i>
+              <i class="material-icons" (click)="delete(element)">
+                delete
+              </i>
+            </p>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="desc">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let element"><div [innerHTML]="element.description"></div></td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="duration">
+        <th mat-header-cell *matHeaderCellDef> Duration </th>
+        <td mat-cell *matCellDef="let element"> {{element.duration_info}} </td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="participants">
+        <th mat-header-cell *matHeaderCellDef> Participants </th>
+        <td mat-cell *matCellDef="let element"> {{element.participants_min}}/{{element.participants_max}} </td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="contact">
+        <th mat-header-cell *matHeaderCellDef>Contact </th>
+        <td mat-cell *matCellDef="let element">
+          <p class="contacts">
+            <span [innerHTML]="element.contact_name"></span>
+            <span [innerHTML]="element.email"></span>
+            <span [innerHTML]="element.phone"></span>
+          </p>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+  <!-- The Modal -->
+  <div id="myModal" class="modal" [ngClass]="{'open-modal':viewModal}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="closeDialog()">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 user-outer" *ngIf="singleTraining">
+        <div class="col-sm-4 col-md-4 col-lg-4 record-line">
+          <h4>Name</h4>
+          <p>{{singleTraining.name}}</p>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 record-line">
+          <h4>Duration Info</h4>
+          <p>{{singleTraining.duration_info}}</p>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 record-line">
+          <h4>Price</h4>
+          <p>{{singleTraining.price}}</p>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 record-line">
+          <h4>Participants Min</h4>
+          <p>{{singleTraining.participants_min}}</p>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 record-line">
+          <h4>Participants Max</h4>
+          <p>{{singleTraining.participants_max}}</p>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 record-line">
+          <h4>Conditions</h4>
+          <p>{{singleTraining.conditions}}</p>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 record-line">
+          <h4>Contact Id</h4>
+          <p>{{singleTraining.contact_id}}</p>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 record-line">
+          <h4>Category Id</h4>
+          <p>{{singleTraining.category_id}}</p>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 record-line">
+          <h4>Training Contact Id</h4>
+          <p>{{singleTraining.training_contact_id}}</p>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 record-line">
+          <h4>Contact Name</h4>
+          <p>{{singleTraining.contact_name}}</p>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 record-line">
+          <h4>Phone</h4>
+          <p>{{singleTraining.phone}}</p>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 record-line">
+          <h4>Email</h4>
+          <p>{{singleTraining.email}}</p>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 record-line">
+          <h4>Description</h4>
+          <p>{{singleTraining.description}}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- The Delete Modal -->
+  <div id="myModal1" class="modal" [ngClass]="{'open-modal':deleteModal}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="closeDialog()">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 user-outer">
+        <h3>Are you sure you want to delete this Training?</h3>
+        <div>
+          <button class="btn-block btn-primary" (click)="closeDialog()">Cancel</button>
+          <button class="btn-block btn-danger" (click)="deleteTraining()">Delete</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- The Add Modal -->
+  <div id="myModal2" class="modal" [ngClass]="{'open-modal':createModal}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="closeDialog()">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 user-outer" *ngIf="createModal">
+        <h3>Create New Training</h3>
+        <form (ngSubmit)="onSubmit()" [formGroup]="trainingForm">
+          <div class="form-group">
+            <input [ngClass]="{ 'is-invalid': submitted && f.name.errors }" class="form-control" formControlName="name" id="name"
+                   type="text" [placeholder]="'Training Name'" />
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+              <div *ngIf="f.name.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea  [ngClass]="{ 'is-invalid': submitted && f.description.errors }" class="form-control" formControlName="description" id="description" [placeholder]="'Description'"></textarea>
+          </div>
+          <div class="form-group">
+            <input [ngClass]="{ 'is-invalid': submitted && f.duration.errors }" class="form-control" formControlName="duration" id="duration"
+                   type="text" [placeholder]="'Duration'" />
+            <div *ngIf="submitted && f.duration.errors" class="invalid-feedback">
+              <div *ngIf="f.duration.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input [ngClass]="{ 'is-invalid': submitted && f.price.errors }" class="form-control" formControlName="price" id="price"
+                   type="text" [placeholder]="'Price'" />
+            <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+              <div *ngIf="f.price.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input [ngClass]="{ 'is-invalid': submitted && f.participantsMin.errors }" class="form-control" formControlName="participantsMin" id="participantsMin"
+                   type="number" [placeholder]="'Participants Min'" />
+            <div *ngIf="submitted && f.participantsMin.errors" class="invalid-feedback">
+              <div *ngIf="f.participantsMin.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input [ngClass]="{ 'is-invalid': submitted && f.participantsMax.errors }" class="form-control" formControlName="participantsMax" id="participantsMax"
+                   type="number" [placeholder]="'Participants Max'" />
+            <div *ngIf="submitted && f.participantsMax.errors" class="invalid-feedback">
+              <div *ngIf="f.participantsMax.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea  [ngClass]="{ 'is-invalid': submitted && f.conditions.errors }" class="form-control" formControlName="conditions" id="conditions" [placeholder]="'Conditions'"></textarea>
+            <div *ngIf="submitted && f.conditions.errors" class="invalid-feedback">
+              <div *ngIf="f.conditions.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <select [ngClass]="{ 'is-invalid': submitted && f.isRequired.errors }" class="col-lg-12 form-control" formControlName="isRequired" name="isRequired"  id="isRequired" required>
+              <option value="" disabled selected>Is Required</option>
+              <option [value]="'1'">True</option>
+              <option [value]="'0'">False</option>
+            </select>
+            <div *ngIf="submitted && f.isRequired.errors" class="invalid-feedback">
+              <div *ngIf="f.isRequired.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <select [ngClass]="{ 'is-invalid': submitted && f.categoryId.errors }" class="col-lg-12 form-control" name="categoryId"  id="categoryId" formControlName="categoryId" required>
+              <option value="" disabled selected>Sélectionnez votre entité générale</option>
+              <option *ngFor="let category of categoriesList" [value]="category.category_id">{{category.name}}</option>
+            </select>
+            <div *ngIf="submitted && f.categoryId.errors" class="invalid-feedback">
+              <div *ngIf="f.categoryId.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <select [ngClass]="{ 'is-invalid': submitted && f.trainingContactId.errors }" class="col-lg-12 form-control" formControlName="trainingContactId" name="trainingContactId"  id="trainingContactId" required>
+              <option value="" disabled selected>Select Training Contact</option>
+              <option *ngFor="let contact of TCList" [value]="contact.training_contact_id">{{contact.contact_name}}</option>
+            </select>
+            <div *ngIf="submitted && f.trainingContactId.errors" class="invalid-feedback">
+              <div *ngIf="f.trainingContactId.errors.required">Required</div>
+            </div>
+          </div>
+
+          <div class="form-group bottom-button">
+            <button class="btn btn-primary">Add </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
