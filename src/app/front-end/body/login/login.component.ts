@@ -27,6 +27,9 @@ export class LoginComponent implements OnInit {
               public SpinnerService: NgxSpinnerService) { }
 
   ngOnInit() {
+    if (this.authService.isLoggedin) {
+      this.router.navigateByUrl('/');
+    }
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]

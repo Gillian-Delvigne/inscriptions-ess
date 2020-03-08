@@ -226,7 +226,7 @@ export class CalendarComponent implements OnInit {
     this.systemService.getAllSessions().subscribe(
       res => {
         console.log(res);
-        const data = res;
+        const data = res.data;
         const eve = [];
         data.map(
           (val, key) => {

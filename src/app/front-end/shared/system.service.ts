@@ -77,7 +77,7 @@ export class SystemService {
   getAllSessions(): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this.http.get<any>(this.ROOT_URL + 'sessions/getTrainingSessions/', {headers});
+    return this.http.get<any>(this.ROOT_URL + 'sessions/getTrainingSessionByAll/', {headers});
   }
 
   getSessionById(trainingId): Observable<any> {
