@@ -1,25 +1,46 @@
 <div class="row">
   <nav class="navbar navbar-expand-sm navbar-light">
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/admin/dashboard" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+      <li class="nav-item" (click)="adminService.showDashboard = true">
+        <a class="nav-link" routerLink="/admin/dashboard" routerLinkActive="active-link dash" [routerLinkActiveOptions]="{exact:
                   true}">Dashboard</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/admin/dashboard/users" routerLinkActive="active-link">Users</a>
+      <li class="nav-item" (click)="adminService.showDashboard = false">
+        <a class="nav-link" routerLink="/admin/dashboard/users" routerLinkActive="active-link nl">Users</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/admin/dashboard/roles" routerLinkActive="active-link">Roles</a>
+      <li class="nav-item" (click)="adminService.showDashboard = false">
+        <a class="nav-link" routerLink="/admin/dashboard/roles" routerLinkActive="active-link nl">Roles</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/admin/dashboard/trainings" routerLinkActive="active-link">Trainings</a>
+      <li class="nav-item" (click)="adminService.showDashboard = false">
+        <a class="nav-link" routerLink="/admin/dashboard/trainings" routerLinkActive="active-link nl">Trainings</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" (click)="adminService.showDashboard = false">
+        <a class="nav-link" routerLink="/admin/dashboard/training-sessions" routerLinkActive="active-link nl">Training Sessions</a>
+      </li>
+      <li class="nav-item" (click)="adminService.showDashboard = false">
+        <a class="nav-link" routerLink="/admin/dashboard/contacts" routerLinkActive="active-link nl">Training Contacts</a>
+      </li>
+      <li class="nav-item" (click)="adminService.showDashboard = false">
         <a class="nav-link" routerLink="/admin" (click)="adminService.logout()">Déconnexion</a>
       </li>
     </ul>
   </nav>
 </div>
 
-
+<div *ngIf="adminService.showDashboard">
+  <mat-grid-list cols="3" rowHeight="3:1">
+    <mat-grid-tile>
+      <mat-card routerLink="/admin/dashboard/users">
+        <mat-card-title>
+          Users
+        </mat-card-title>
+        <mat-card-content>
+          No. Of Users
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>2</mat-grid-tile>
+    <mat-grid-tile>3</mat-grid-tile>
+  </mat-grid-list>
+</div>
 <router-outlet></router-outlet>

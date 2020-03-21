@@ -1,0 +1,319 @@
+<div class="col-sm-12 col-md-12 col-lg-12">
+  <mat-toolbar class="head-user">
+    <span>Contacts</span>
+    <p class="user-add" (click)="openAddSession()">Add Contact</p>
+  </mat-toolbar>
+  <mat-form-field>
+    <mat-label>Search</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element; let i = index;"> {{i + 1}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="actions-container">
+          <span>{{element.contact_name | titlecase}}</span>
+          <p class="actions">
+            <i class="material-icons" (click)="view(element)">
+              menu_book
+            </i>
+            <i class="material-icons" (click)="edit(element)">
+              edit
+            </i>
+            <i class="material-icons" (click)="delete(element)">
+              delete
+            </i>
+          </p>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef>Phone </th>
+      <td mat-cell *matCellDef="let element">
+        <p [innerHTML]="element.phone"></p>
+      </td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">
+        <p [innerHTML]="element.email"></p>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons></mat-paginator>
+
+  <!-- The View Modal -->
+  <div id="myModal" class="modal" [ngClass]="{'open-modal':viewModal}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="closeDialog()">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 record-sec" *ngIf="singleContact && viewModal">
+        <div class="col-sm-12 col-md-12 col-lg-12 record">
+          <h4>Name</h4>
+          <p>{{singleContact.contact_name}}</p>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 record">
+          <h4>Phone</h4>
+          <p [innerHTML]="singleContact.phone"></p>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 record">
+          <h4>Email</h4>
+          <p [innerHTML]="singleContact.email"></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- The Add Modal -->
+  <div id="myModalA" class="modal" [ngClass]="{'open-modal':createModal}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="closeDialog()">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 user-outer" *ngIf="createModal">
+        <h3>Create New Session</h3>
+        <form (ngSubmit)="onSubmit()" [formGroup]="trainingForm">
+          <div class="form-group">
+            <label for="day1">Day 1</label>
+            <input [ngClass]="{ 'is-invalid': submitted && f.day1.errors }" class="form-control" formControlName="day1" id="day1"
+                   type="date" [placeholder]="'Day 1'" />
+            <div *ngIf="submitted && f.day1.errors" class="invalid-feedback">
+              <div *ngIf="f.day1.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="start_time1">Start Time 1</label>
+            <select [ngClass]="{ 'is-invalid': submitted && f.start_time1.errors }" class="col-lg-12 form-control" formControlName="start_time1" name="start_time1"  id="start_time1" required>
+              <option value="" disabled selected>Start Time 1</option>
+              <option *ngFor="let date of dates" [value]="date">{{date}}</option>
+            </select>
+            <div *ngIf="submitted && f.start_time1.errors" class="invalid-feedback">
+              <div *ngIf="f.start_time1.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="end_time1">End Time 1</label>
+            <select [ngClass]="{ 'is-invalid': submitted && f.end_time1.errors }" class="col-lg-12 form-control" formControlName="end_time1" name="start_time1"  id="end_time1" required>
+              <option value="" disabled selected>End Time 1</option>
+              <option *ngFor="let date of dates" [value]="date">{{date}}</option>
+            </select>
+            <div *ngIf="submitted && f.end_time1.errors" class="invalid-feedback">
+              <div *ngIf="f.end_time1.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="trainer1_id">Trainer 1</label>
+            <select [ngClass]="{ 'is-invalid': submitted && f.trainer1_id.errors }" class="col-lg-12 form-control" formControlName="trainer1_id" name="trainer1_id"  id="trainer1_id" required>
+              <option value="" disabled selected>Select Trainer 1</option>
+              <option *ngFor="let trainer of trainers" [value]="trainer.user_id">{{trainer.first_name}}({{trainer.email}})</option>
+            </select>
+            <div *ngIf="submitted && f.trainer1_id.errors" class="invalid-feedback">
+              <div *ngIf="f.trainer1_id.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="day2">Day 2</label>
+            <input class="form-control" formControlName="day2" id="day2" type="date" [placeholder]="'Day 2'" />
+          </div>
+          <div class="form-group">
+            <label for="start_time2">Start Time 2</label>
+            <select class="col-lg-12 form-control" formControlName="start_time2" name="start_time2"  id="start_time2" >
+              <option value="" disabled selected>Start Time 2</option>
+              <option *ngFor="let date of dates" [value]="date">{{date}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="end_time2">End Time 2</label>
+            <select class="col-lg-12 form-control" formControlName="end_time2" name="end_time2"  id="end_time2">
+              <option value="" disabled selected>End Time 2</option>
+              <option *ngFor="let date of dates" [value]="date">{{date}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="trainer2_id">Trainer 2</label>
+            <select class="col-lg-12 form-control" formControlName="trainer2_id" name="trainer2_id"  id="trainer2_id" required>
+              <option value="" disabled selected>Select Trainer 2</option>
+              <option *ngFor="let trainer of trainers" [value]="trainer.user_id">{{trainer.first_name}}({{trainer.email}})</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="training_id">Choose Training</label>
+            <select [ngClass]="{ 'is-invalid': submitted && f.training_id.errors }" class="col-lg-12 form-control" formControlName="training_id" name="training_id"  id="training_id" required>
+              <option value="" disabled selected>Select Training Contact</option>
+              <option *ngFor="let training of trainings" [value]="training.training_id">{{training.name}}</option>
+            </select>
+            <div *ngIf="submitted && f.training_id.errors" class="invalid-feedback">
+              <div *ngIf="f.training_id.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="location_id">Choose Location</label>
+            <select [ngClass]="{ 'is-invalid': submitted && f.location_id.errors }" class="col-lg-12 form-control" formControlName="location_id" name="location_id"  id="location_id" required>
+              <option value="" disabled selected>Select Location</option>
+              <option *ngFor="let location of locations" [value]="location.location_id">{{location.name}}</option>
+            </select>
+            <div *ngIf="submitted && f.location_id.errors" class="invalid-feedback">
+              <div *ngIf="f.location_id.errors.required">Required</div>
+            </div>
+          </div>
+
+          <div class="form-group bottom-button">
+            <button class="btn btn-primary">Add </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- The Delete Modal -->
+  <div id="myModal1" class="modal" [ngClass]="{'open-modal':deleteModal}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="closeDialog()">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 user-outer">
+        <h3>Are you sure you want to delete this Training Session?</h3>
+        <div class="col-sm-12 col-md-12 col-lg-12 user-action">
+          <button class="btn-block btn-primary" (click)="closeDialog()">Cancel</button>
+          <button class="btn-block btn-danger" (click)="deleteTraining()">Delete</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- The Edit Modal -->
+  <div id="myModal3" class="modal" [ngClass]="{'open-modal':editModal}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="closeDialog()">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 user-outer" *ngIf="editModal">
+        <h3>Edit Training</h3>
+        <form (ngSubmit)="onEdit()" [formGroup]="trainingFormEdit">
+          <div class="form-group">
+            <label for="day1"> Day 1</label>
+            <input [ngClass]="{ 'is-invalid': submitted && e.day1.errors }" class="form-control" formControlName="day1" id="day1"
+                   type="date" [placeholder]="'Day 1'" />
+            <div *ngIf="submitted && e.day1.errors" class="invalid-feedback">
+              <div *ngIf="e.day1.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="start_time1">Start Time 1</label>
+            <select [ngClass]="{ 'is-invalid': submitted && e.start_time1.errors }" class="col-lg-12 form-control" formControlName="start_time1" name="start_time1"  id="start_time1" required>
+              <option value="" disabled selected>Start Time 1</option>
+              <option *ngFor="let date of dates" [value]="date">{{date}}</option>
+            </select>
+            <div *ngIf="submitted && e.start_time1.errors" class="invalid-feedback">
+              <div *ngIf="e.start_time1.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="end_time1">End Time 1</label>
+            <select [ngClass]="{ 'is-invalid': submitted && e.end_time1.errors }" class="col-lg-12 form-control" formControlName="end_time1" name="start_time1"  id="end_time1" required>
+              <option value="" disabled selected>End Time 1</option>
+              <option *ngFor="let date of dates" [value]="date">{{date}}</option>
+            </select>
+            <div *ngIf="submitted && e.end_time1.errors" class="invalid-feedback">
+              <div *ngIf="e.end_time1.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="trainer1_id">Trainer 1</label>
+            <select [ngClass]="{ 'is-invalid': submitted && e.trainer1_id.errors }" class="col-lg-12 form-control" formControlName="trainer1_id" name="trainer1_id"  id="trainer1_id" required>
+              <option value="" disabled selected>Select Trainer 1</option>
+              <option *ngFor="let trainer of trainers" [value]="trainer.user_id">{{trainer.first_name}}({{trainer.email}})</option>
+            </select>
+            <div *ngIf="submitted && e.trainer1_id.errors" class="invalid-feedback">
+              <div *ngIf="e.trainer1_id.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="day2">Day 2</label>
+            <input class="form-control" formControlName="day2" id="day2" type="date" [placeholder]="'Day 2'" />
+          </div>
+          <div class="form-group">
+            <label for="start_time2">Start Time 2</label>
+            <select class="col-lg-12 form-control" formControlName="start_time2" name="start_time2"  id="start_time2" >
+              <option value="" disabled selected>Start Time 2</option>
+              <option *ngFor="let date of dates" [value]="date">{{date}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="end_time2">End Time 2</label>
+            <select class="col-lg-12 form-control" formControlName="end_time2" name="start_time2"  id="end_time2">
+              <option value="" disabled selected>End Time 2</option>
+              <option *ngFor="let date of dates" [value]="date">{{date}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="trainer2_id">Trainer 2</label>
+            <select class="col-lg-12 form-control" formControlName="trainer2_id" name="trainer2_id"  id="trainer2_id" required>
+              <option value="" disabled selected>Select Trainer 2</option>
+              <option *ngFor="let trainer of trainers" [value]="trainer.user_id">{{trainer.first_name}}({{trainer.email}})</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="training_id">Choose Training</label>
+            <select [ngClass]="{ 'is-invalid': submitted && e.training_id.errors }" class="col-lg-12 form-control" formControlName="training_id" name="training_id"  id="training_id" required>
+              <option value="" disabled selected>Select Training Contact</option>
+              <option *ngFor="let training of trainings" [value]="training.training_id">{{training.name}}</option>
+            </select>
+            <div *ngIf="submitted && e.training_id.errors" class="invalid-feedback">
+              <div *ngIf="e.training_id.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="location_id">Choose Location</label>
+            <select [ngClass]="{ 'is-invalid': submitted && e.location_id.errors }" class="col-lg-12 form-control" formControlName="location_id" name="location_id"  id="location_id" required>
+              <option value="" disabled selected>Select Location</option>
+              <option *ngFor="let location of locations" [value]="location.location_id">{{location.name}}</option>
+            </select>
+            <div *ngIf="submitted && e.location_id.errors" class="invalid-feedback">
+              <div *ngIf="e.location_id.errors.required">Required</div>
+            </div>
+          </div>
+
+          <div class="form-group bottom-button">
+            <button class="btn btn-primary">Add </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>

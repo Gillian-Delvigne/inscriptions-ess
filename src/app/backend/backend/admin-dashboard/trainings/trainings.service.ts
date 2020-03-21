@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 export class TrainingsService {
   ROOT_URL = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
   getTrainings(): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -37,5 +37,12 @@ export class TrainingsService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     return this.http.post<any>(this.ROOT_URL + 'trainings/addTraining', data, {headers});
+  }
+
+  editTraining(data): Observable<any> {
+    console.log(data)
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.http.post<any>(this.ROOT_URL + 'trainings/editTraining', data, {headers});
   }
 }

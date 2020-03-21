@@ -258,4 +258,98 @@
 
   </div>
 
+  <!-- The Add Modal -->
+  <div id="myModal3" class="modal" [ngClass]="{'open-modal':editModal}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="closeDialog()">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 user-outer" *ngIf="editModal">
+        <h3>Edit Training</h3>
+        <form (ngSubmit)="onEdit()" [formGroup]="trainingFormEdit">
+          <div class="form-group">
+            <input [ngClass]="{ 'is-invalid': submitted && e.name.errors }" class="form-control" formControlName="name" id="name"
+                   type="text" [placeholder]="'Training Name'" />
+            <div *ngIf="submitted && e.name.errors" class="invalid-feedback">
+              <div *ngIf="e.name.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea  [ngClass]="{ 'is-invalid': submitted && e.description.errors }" class="form-control" formControlName="description" id="description" [placeholder]="'Description'"></textarea>
+          </div>
+          <div class="form-group">
+            <input [ngClass]="{ 'is-invalid': submitted && e.duration.errors }" class="form-control" formControlName="duration" id="duration"
+                   type="text" [placeholder]="'Duration'" />
+            <div *ngIf="submitted && e.duration.errors" class="invalid-feedback">
+              <div *ngIf="e.duration.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input [ngClass]="{ 'is-invalid': submitted && e.price.errors }" class="form-control" formControlName="price" id="price"
+                   type="text" [placeholder]="'Price'" />
+            <div *ngIf="submitted && e.price.errors" class="invalid-feedback">
+              <div *ngIf="e.price.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input [ngClass]="{ 'is-invalid': submitted && e.participantsMin.errors }" class="form-control" formControlName="participantsMin" id="participantsMin"
+                   type="number" [placeholder]="'Participants Min'" />
+            <div *ngIf="submitted && e.participantsMin.errors" class="invalid-feedback">
+              <div *ngIf="e.participantsMin.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input [ngClass]="{ 'is-invalid': submitted && e.participantsMax.errors }" class="form-control" formControlName="participantsMax" id="participantsMax"
+                   type="number" [placeholder]="'Participants Max'" />
+            <div *ngIf="submitted && e.participantsMax.errors" class="invalid-feedback">
+              <div *ngIf="e.participantsMax.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea  [ngClass]="{ 'is-invalid': submitted && e.conditions.errors }" class="form-control" formControlName="conditions" id="conditions" [placeholder]="'Conditions'"></textarea>
+            <div *ngIf="submitted && e.conditions.errors" class="invalid-feedback">
+              <div *ngIf="e.conditions.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <select [ngClass]="{ 'is-invalid': submitted && e.isRequired.errors }" class="col-lg-12 form-control" formControlName="isRequired" name="isRequired"  id="isRequired" required>
+              <option value="" disabled selected>Is Required</option>
+              <option [value]="'1'">True</option>
+              <option [value]="'0'">False</option>
+            </select>
+            <div *ngIf="submitted && e.isRequired.errors" class="invalid-feedback">
+              <div *ngIf="e.isRequired.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <select [ngClass]="{ 'is-invalid': submitted && e.categoryId.errors }" class="col-lg-12 form-control" name="categoryId"  id="categoryId" formControlName="categoryId" required>
+              <option value="" disabled selected>Sélectionnez votre entité générale</option>
+              <option *ngFor="let category of categoriesList" [value]="category.category_id">{{category.name}}</option>
+            </select>
+            <div *ngIf="submitted && e.categoryId.errors" class="invalid-feedback">
+              <div *ngIf="e.categoryId.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <select [ngClass]="{ 'is-invalid': submitted && e.trainingContactId.errors }" class="col-lg-12 form-control" formControlName="trainingContactId" name="trainingContactId"  id="trainingContactId" required>
+              <option value="" disabled selected>Select Training Contact</option>
+              <option *ngFor="let contact of TCList" [value]="contact.training_contact_id">{{contact.contact_name}}</option>
+            </select>
+            <div *ngIf="submitted && e.trainingContactId.errors" class="invalid-feedback">
+              <div *ngIf="e.trainingContactId.errors.required">Required</div>
+            </div>
+          </div>
+
+          <div class="form-group bottom-button">
+            <button class="btn btn-primary">Update </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
 </div>

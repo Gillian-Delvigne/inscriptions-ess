@@ -23,6 +23,7 @@ export class BackendComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('dssd')
   }
 
 }
