@@ -14,4 +14,22 @@ export class ContactsService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.get<any>(this.ROOT_URL + 'trainings/getTrainingContacts', {headers});
   }
+
+  addContacts(data): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(this.ROOT_URL + 'trainings/addContact', data,{headers});
+  }
+
+  editContact(data): Observable<any> {
+    console.log(data)
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.http.post<any>(this.ROOT_URL + 'trainings/editContact', data, {headers});
+  }
+
+  deleteContact(id): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.http.post<any>(this.ROOT_URL + 'trainings/deleteContact',{id} , {headers});
+  }
 }

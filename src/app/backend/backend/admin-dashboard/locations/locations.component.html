@@ -1,7 +1,7 @@
 <div class="col-sm-12 col-md-12 col-lg-12">
   <mat-toolbar class="head-user">
-    <span>Contacts</span>
-    <p class="user-add" (click)="openAddSession()">Add Contact</p>
+    <span>Locations</span>
+    <p class="user-add" (click)="openAddSession()">Add Location</p>
   </mat-toolbar>
   <mat-form-field>
     <mat-label>Search</mat-label>
@@ -21,7 +21,7 @@
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let element">
         <div class="actions-container">
-          <span>{{element.contact_name | titlecase}}</span>
+          <span>{{element.name | titlecase}}</span>
           <p class="actions">
             <i class="material-icons" (click)="view(element)">
               menu_book
@@ -38,10 +38,18 @@
     </ng-container>
 
     <!-- Email Column -->
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef>Address </th>
+      <td mat-cell *matCellDef="let element">
+        <p [innerHTML]="element.address"></p>
+      </td>
+    </ng-container>
+
+    <!-- Email Column -->
     <ng-container matColumnDef="phone">
       <th mat-header-cell *matHeaderCellDef>Phone </th>
       <td mat-cell *matCellDef="let element">
-        <p [innerHTML]="element.phone"></p>
+        <p [innerHTML]="element.phone_number"></p>
       </td>
     </ng-container>
 
@@ -68,18 +76,22 @@
           close
         </i>
       </p>
-      <div class="col-sm-12 col-md-12 col-lg-12 record-sec" *ngIf="singleContact && viewModal">
+      <div class="col-sm-12 col-md-12 col-lg-12 record-sec" *ngIf="singleLocation && viewModal">
         <div class="col-sm-12 col-md-12 col-lg-12 record">
           <h4>Name</h4>
-          <p>{{singleContact.contact_name}}</p>
+          <p>{{singleLocation.name}}</p>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 record">
+          <h4>Address</h4>
+          <p [innerHTML]="singleLocation.address"></p>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-12 record">
           <h4>Phone</h4>
-          <p [innerHTML]="singleContact.phone"></p>
+          <p [innerHTML]="singleLocation.phone"></p>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-12 record">
           <h4>Email</h4>
-          <p [innerHTML]="singleContact.email"></p>
+          <p [innerHTML]="singleLocation.email"></p>
         </div>
       </div>
     </div>
@@ -96,22 +108,30 @@
         </i>
       </p>
       <div class="col-sm-12 col-md-12 col-lg-12 user-outer" *ngIf="createModal">
-        <h3>Create New Contact</h3>
+        <h3>Create New Location</h3>
         <form (ngSubmit)="onSubmit()" [formGroup]="trainingForm">
           <div class="form-group">
-            <label for="contact_name">Name</label>
-            <input [ngClass]="{ 'is-invalid': submitted && f.contact_name.errors }" class="form-control" formControlName="contact_name" id="contact_name"
-                      type="text" [placeholder]="'Name'" />
-            <div *ngIf="submitted && f.contact_name.errors" class="invalid-feedback">
-              <div *ngIf="f.contact_name.errors.required">Required</div>
+            <label for="name">Name</label>
+            <input [ngClass]="{ 'is-invalid': submitted && f.name.errors }" class="form-control" formControlName="name" id="name"
+                   type="text" [placeholder]="'Name'" />
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+              <div *ngIf="f.name.errors.required">Required</div>
             </div>
           </div>
           <div class="form-group">
-            <label for="phone">Phone</label>
-            <textarea [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" class="form-control" formControlName="phone" id="phone"
-                       [placeholder]="'Phone'"></textarea>
-            <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
-              <div *ngIf="f.phone.errors.required">Required</div>
+            <label for="address">Address</label>
+            <textarea [ngClass]="{ 'is-invalid': submitted && f.address.errors }" class="form-control" formControlName="address" id="address"
+                      [placeholder]="'Address'"></textarea>
+            <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+              <div *ngIf="f.address.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phone_number">Phone Number</label>
+            <textarea [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }" class="form-control" formControlName="phone_number" id="phone_number"
+                      [placeholder]="'Phone Number'"></textarea>
+            <div *ngIf="submitted && f.phone_number.errors" class="invalid-feedback">
+              <div *ngIf="f.phone_number.errors.required">Required</div>
             </div>
           </div>
           <div class="form-group">
@@ -141,7 +161,7 @@
         </i>
       </p>
       <div class="col-sm-12 col-md-12 col-lg-12 delete user-outer">
-        <h3>Are you sure you want to delete this Training Session?</h3>
+        <h3>Are you sure you want to delete this Location?</h3>
         <div class="col-sm-12 col-md-12 col-lg-12 user-action">
           <button class="btn-block btn-primary" (click)="closeDialog()">Cancel</button>
           <button class="btn-block btn-danger" (click)="deleteTraining()">Delete</button>
@@ -161,21 +181,28 @@
         </i>
       </p>
       <div class="col-sm-12 col-md-12 col-lg-12 user-outer" *ngIf="editModal">
-        <h3>Edit Contact</h3>
+        <h3>Edit Location</h3>
         <form (ngSubmit)="onEdit()" [formGroup]="editForm">
           <div class="form-group">
-            <label for="contact_name">Name</label>
-            <input [ngClass]="{ 'is-invalid': submitted && e.contact_name.errors }" class="form-control" formControlName="contact_name" id="contact_name"
+            <label for="name">Name</label>
+            <input [ngClass]="{ 'is-invalid': submitted && e.name.errors }" class="form-control" formControlName="name" id="name"
                    type="text" [placeholder]="'Name'" />
-            <div *ngIf="submitted && e.contact_name.errors" class="invalid-feedback">
-              <div *ngIf="e.contact_name.errors.required">Required</div>
+            <div *ngIf="submitted && e.name.errors" class="invalid-feedback">
+              <div *ngIf="e.name.errors.required">Required</div>
             </div>
           </div>
           <div class="form-group">
-            <label for="phone">Phone</label>
-            <textarea [ngClass]="{ 'is-invalid': submitted && e.phone.errors }" class="form-control" formControlName="phone" id="phone" [placeholder]="'Phone'"></textarea>
-            <div *ngIf="submitted && e.phone.errors" class="invalid-feedback">
-              <div *ngIf="e.phone.errors.required">Required</div>
+            <label for="address">Address</label>
+            <textarea [ngClass]="{ 'is-invalid': submitted && e.address.errors }" class="form-control" formControlName="address" id="address" [placeholder]="'Address'"></textarea>
+            <div *ngIf="submitted && e.address.errors" class="invalid-feedback">
+              <div *ngIf="e.address.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phone_number">Phone</label>
+            <textarea [ngClass]="{ 'is-invalid': submitted && e.phone_number.errors }" class="form-control" formControlName="phone_number" id="phone_number" [placeholder]="'Phone'"></textarea>
+            <div *ngIf="submitted && e.phone_number.errors" class="invalid-feedback">
+              <div *ngIf="e.phone_number.errors.required">Required</div>
             </div>
           </div>
           <div class="form-group">
