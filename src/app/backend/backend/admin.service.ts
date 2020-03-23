@@ -12,8 +12,15 @@ export class AdminService {
   adminLoggedin = false;
   loggedInAdminId: any;
   loggedInAdmin: any;
+  public showDashboard = false;
 
   constructor(private http: HttpClient, private router: Router) {
+    console.log(this.router.url)
+    if (this.router.url === '/admin/dashboard'){
+      this.showDashboard = true;
+    } else {
+      this.showDashboard = false;
+    }
     if (sessionStorage.getItem('adminId')){
       this.adminLoggedin = true;
       this.loggedInAdmin = JSON.parse(sessionStorage.getItem('loggedUser'));
@@ -45,5 +52,6 @@ export class AdminService {
     this.adminLoggedin = false;
     this.loggedInAdmin = '';
     this.loggedInAdminId = '';
+    this.router.navigateByUrl('/admin/login');
   }
 }

@@ -11,6 +11,7 @@ export class AdminSidebarComponent implements OnInit {
   constructor(public adminService: AdminService) { }
 
   ngOnInit() {
+    console.log('hf')
   }
 
 }

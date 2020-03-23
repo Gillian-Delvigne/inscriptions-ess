@@ -1,0 +1,198 @@
+<div class="col-sm-12 col-md-12 col-lg-12">
+  <mat-toolbar class="head-user">
+    <span>Contacts</span>
+    <p class="user-add" (click)="openAddSession()">Add Contact</p>
+  </mat-toolbar>
+  <mat-form-field>
+    <mat-label>Search</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element; let i = index;"> {{i + 1}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="actions-container">
+          <span>{{element.contact_name | titlecase}}</span>
+          <p class="actions">
+            <i class="material-icons" (click)="view(element)">
+              menu_book
+            </i>
+            <i class="material-icons" (click)="edit(element)">
+              edit
+            </i>
+            <i class="material-icons" (click)="delete(element)">
+              delete
+            </i>
+          </p>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef>Phone </th>
+      <td mat-cell *matCellDef="let element">
+        <p [innerHTML]="element.phone"></p>
+      </td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">
+        <p [innerHTML]="element.email"></p>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons></mat-paginator>
+
+  <!-- The View Modal -->
+  <div id="myModal" class="modal" [ngClass]="{'open-modal':viewModal}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="closeDialog()">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 record-sec" *ngIf="singleContact && viewModal">
+        <div class="col-sm-12 col-md-12 col-lg-12 record">
+          <h4>Name</h4>
+          <p>{{singleContact.contact_name}}</p>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 record">
+          <h4>Phone</h4>
+          <p [innerHTML]="singleContact.phone"></p>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 record">
+          <h4>Email</h4>
+          <p [innerHTML]="singleContact.email"></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- The Add Modal -->
+  <div id="myModalA" class="modal" [ngClass]="{'open-modal':createModal}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="closeDialog()">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 user-outer" *ngIf="createModal">
+        <h3>Create New Contact</h3>
+        <form (ngSubmit)="onSubmit()" [formGroup]="trainingForm">
+          <div class="form-group">
+            <label for="contact_name">Name</label>
+            <input [ngClass]="{ 'is-invalid': submitted && f.contact_name.errors }" class="form-control" formControlName="contact_name" id="contact_name"
+                      type="text" [placeholder]="'Name'" />
+            <div *ngIf="submitted && f.contact_name.errors" class="invalid-feedback">
+              <div *ngIf="f.contact_name.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <textarea [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" class="form-control" formControlName="phone" id="phone"
+                       [placeholder]="'Phone'"></textarea>
+            <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+              <div *ngIf="f.phone.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <textarea [ngClass]="{ 'is-invalid': submitted && f.email.errors }" class="form-control" formControlName="email" id="email" [placeholder]="'Email'">
+            </textarea>
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group bottom-button">
+            <button class="btn btn-primary">Add </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- The Delete Modal -->
+  <div id="myModal1" class="modal" [ngClass]="{'open-modal':deleteModal}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="closeDialog()">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 delete user-outer">
+        <h3>Are you sure you want to delete this Training Session?</h3>
+        <div class="col-sm-12 col-md-12 col-lg-12 user-action">
+          <button class="btn-block btn-primary" (click)="closeDialog()">Cancel</button>
+          <button class="btn-block btn-danger" (click)="deleteTraining()">Delete</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- The Edit Modal -->
+  <div id="myModal3" class="modal" [ngClass]="{'open-modal':editModal}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="closeDialog()">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 user-outer" *ngIf="editModal">
+        <h3>Edit Contact</h3>
+        <form (ngSubmit)="onEdit()" [formGroup]="editForm">
+          <div class="form-group">
+            <label for="contact_name">Name</label>
+            <input [ngClass]="{ 'is-invalid': submitted && e.contact_name.errors }" class="form-control" formControlName="contact_name" id="contact_name"
+                   type="text" [placeholder]="'Name'" />
+            <div *ngIf="submitted && e.contact_name.errors" class="invalid-feedback">
+              <div *ngIf="e.contact_name.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <textarea [ngClass]="{ 'is-invalid': submitted && e.phone.errors }" class="form-control" formControlName="phone" id="phone" [placeholder]="'Phone'"></textarea>
+            <div *ngIf="submitted && e.phone.errors" class="invalid-feedback">
+              <div *ngIf="e.phone.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <textarea [ngClass]="{ 'is-invalid': submitted && e.email.errors }" class="form-control" formControlName="email" id="email" [placeholder]="'Email'">
+            </textarea>
+            <div *ngIf="submitted && e.email.errors" class="invalid-feedback">
+              <div *ngIf="e.email.errors.required">Required</div>
+            </div>
+          </div>
+          <div class="form-group bottom-button">
+            <button class="btn btn-primary">Update </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>

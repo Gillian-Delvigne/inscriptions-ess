@@ -11,7 +11,7 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor(public adminService: AdminService,
               public router: Router) {
-
+    this.adminService.showDashboard = true;
   }
 
   ngOnInit() {

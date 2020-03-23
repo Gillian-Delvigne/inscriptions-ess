@@ -5,6 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
+import {AdminService} from '../../admin.service';
 
 @Component({
   selector: 'app-trainings',
@@ -17,18 +18,23 @@ export class TrainingsComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   trainingForm: FormGroup;
+  trainingFormEdit: FormGroup;
   submitted = false;
   viewModal = false;
   editModal = false;
   deleteModal = false;
   createModal = false;
-  public singleTraining: any;
+  singleTraining: any;
   categoriesList: any;
   TCList: any;
+  submittedEdit = false;
 
   constructor(public trainingsService: TrainingsService,
               public formBuilder: FormBuilder,
-              public toastr: ToastrService) { }
+              public toastr: ToastrService,
+              public adminService: AdminService) {
+    this.adminService.showDashboard = false;
+  }
 
   ngOnInit() {
     this.displayTrainings();
@@ -149,4 +155,49 @@ export class TrainingsComponent implements OnInit {
     )
   }
 
+  edit(element: any) {
+    this.singleTraining = element;
+    console.log(this.singleTraining);
+    this.trainingFormEdit = this.formBuilder.group({
+      name: [this.singleTraining.name, Validators.required],
+      description: [this.singleTraining.description, [Validators.required]],
+      duration: [this.singleTraining.duration_info, [Validators.required]],
+      price: [this.singleTraining.price, [Validators.required]],
+      participantsMin: [this.singleTraining.participants_min, [Validators.required]],
+      participantsMax: [this.singleTraining.participants_max, [Validators.required]],
+      conditions: [this.singleTraining.conditions, [Validators.required]],
+      isRequired: [this.singleTraining.is_required, [Validators.required]],
+      categoryId: [this.singleTraining.category_id, [Validators.required]],
+      trainingContactId: [this.singleTraining.contact_id, [Validators.required]],
+      trainingId: [this.singleTraining.training_id, [Validators.required]]
+    });
+    this.editModal = true;
+  }
+
+  // convenience getter for easy access to form fields
+  get e() {
+    return this.trainingFormEdit.controls;
+  }
+  async onEdit() {
+    this.submittedEdit = true;
+    console.log(this.trainingFormEdit, this.trainingFormEdit.value, 'before');
+    // stop here if form is invalid
+    if (this.trainingFormEdit.invalid) {
+      return;
+    }
+    console.log(this.trainingFormEdit.value);
+
+    this.trainingsService.editTraining(this.trainingFormEdit.value).subscribe(
+      res => {
+        console.log(res);
+        if (res.changedRows == 1){
+          this.toastr.success('Training Data Updated', 'Success !!!');
+          this.displayTrainings();
+        } else {
+          this.toastr.error('Not Updated', 'Warning !!!');
+        }
+        this.editModal = false;
+      }
+    )
+  }
 }

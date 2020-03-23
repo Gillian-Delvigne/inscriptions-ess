@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
 import {UsersService} from '../users/users.service';
 import {RolesService} from './roles.service';
+import {AdminService} from '../../admin.service';
 
 @Component({
   selector: 'app-roles',
@@ -11,7 +12,10 @@ import {RolesService} from './roles.service';
 export class RolesComponent implements OnInit {
   displayedColumns: string[] = ['position', 'role-id', 'role'];
   dataSource = new MatTableDataSource();
-  constructor(public roleService: RolesService) { }
+  constructor(public roleService: RolesService,
+              public adminService: AdminService) {
+    this.adminService.showDashboard = false;
+  }
 
   ngOnInit() {
     this.getUser();

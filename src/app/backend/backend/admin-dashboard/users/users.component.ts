@@ -47,7 +47,8 @@ export class UsersComponent implements OnInit {
   constructor(public usersService: UsersService,
               public toastr: ToastrService,
               public adminService: AdminService) {
-    console.log(this.dataSource)
+    console.log(this.dataSource);
+    this.adminService.showDashboard = false;
   }
 
   ngOnInit() {

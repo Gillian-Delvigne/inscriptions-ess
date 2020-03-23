@@ -49,3 +49,6 @@ kt-menu__nav>.kt-menu__item.kt-menu__item--active {
 a.kt-menu__link.kt-menu__item--active .kt-menu__link-text {
   color: #fff;
 }
+a.kt-menu__link.kt-menu__toggle.kt-menu__item--active span.kt-menu__link-text {
+  color: #fff !important;
+}
