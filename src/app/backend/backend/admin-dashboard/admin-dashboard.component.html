@@ -15,13 +15,16 @@
         <a class="nav-link" routerLink="/admin/dashboard/trainings" routerLinkActive="active-link nl">Trainings</a>
       </li>
       <li class="nav-item" (click)="adminService.showDashboard = false">
-        <a class="nav-link" routerLink="/admin/dashboard/training-sessions" routerLinkActive="active-link nl">Training Sessions</a>
+        <a class="nav-link" routerLink="/admin/dashboard/training-sessions" routerLinkActive="active-link nl">Sessions</a>
       </li>
       <li class="nav-item" (click)="adminService.showDashboard = false">
-        <a class="nav-link" routerLink="/admin/dashboard/contacts" routerLinkActive="active-link nl">Training Contacts</a>
+        <a class="nav-link" routerLink="/admin/dashboard/contacts" routerLinkActive="active-link nl">Contacts</a>
       </li>
       <li class="nav-item" (click)="adminService.showDashboard = false">
-        <a class="nav-link" routerLink="/admin/dashboard/locations" routerLinkActive="active-link nl">Training Locations</a>
+        <a class="nav-link" routerLink="/admin/dashboard/locations" routerLinkActive="active-link nl">Locations</a>
+      </li>
+      <li class="nav-item" (click)="adminService.showDashboard = false">
+        <a class="nav-link" routerLink="/admin/dashboard/status" routerLinkActive="active-link nl">Status</a>
       </li>
       <li class="nav-item" (click)="adminService.showDashboard = false">
         <a class="nav-link" routerLink="/admin" (click)="adminService.logout()">Déconnexion</a>
@@ -33,17 +36,35 @@
 <div *ngIf="adminService.showDashboard">
   <mat-grid-list cols="3" rowHeight="3:1">
     <mat-grid-tile>
-      <mat-card routerLink="/admin/dashboard/users">
+      <mat-card routerLink="/admin/dashboard/users" (click)="adminService.showDashboard = false">
         <mat-card-title>
           Users
         </mat-card-title>
         <mat-card-content>
-          No. Of Users
+          <!--Trainings-->
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
-    <mat-grid-tile>2</mat-grid-tile>
-    <mat-grid-tile>3</mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card routerLink="/admin/dashboard/trainings" (click)="adminService.showDashboard = false">
+      <mat-card-title>
+        Trainings
+      </mat-card-title>
+      <mat-card-content>
+        <!--Trainings-->
+      </mat-card-content>
+    </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card routerLink="/admin/dashboard/training-sessions" (click)="adminService.showDashboard = false">
+        <mat-card-title>
+          Sessions
+        </mat-card-title>
+        <mat-card-content>
+          <!--Trainings-->
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
   </mat-grid-list>
 </div>
 <router-outlet></router-outlet>

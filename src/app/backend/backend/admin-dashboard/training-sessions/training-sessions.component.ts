@@ -12,8 +12,13 @@ import {DatePipe} from '@angular/common';
   styleUrls: ['./training-sessions.component.css']
 })
 export class TrainingSessionsComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'desc', 'day1', 'location', 'duration', 'participants', 'price', 'contact'];
+  displayedColumns: string[] = ['position', 'name', 'desc', 'duration', 'participants', 'active-participants'];
   dataSource = new MatTableDataSource();
+
+  /* For Participants List*/
+  displayedColumnsP: string[] = ['position', 'name', 'sign', 'status', 'actions'];
+  dataSourceP = new MatTableDataSource();
+
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   viewModal = false;
@@ -27,15 +32,26 @@ export class TrainingSessionsComponent implements OnInit {
   locations: any;
   trainingForm: FormGroup;
   trainingFormEdit: FormGroup;
+  partiForm: FormGroup;
+  partiFormEdit: FormGroup;
   submitted = false;
   trainers: any;
   dates: any;
   submittedEdit = false;
   datePipe = new DatePipe('en-US');
+  listModal = false;
+  trainer: any;
+  addParticipant = false;
+  submittedP = false;
+  statuses: any;
+  users: any;
+  deleteModalP = false;
+  editModalP = false;
+  selectedParticipant: any;
+  submittedPE = false;
   constructor(public trainingSessions: TrainingSessionsService,
               public formBuilder: FormBuilder,
-              public toastr: ToastrService,
-              public adminService: AdminService) { }
+              public toastr: ToastrService) { }
 
   ngOnInit() {
     this.displayTrainings();
@@ -118,7 +134,7 @@ export class TrainingSessionsComponent implements OnInit {
   view(element: any) {
     this.singleTraining = element;
     console.log(element)
-    this.getTrainingContactById(element.contact_id, element.location_id);
+    this.getTrainingContactById(element.contact_id, element.location_id, element.trainer1_id);
   }
 
   closeDialog() {
@@ -126,13 +142,15 @@ export class TrainingSessionsComponent implements OnInit {
     this.editModal = false;
     this.deleteModal = false;
     this.createModal = false;
+    this.listModal = false;
   }
 
-  getTrainingContactById(cId, locId) {
-    this.trainingSessions.getData(cId, locId).subscribe(
+  getTrainingContactById(cId, locId, tId) {
+    this.trainingSessions.getData(cId, locId, tId).subscribe(
       res => {
         this.singleContact = res[1][0];
         this.singleLocation = res[0][0];
+        this.trainer = res[2][0];
         // console.log('res-', res, this.singleContact);
         this.viewModal = true;
       }
@@ -268,6 +286,150 @@ export class TrainingSessionsComponent implements OnInit {
           this.toastr.error('Not Updated', 'Warning !!!');
         }
         this.editModal = false;
+      }
+    )
+  }
+
+  viewParticipants(element: any) {
+    this.singleTraining = element;
+    this.getTrainingContactById(element.contact_id, element.location_id, element.trainer1_id);
+    this.getParticipantsList(element.training_session_id);
+    this.listModal = true;
+  }
+
+  getParticipantsList(tsId){
+    this.trainingSessions.getParticipants(tsId).subscribe(
+      res => {
+        console.log('res', res);
+        if (res) {
+          this.dataSourceP = new MatTableDataSource(res);
+          this.dataSourceP.sort = this.sort;
+          console.log(this.dataSourceP);
+        }
+        // this.participants = res;
+      }
+    )
+  }
+
+  addPart(sess){
+    console.log(sess);
+
+    this.trainingSessions.getParticipantData().subscribe(
+      resu => {
+        console.log(resu);
+        this.statuses = resu[0];
+        this.users = resu[1];
+        this.addParticipant = true;
+        this.initAddParti(sess.training_session_id);
+      }
+    );
+  }
+
+  initAddParti(tsId){
+    this.partiForm = this.formBuilder.group({
+      userId: ['', Validators.required],
+      sessionId: [tsId, [Validators.required]],
+      status_id: ['', [Validators.required]]
+    });
+  }
+
+  get aP() {
+    return this.partiForm.controls;
+  }
+
+  onSubmitP() {
+    this.submittedP = true;
+    console.log(this.partiForm, this.partiForm.value, 'before');
+    // stop here if form is invalid
+    if (this.partiForm.value.userId === '' || this.partiForm.value.status_id === '') {
+      return;
+    }
+    console.log(this.partiForm.value);
+
+    this.trainingSessions.addParticipant(this.partiForm.value).subscribe(
+      res => {
+        console.log(res);
+        if (res.status){
+          this.toastr.success('Record Added', 'Success !!!');
+          this.getParticipantsList(this.partiForm.value.sessionId);
+        } else {
+          this.toastr.error('Already Joined', 'Warning !!!');
+        }
+        this.addParticipant = false;
+      }
+    )
+  }
+
+  deleteP(elementP: any) {
+    console.log('elementP', elementP);
+    this.listModal = false;
+    this.deleteModalP = true;
+    this.selectedParticipant = elementP;
+  }
+
+  deleteParticipants() {
+    this.trainingSessions.deleteParticipant(this.selectedParticipant.participant_id).subscribe(
+      r => {
+        console.log(r);
+        if (r.affectedRows == 1) {
+          // this.displayTrainings();
+          this.toastr.success('Record Deleted.', 'Success !!!');
+          this.deleteModalP = false;
+          this.closeDialog();
+        } else {
+          this.toastr.error('Not Deleted', 'Error!!!');
+          console.log('technical error');
+        }
+      }
+    )
+  }
+
+  editP(elementP: any) {
+    this.selectedParticipant = elementP;
+    this.trainingSessions.getParticipantData().subscribe(
+      resu => {
+        console.log(resu);
+        this.statuses = resu[0];
+        this.users = resu[1];
+        this.editModalP = true;
+        this.initEditParti();
+      }
+    );
+  }
+
+  initEditParti(){
+    this.partiFormEdit = this.formBuilder.group({
+      user_id: [this.selectedParticipant.user_id, Validators.required],
+      training_session_id: [this.selectedParticipant.training_session_id, [Validators.required]],
+      status_id: [this.selectedParticipant.status_id, [Validators.required]],
+      participant_id: [this.selectedParticipant.participant_id, [Validators.required]]
+    });
+  }
+
+
+  get eP() {
+    return this.partiFormEdit.controls;
+  }
+
+  onSubmitPE() {
+    this.submittedPE = true;
+    console.log(this.partiFormEdit, this.partiFormEdit.value, 'before');
+    // stop here if form is invalid
+    if (this.partiFormEdit.value.user_id === '' || this.partiFormEdit.value.status_id === '') {
+      return;
+    }
+    console.log(this.partiFormEdit.value);
+
+    this.trainingSessions.editParticipant(this.partiFormEdit.value).subscribe(
+      res => {
+        console.log(res);
+        if (res.changedRows == 1) {
+          this.toastr.success('Record Edited', 'Success !!!');
+          this.getParticipantsList(this.partiFormEdit.value.training_session_id);
+        } else {
+          this.toastr.error('Error in submission', 'Warning !!!');
+        }
+        this.editModalP = false;
       }
     )
   }

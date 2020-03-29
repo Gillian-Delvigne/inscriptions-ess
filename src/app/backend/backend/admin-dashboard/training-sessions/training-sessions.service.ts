@@ -9,21 +9,24 @@ import {forkJoin} from 'rxjs/internal/observable/forkJoin';
 })
 export class TrainingSessionsService {
   ROOT_URL = environment.apiUrl;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getTrainingSessions(): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.get<any>(this.ROOT_URL + 'sessions/getTrainingSessionByAll', {headers});
   }
 
-  getTrainings(): Observable<any> {
+  getParticipantData(): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<any>(this.ROOT_URL + 'trainings/getTrainings', {headers});
+    const getStatus = this.http.get<any>(this.ROOT_URL + 'users/getStatus', {headers});
+    const getUsers =  this.http.get<any>(this.ROOT_URL + 'users/getUsersAdmin', {headers});
+    return forkJoin([getStatus, getUsers]);
   }
 
-  getLocations(): Observable<any> {
+  getParticipants(tId): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<any>(this.ROOT_URL + 'locations/getLocations', {headers});
+    return this.http.get<any>(this.ROOT_URL + 'sessions/getSessionParticipants/' + tId, {headers});
   }
 
   deleteSession(id): Observable<any> {
@@ -37,13 +40,14 @@ export class TrainingSessionsService {
     return this.http.post<any>(this.ROOT_URL + 'sessions/addTrainingSession', data,{headers});
   }
 
-  getData(cId, lId): Observable<any> {
+  getData(cId, lId, tId): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const response1 = this.http.get<any>(this.ROOT_URL + 'locations/getLocationById/' + lId, {headers});
     const response2 =  this.http.get<any>(this.ROOT_URL + 'trainings/getTrainingContacts/' + cId, {headers});
+    const response3 =  this.http.get<any>(this.ROOT_URL + 'users/getUserById/' + tId, {headers});
     /*const response3 = this.http.get(apiUrl + '28743736/');
     const response4 = this.http.get(apiUrl + '1940345/');*/
-    return forkJoin([response1, response2]);
+    return forkJoin([response1, response2, response3]);
   }
 
   getSessionData(): Observable<any> {
@@ -59,5 +63,23 @@ export class TrainingSessionsService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     return this.http.post<any>(this.ROOT_URL + 'sessions/editSession', data, {headers});
+  }
+
+  addParticipant(data): Observable<any> {
+    console.log(data)
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(this.ROOT_URL + 'sessions/addParticipant', data,{headers});
+  }
+
+  deleteParticipant(id): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(this.ROOT_URL + 'sessions/deleteParticipant', {id},{headers});
+  }
+
+  editParticipant(data): Observable<any> {
+    console.log(data)
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.http.post<any>(this.ROOT_URL + 'sessions/editParticipant', data, {headers});
   }
 }

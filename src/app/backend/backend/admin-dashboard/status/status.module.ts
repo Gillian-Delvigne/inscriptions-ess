@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RolesComponent } from './roles.component';
+import { StatusComponent } from './status.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MaterialModule} from '../../../../material/material.module';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -8,12 +8,12 @@ import {ReactiveFormsModule} from '@angular/forms';
 const routes: Routes = [
   {
     path: '',
-    component: RolesComponent
+    component: StatusComponent
   }
 ]
 
-@NgModule({
-  declarations: [RolesComponent],
+  @NgModule({
+  declarations: [StatusComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -21,4 +21,4 @@ const routes: Routes = [
     ReactiveFormsModule
   ]
 })
-export class RolesModule { }
+export class StatusModule { }

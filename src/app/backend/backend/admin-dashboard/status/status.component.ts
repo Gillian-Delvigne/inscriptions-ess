@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
-import {UsersService} from '../users/users.service';
-import {RolesService} from './roles.service';
-import {AdminService} from '../../admin.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {StatusService} from './status.service';
+import {AdminService} from '../../admin.service';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
-  selector: 'app-roles',
-  templateUrl: './roles.component.html',
-  styleUrls: ['./roles.component.css']
+  selector: 'app-status',
+  templateUrl: './status.component.html',
+  styleUrls: ['./status.component.css']
 })
-export class RolesComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'role-id', 'role', 'actions'];
+export class StatusComponent implements OnInit {
+  displayedColumns: string[] = ['position', 'status-id', 'status', 'actions'];
   dataSource = new MatTableDataSource();
   editModel = false;
   delModel = false;
@@ -22,21 +21,19 @@ export class RolesComponent implements OnInit {
   editForm: FormGroup;
   submittedAdd = false;
   submittedEdit = false;
-  constructor(public roleService: RolesService,
-              public adminService: AdminService,
+  
+  constructor(public statusService: StatusService,
               public formBuilder: FormBuilder,
-              public toastr: ToastrService) {
-    this.adminService.showDashboard = false;
-  }
+              public toastr: ToastrService) { }
 
   ngOnInit() {
-    this.getRoles();
+    this.getStatus();
   }
 
-  getRoles() {
-    this.roleService.getRoles().subscribe(
+  getStatus() {
+    this.statusService.getStatus().subscribe(
       res => {
-        console.log(res, 'roles');
+        console.log(res, 'Status');
         this.dataSource = new MatTableDataSource(res);
       }
     );
@@ -53,12 +50,12 @@ export class RolesComponent implements OnInit {
     this.addModel = false;
   }
 
-  addRole() {
+  addStatus() {
     this.addModel = true;
-    this.initAddRole();
+    this.initAddStatus();
   }
 
-  initAddRole(){
+  initAddStatus(){
     this.addForm = this.formBuilder.group({
       name: ['', Validators.required]
     });
@@ -77,12 +74,12 @@ export class RolesComponent implements OnInit {
     }
     console.log(this.addForm.value);
 
-    this.roleService.addRole(this.addForm.value).subscribe(
+    this.statusService.addStatus(this.addForm.value).subscribe(
       res => {
-        console.log(res);
+        console.log(res, 'res');
         if (res.status === true){
-          this.toastr.success('Role Data Submitted', 'Success !!!');
-          this.getRoles();
+          this.toastr.success('Status Data Submitted', 'Success !!!');
+          this.getStatus();
         } else {
           this.toastr.error('Not Added', 'Warning !!!');
         }
@@ -97,13 +94,13 @@ export class RolesComponent implements OnInit {
     this.delModel = true;
   }
 
-  deleteRole() {
-    this.roleService.deleteRole(this.singleRecord.role_id).subscribe(
+  deleteStatus() {
+    this.statusService.deleteStatus(this.singleRecord.status_id).subscribe(
       r => {
         console.log(r)
         if (r.affectedRows === 1) {
-          this.getRoles();
-          this.toastr.success('Role Deleted', 'Success !!!');
+          this.getStatus();
+          this.toastr.success('Status Deleted', 'Success !!!');
           this.delModel = false;
         } else {
           this.toastr.error('Technical Error', 'Error!!!');
@@ -112,7 +109,7 @@ export class RolesComponent implements OnInit {
     );
   }
 
-  /* Edit Role */
+  /* Edit Status */
 
   get e() {
     return this.editForm.controls;
@@ -120,20 +117,20 @@ export class RolesComponent implements OnInit {
 
   async onEdit() {
     this.submittedEdit = true;
-    console.log(this.editForm, this.editForm.value, 'before');
+    console.log(this.editForm, this.editForm.value, 'before Status');
     // stop here if form is invalid
     if (this.editForm.invalid) {
       return;
     }
     console.log(this.editForm.value);
 
-    this.roleService.editRole(this.editForm.value).subscribe(
+    this.statusService.editStatus(this.editForm.value).subscribe(
       res => {
         console.log(res);
         if (res.affectedRows === 1){
-          this.toastr.success('Role Data Submitted', 'Success !!!');
+          this.toastr.success('Status Data Submitted', 'Success !!!');
           this.editModel = false;
-          this.getRoles();
+          this.getStatus();
         } else {
           this.toastr.error('Not Added', 'Warning !!!');
         }
@@ -151,7 +148,8 @@ export class RolesComponent implements OnInit {
   initEditForm() {
     this.editForm = this.formBuilder.group({
       name: [this.singleRecord.name, Validators.required],
-      role_id: [this.singleRecord.role_id, [Validators.required]]
+      status_id: [this.singleRecord.status_id, [Validators.required]]
     });
   }
+
 }

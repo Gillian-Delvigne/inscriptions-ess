@@ -16,4 +16,23 @@ export class RolesService {
 
     return this.http.get<any>(this.ROOT_URL + 'users/getRoles', {headers});
   }
+
+  addRole(data): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.http.post<any>(this.ROOT_URL + 'users/addRoles', data,{headers});
+  }
+
+  editRole(data): Observable<any> {
+    console.log(data)
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.http.post<any>(this.ROOT_URL + 'users/editRole', data, {headers});
+  }
+
+  deleteRole(id): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.http.post<any>(this.ROOT_URL + 'users/deleteRole',{id} , {headers});
+  }
 }
