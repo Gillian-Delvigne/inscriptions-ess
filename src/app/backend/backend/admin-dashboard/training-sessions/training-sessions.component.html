@@ -409,7 +409,10 @@
       </p>
       <div class="col-sm-12 col-md-12 col-lg-12 user-outer" *ngIf="singleTraining && listModal">
         <div class="col-sm-12 col-md-12 col-lg-12">
-          <h4>Training Name</h4>
+          <h4 class="expo">
+            Training Name
+            <p (click)="generatePdf()" *ngIf="dataSourceP.filteredData.length > 0">Export PDF</p>
+          </h4>
           <p>{{singleTraining.name}}</p>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-12 p-0">
