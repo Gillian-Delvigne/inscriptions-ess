@@ -139,7 +139,7 @@ export class TrainingSessionsComponent implements OnInit {
   generatePdf(){
     const documentDefinition = this.getDocumentDefinition();
     // const documentDefinition = { content: 'This is for testing.' };
-    pdfMake.createPdf(documentDefinition).open();
+    pdfMake.createPdf(documentDefinition).download('sessions.pdf');
   }
 
   displayTrainings() {

@@ -89,7 +89,7 @@ export class RolesComponent implements OnInit {
   }
 
   addRole() {
-    this.generatePdf();
+    // this.generatePdf();
     this.addModel = true;
     this.initAddRole();
   }
