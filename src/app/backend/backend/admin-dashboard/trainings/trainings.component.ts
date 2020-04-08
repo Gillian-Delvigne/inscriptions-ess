@@ -6,6 +6,7 @@ import {MatSort} from '@angular/material/sort';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {AdminService} from '../../admin.service';
+import {ExcelService} from '../excel.service';
 
 @Component({
   selector: 'app-trainings',
@@ -28,11 +29,13 @@ export class TrainingsComponent implements OnInit {
   categoriesList: any;
   TCList: any;
   submittedEdit = false;
+  excelData: any = [];
 
   constructor(public trainingsService: TrainingsService,
               public formBuilder: FormBuilder,
               public toastr: ToastrService,
-              public adminService: AdminService) {
+              public adminService: AdminService,
+              public excelService: ExcelService) {
     this.adminService.showDashboard = false;
   }
 
@@ -49,6 +52,25 @@ export class TrainingsComponent implements OnInit {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+
+        res.map((data, key) => {
+          this.excelData.push({
+            'S No': key + 1,
+            Name: data.name,
+            Duration: data.duration_info,
+            Price: data.price,
+            'Participants-Min': data.participants_min,
+            'Participants-Max': data.participants_max,
+            Conditions: data.conditions,
+            'Contact Id': data.contact_id,
+            'Category Id': data.category_id,
+            'Training Contact Id': data.training_contact_id,
+            'Contact Name': data.contact_name,
+            Phone: data.phone,
+            Email: data.email,
+            Description: data.description
+          });
+        });
       }
     );
   }
@@ -199,5 +221,10 @@ export class TrainingsComponent implements OnInit {
         this.editModal = false;
       }
     )
+  }
+
+  exportAsXLSX(): void {
+    console.log(this.excelData);
+    this.excelService.exportAsExcelFile(this.excelData, 'trainings');
   }
 }

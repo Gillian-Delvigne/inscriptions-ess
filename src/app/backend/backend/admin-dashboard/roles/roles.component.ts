@@ -7,6 +7,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import {ExcelService} from '../excel.service';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -50,10 +51,13 @@ export class RolesComponent implements OnInit {
   submittedAdd = false;
   submittedEdit = false;
   pdfData: any;
+  excelData: any = [];
+
   constructor(public roleService: RolesService,
               public adminService: AdminService,
               public formBuilder: FormBuilder,
-              public toastr: ToastrService) {
+              public toastr: ToastrService,
+              public excelService: ExcelService) {
     this.adminService.showDashboard = false;
   }
 
@@ -73,6 +77,14 @@ export class RolesComponent implements OnInit {
         console.log(res, 'roles');
         this.pdfData = res;
         this.dataSource = new MatTableDataSource(res);
+
+        res.map((data, key) => {
+          this.excelData.push({
+            'S No': key + 1,
+            'Role Id': data.role_id,
+            'Role Name': data.name
+          });
+        });
       }
     );
   }
@@ -263,5 +275,10 @@ export class RolesComponent implements OnInit {
         }
       ]
     };
+  }
+
+  exportAsXLSX(): void {
+    console.log(this.excelData);
+    this.excelService.exportAsExcelFile(this.excelData, 'roles');
   }
 }

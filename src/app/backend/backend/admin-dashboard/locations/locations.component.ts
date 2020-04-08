@@ -3,6 +3,7 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LocationsService} from './locations.service';
 import {ToastrService} from 'ngx-toastr';
+import {ExcelService} from '../excel.service';
 
 @Component({
   selector: 'app-locations',
@@ -25,10 +26,12 @@ export class LocationsComponent implements OnInit {
   editForm: FormGroup;
   submitted = false;
   submittedEdit = false;
+  excelData: any = [];
 
   constructor(public ls: LocationsService,
               public formBuilder: FormBuilder,
-              public toastr: ToastrService) { }
+              public toastr: ToastrService,
+              public excelService: ExcelService) { }
 
   ngOnInit() {
     this.displayLocation();
@@ -41,6 +44,16 @@ export class LocationsComponent implements OnInit {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+
+        res.map((data, key) => {
+          this.excelData.push({
+            'S No': key + 1,
+            Name: data.name,
+            Address: data.address,
+            Phone: data.phone_number,
+            Email: data.email,
+          });
+        });
       }
     )
   }
@@ -170,5 +183,10 @@ export class LocationsComponent implements OnInit {
         }
       }
     )
+  }
+
+  exportAsXLSX(): void {
+    console.log(this.excelData);
+    this.excelService.exportAsExcelFile(this.excelData, 'locations');
   }
 }
