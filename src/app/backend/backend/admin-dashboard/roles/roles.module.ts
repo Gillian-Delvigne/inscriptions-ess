@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RolesComponent } from './roles.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MaterialModule} from '../../../../material/material.module';
+import {ReactiveFormsModule} from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class RolesModule { }

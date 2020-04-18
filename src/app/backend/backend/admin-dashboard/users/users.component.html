@@ -7,7 +7,7 @@
     <mat-label>Search User</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
   </mat-form-field>
-
+  <button (click)="exportAsXLSX()" class="btn-block btn excel-export">Export to Excel</button>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!-- Position Column -->

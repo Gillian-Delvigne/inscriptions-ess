@@ -7,7 +7,7 @@
     <mat-label>Search</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
   </mat-form-field>
-
+  <button (click)="exportAsXLSX()" class="btn-block btn excel-export">Export to Excel</button>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
     <!-- Position Column -->
@@ -46,29 +46,6 @@
     </ng-container>
 
     <!-- Email Column -->
-    <ng-container matColumnDef="day1">
-      <th mat-header-cell *matHeaderCellDef> Day 1 </th>
-      <td mat-cell *matCellDef="let element">
-        <p class="contacts">
-          <span>{{element.day1 | date: 'dd-MM-yyyy'}}</span>
-          <span>{{sliceTime(element.start_time1)}}</span>
-          <span>{{sliceTime(element.end_time1)}}</span>
-        </p>
-      </td>
-    </ng-container>
-    <!-- Email Column -->
-   <!-- <ng-container matColumnDef="day2">
-      <th mat-header-cell *matHeaderCellDef> Day 2 </th>
-      <td mat-cell *matCellDef="let element">
-        <p class="contacts">
-          <span [innerHTML]="element.day2"></span>
-          <span [innerHTML]="element.start_time2"></span>
-          <span [innerHTML]="element.end_time2"></span>
-        </p>
-      </td>
-    </ng-container>-->
-
-    <!-- Email Column -->
     <ng-container matColumnDef="location">
       <th mat-header-cell *matHeaderCellDef>Location </th>
       <td mat-cell *matCellDef="let element">
@@ -83,20 +60,19 @@
         {{element.duration_info}}
       </td>
     </ng-container>
+
     <!-- Email Column -->
     <ng-container matColumnDef="participants">
       <th mat-header-cell *matHeaderCellDef> Participants(Min/Max) </th>
       <td mat-cell *matCellDef="let element"> {{element.participants_min}}/{{element.participants_max}} </td>
     </ng-container>
+
     <!-- Email Column -->
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef> Price </th>
-      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-    </ng-container>
-    <!-- Email Column -->
-    <ng-container matColumnDef="contact">
-      <th mat-header-cell *matHeaderCellDef> Contact </th>
-      <td mat-cell *matCellDef="let element"> {{element.contact_id}} </td>
+    <ng-container matColumnDef="active-participants">
+      <th mat-header-cell *matHeaderCellDef>Participants List</th>
+      <td mat-cell *matCellDef="let element">
+        <p class="view-parti" (click)="viewParticipants(element)">View Participants</p>
+      </td>
     </ng-container>
 
 
@@ -286,7 +262,7 @@
           close
         </i>
       </p>
-      <div class="col-sm-12 col-md-12 col-lg-12 user-outer">
+      <div class="col-sm-12 col-md-12 col-lg-12 user-outer dele-mod">
         <h3>Are you sure you want to delete this Training Session?</h3>
         <div class="col-sm-12 col-md-12 col-lg-12 user-action">
           <button class="btn-block btn-primary" (click)="closeDialog()">Cancel</button>
@@ -402,4 +378,206 @@
 
   </div>
 
+  <!-- Delete participant-->
+  <div id="myModalDP" class="modal" [ngClass]="{'open-modal':deleteModalP}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="deleteModalP = !deleteModalP">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 user-outer dele-mod">
+        <h3>Are you sure you want to remove this Participant?</h3>
+        <div class="col-sm-12 col-md-12 col-lg-12 user-action">
+          <button class="btn-block btn-primary" (click)="closeDialog()">Cancel</button>
+          <button class="btn-block btn-danger" (click)="deleteParticipants()">Delete</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- The List View Modal -->
+  <div id="myModalP" class="modal" [ngClass]="{'open-modal':listModal}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="closeDialog()">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 user-outer" *ngIf="singleTraining && listModal">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <h4 class="expo">
+            Training Name
+            <p (click)="generatePdf()" *ngIf="dataSourceP.filteredData.length > 0">Export PDF</p>
+          </h4>
+          <p>{{singleTraining.name}}</p>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 p-0">
+          <hr>
+          <div class="clearfix"></div>
+          <div class="col-sm-4 col-md-4 col-lg-4 record-line">
+            <h4>Session Date</h4>
+            <p>{{singleTraining.day1 | date: 'dd-MM-yyyy'}}</p>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4 record-line">
+            <h4>Location</h4>
+            <p *ngIf="singleLocation">{{singleLocation.address}}</p>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4 record-line">
+            <h4>Trainer</h4>
+            <p *ngIf="trainer">{{trainer.first_name}} {{trainer.last_name}}</p>
+          </div>
+          <div class="clearfix"></div>
+          <hr>
+          <div class="clearfix"></div>
+        </div>
+        <!-- Participants Table-->
+        <div class="col-sm-12 col-md-12 col-lg-12 parti-list">
+          <h4 class="prt-title">Participants List <p class="user-add" (click)="addPart(singleTraining)">Add Participant</p></h4>
+
+          <div *ngIf="addParticipant" class="part-cont">
+            <form (ngSubmit)="onSubmitP()" [formGroup]="partiForm">
+              <div class="form-group">
+                <label for="start_time1">Select User </label>
+                <select [ngClass]="{ 'is-invalid': submittedP && aP.userId.errors }" class="col-lg-12 form-control" formControlName="userId" name="userId"  id="userId" required>
+                  <option value="" disabled selected>Choose User</option>
+                  <option *ngFor="let user of users" [value]="user.user_id">{{user.first_name}} {{user.last_name}}</option>
+                </select>
+                <div *ngIf="submittedP && aP.userId.errors" class="invalid-feedback">
+                  <div *ngIf="aP.userId.errors.required">Required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="start_time1">Select Status </label>
+                <select [ngClass]="{ 'is-invalid': submittedP && aP.status_id.errors }" class="col-lg-12 form-control" formControlName="status_id" name="status_id"  id="status_id" required>
+                  <option value="" disabled selected>Select Status</option>
+                  <option *ngFor="let status of statuses" [value]="status.status_id">{{status.name}}</option>
+                </select>
+                <div *ngIf="submittedP && aP.status_id.errors" class="invalid-feedback">
+                  <div *ngIf="aP.status_id.errors.required">Required</div>
+                </div>
+              </div>
+              <div class="form-group bottom-button">
+                <button class="btn btn-primary">Add Participant</button>
+              </div>
+            </form>
+          </div>
+          <ng-template
+            *ngIf="dataSourceP.filteredData.length > 0; then showBlock; else notShowBlock">
+          </ng-template>
+
+          <ng-template #showBlock>
+            <div class="col-sm-12 col-md-12 col-lg-12 p-0 parti-table" >
+              <table mat-table [dataSource]="dataSourceP" class="mat-elevation-z8" matSort>
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef> No. </th>
+                  <td mat-cell *matCellDef="let elementP; let j = index;"> {{j + 1}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Name </th>
+                  <td mat-cell *matCellDef="let elementP">
+                    {{elementP.first_name | titlecase}} {{elementP.last_name | titlecase}}
+                  </td>
+                </ng-container>
+
+                <!-- Email Column -->
+                <ng-container matColumnDef="sign">
+                  <th mat-header-cell *matHeaderCellDef> Signature </th>
+                  <td mat-cell *matCellDef="let elementP">
+                  </td>
+                </ng-container>
+
+                <!-- Email Column -->
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef>Status </th>
+                  <td mat-cell *matCellDef="let elementP">
+                    {{elementP.status_name}}
+                  </td>
+                </ng-container>
+
+                <!-- Email Column -->
+                <ng-container matColumnDef="actions">
+                  <th mat-header-cell *matHeaderCellDef>Actions </th>
+                  <td mat-cell *matCellDef="let elementP">
+                    <div class="actions-container">
+                      <span>{{elementP.name | titlecase}}</span>
+                      <p class="actions-par">
+                        <i class="material-icons" (click)="editP(elementP)">
+                          edit
+                        </i>
+                        <i class="material-icons" (click)="deleteP(elementP)">
+                          delete
+                        </i>
+                      </p>
+                    </div>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsP"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsP;"></tr>
+              </table>
+            </div>
+          </ng-template>
+
+          <ng-template #notShowBlock>
+            <h3>
+              No Participants Found!!!
+            </h3>
+          </ng-template>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Edit participant-->
+  <div id="myModalEP" class="modal" [ngClass]="{'open-modal':editModalP}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="editModalP = !editModalP">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 user-outer">
+        <h3>Edit Participant.</h3>
+        <div class="edit-part-cont" *ngIf="editModalP">
+          <form (ngSubmit)="onSubmitPE()" [formGroup]="partiFormEdit">
+            <div class="form-group">
+              <label for="start_time1">Select User </label>
+              <select [ngClass]="{ 'is-invalid': submittedPE && eP.user_id.errors }" class="col-lg-12 form-control" formControlName="user_id" name="user_id"  id="user_id" required>
+                <option value="" disabled selected>Choose User</option>
+                <option *ngFor="let user of users" [value]="user.user_id">{{user.first_name}} {{user.last_name}}</option>
+              </select>
+              <div *ngIf="submittedPE && eP.user_id.errors" class="invalid-feedback">
+                <div *ngIf="eP.user_id.errors.required">Required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="start_time1">Select Status </label>
+              <select [ngClass]="{ 'is-invalid': submittedPE && eP.status_id.errors }" class="col-lg-12 form-control" formControlName="status_id" name="status_id"  id="status_id" required>
+                <option value="" disabled selected>Select Status</option>
+                <option *ngFor="let status of statuses" [value]="status.status_id">{{status.name}}</option>
+              </select>
+              <div *ngIf="submittedPE && eP.status_id.errors" class="invalid-feedback">
+                <div *ngIf="eP.status_id.errors.required">Required</div>
+              </div>
+            </div>
+            <div class="form-group bottom-button">
+              <button class="btn btn-primary">Edit Participant</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>

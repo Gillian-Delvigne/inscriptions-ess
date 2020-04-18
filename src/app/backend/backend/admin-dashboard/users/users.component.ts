@@ -6,6 +6,7 @@ import {ToastrService} from 'ngx-toastr';
 import {NgForm} from '@angular/forms';
 import {AdminService} from '../../admin.service';
 import {DatePipe} from '@angular/common';
+import {ExcelService} from '../excel.service';
 
 @Component({
   selector: 'app-users',
@@ -44,9 +45,11 @@ export class UsersComponent implements OnInit {
   openModalEdit = false;
   datePipe = new DatePipe('en-US');
 
+  data: any = [];
   constructor(public usersService: UsersService,
               public toastr: ToastrService,
-              public adminService: AdminService) {
+              public adminService: AdminService,
+              private excelService: ExcelService) {
     console.log(this.dataSource);
     this.adminService.showDashboard = false;
   }
@@ -449,11 +452,29 @@ export class UsersComponent implements OnInit {
       {name: 'Zimbabwe'}, ];
   }
 
-  getUser(){
+  getUser() {
     this.usersService.getUsers().subscribe(
       res => {
         console.log(res, 'users');
         this.dataSource = new MatTableDataSource(res);
+
+        res.map((data, key) => {
+          this.data.push({
+            'S No': key + 1,
+            Name: data.first_name + ' ' + data.last_name,
+            Email: data.email,
+            RoleId: data.role_id,
+            Gender: data.gender,
+            DOB: this.datePipe.transform(data.date_of_birth, 'yyyy-MM-dd'),
+            Phone: data.phone_number,
+            Nationality: data.nationality,
+            Matricule: data.matricule,
+            'General Entity': data.general_entity,
+            'Local Entity': data.local_entity,
+            'Activity Type': data.activity_type,
+            Activity: data.activity,
+          });
+        });
       }
     )
   }
@@ -592,5 +613,10 @@ export class UsersComponent implements OnInit {
 
   closeDialogUserEdit(){
     this.openModalEdit = false;
+  }
+
+  exportAsXLSX(): void {
+    console.log(this.data);
+    this.excelService.exportAsExcelFile(this.data, 'users');
   }
 }

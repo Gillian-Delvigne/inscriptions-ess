@@ -1,0 +1,132 @@
+<div class="col-sm-12 col-md-12 col-lg-12">
+  <mat-toolbar class="head-user">
+    <span>Statuss</span>
+    <p class="user-add" (click)="addStatus()">Add Status</p>
+  </mat-toolbar>
+  <mat-form-field>
+    <mat-label>Search</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element; let i = index;"> {{i + 1}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.name | titlecase}} </td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="status-id">
+      <th mat-header-cell *matHeaderCellDef> Status Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.status_id}} </td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <p class="actions">
+          <!--<i class="material-icons" (click)="view(element)">
+            menu_book
+          </i>-->
+          <i class="material-icons" (click)="edit(element)">
+            edit
+          </i>
+          <i class="material-icons" (click)="delete(element)">
+            delete
+          </i>
+        </p>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- The Add Modal -->
+  <div id="myModalA" class="modal" [ngClass]="{'open-modal':addModel}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="closeDialog()">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 user-outer" *ngIf="addModel">
+        <h3>Add New Status</h3>
+        <form (ngSubmit)="onSubmit()" [formGroup]="addForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input [ngClass]="{ 'is-invalid': submittedAdd && f.name.errors }" class="form-control" formControlName="name" id="name"
+                   type="text" [placeholder]="'Name'" />
+            <div *ngIf="submittedAdd && f.name.errors" class="invalid-feedback">
+              <div *ngIf="f.name.errors.required">Required</div>
+            </div>
+          </div>
+
+          <div class="form-group bottom-button">
+            <button class="btn btn-primary">Add </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- The Delete Modal -->
+  <div id="myModal1" class="modal" [ngClass]="{'open-modal':delModel}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="closeDialog()">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 delete user-outer">
+        <h3>Are you sure you want to delete this Status?</h3>
+        <div class="col-sm-12 col-md-12 col-lg-12 user-action">
+          <button class="btn-block btn-primary" (click)="closeDialog()">Cancel</button>
+          <button class="btn-block btn-danger" (click)="deleteStatus()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Edit Modal -->
+  <div id="myModal3" class="modal" [ngClass]="{'open-modal':editModel}">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <p class="close-modal-icons" (click)="closeDialog()">
+        <i class="material-icons">
+          close
+        </i>
+      </p>
+      <div class="col-sm-12 col-md-12 col-lg-12 user-outer" *ngIf="editModel">
+        <h3>Edit Status</h3>
+        <form (ngSubmit)="onEdit()" [formGroup]="editForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input [ngClass]="{ 'is-invalid': submittedEdit && e.name.errors }" class="form-control" formControlName="name" id="name"
+                   type="text" [placeholder]="'Name'" />
+            <div *ngIf="submittedEdit && e.name.errors" class="invalid-feedback">
+              <div *ngIf="e.name.errors.required">Required</div>
+            </div>
+          </div>
+
+          <div class="form-group bottom-button">
+            <button class="btn btn-primary">Update </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>

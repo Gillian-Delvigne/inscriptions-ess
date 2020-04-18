@@ -4,6 +4,7 @@ import { AdminDashboardComponent } from './admin-dashboard.component';
 import {RouterModule, Routes} from '@angular/router';
 import {RolesModule} from './roles/roles.module';
 import {MaterialModule} from '../../../material/material.module';
+import {StatusModule} from './status/status.module';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
       {
         path: 'locations',
         loadChildren: () => import('./locations/locations.module').then(mod => mod.LocationsModule)
+      },
+      {
+        path: 'status',
+        loadChildren: () => import('./status/status.module').then(mod => mod.StatusModule)
       }
     ]
   }
